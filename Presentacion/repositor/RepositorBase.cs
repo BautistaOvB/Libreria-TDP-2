@@ -31,5 +31,10 @@ namespace Gestion_Libreria.Presentacion.repositor
         {
 
         }
+
+        private void panel3_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

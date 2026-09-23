@@ -1,6 +1,6 @@
-﻿namespace Gestion_Libreria
+﻿namespace Gestion_Libreria.Presentacion
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -47,6 +47,7 @@
             this.BtnIngresar.TabIndex = 0;
             this.BtnIngresar.Text = "Ingresar";
             this.BtnIngresar.UseVisualStyleBackColor = true;
+            this.BtnIngresar.Click += new System.EventHandler(this.BtnIngresar_Click);
             // 
             // usernameText
             // 
@@ -66,30 +67,36 @@
             // LUsuario
             // 
             this.LUsuario.AutoSize = true;
-            this.LUsuario.BackColor = System.Drawing.SystemColors.Menu;
+            this.LUsuario.BackColor = System.Drawing.Color.SteelBlue;
+            this.LUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.LUsuario.Location = new System.Drawing.Point(235, 58);
             this.LUsuario.Name = "LUsuario";
-            this.LUsuario.Size = new System.Drawing.Size(98, 13);
+            this.LUsuario.Size = new System.Drawing.Size(125, 16);
             this.LUsuario.TabIndex = 4;
             this.LUsuario.Text = "Nombre de Usuario";
             // 
             // Lpassword
             // 
             this.Lpassword.AutoSize = true;
-            this.Lpassword.BackColor = System.Drawing.SystemColors.Menu;
+            this.Lpassword.BackColor = System.Drawing.Color.SteelBlue;
+            this.Lpassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lpassword.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.Lpassword.Location = new System.Drawing.Point(235, 131);
             this.Lpassword.Name = "Lpassword";
-            this.Lpassword.Size = new System.Drawing.Size(61, 13);
+            this.Lpassword.Size = new System.Drawing.Size(76, 16);
             this.Lpassword.TabIndex = 5;
             this.Lpassword.Text = "Contraseña";
             // 
             // LtituloLogin
             // 
             this.LtituloLogin.AutoSize = true;
-            this.LtituloLogin.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.LtituloLogin.Location = new System.Drawing.Point(171, 22);
+            this.LtituloLogin.BackColor = System.Drawing.Color.SteelBlue;
+            this.LtituloLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LtituloLogin.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.LtituloLogin.Location = new System.Drawing.Point(178, 9);
             this.LtituloLogin.Name = "LtituloLogin";
-            this.LtituloLogin.Size = new System.Drawing.Size(136, 13);
+            this.LtituloLogin.Size = new System.Drawing.Size(200, 20);
             this.LtituloLogin.TabIndex = 6;
             this.LtituloLogin.Text = "Bienvenido a Punto y Barra";
             // 
@@ -115,11 +122,11 @@
             this.imgInicio.TabIndex = 3;
             this.imgInicio.TabStop = false;
             // 
-            // Form1
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(484, 261);
             this.Controls.Add(this.Bsalir);
             this.Controls.Add(this.LtituloLogin);
@@ -129,7 +136,7 @@
             this.Controls.Add(this.PassText);
             this.Controls.Add(this.usernameText);
             this.Controls.Add(this.BtnIngresar);
-            this.Name = "Form1";
+            this.Name = "Login";
             this.Text = "Inicio Sesion";
             ((System.ComponentModel.ISupportInitialize)(this.imgInicio)).EndInit();
             this.ResumeLayout(false);

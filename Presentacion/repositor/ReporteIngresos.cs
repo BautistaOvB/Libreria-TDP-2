@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Gestion_Libreria
+namespace Gestion_Libreria.Presentacion.repositor
 {
-    public partial class Form1 : Form
+    public partial class RIngresos : Form
     {
-        public Form1()
+        public RIngresos()
         {
             InitializeComponent();
-        }
-
-        private void Bsalir_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

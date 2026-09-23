@@ -21,5 +21,12 @@ namespace Gestion_Libreria.Presentacion.administrador
         {
 
         }
+
+        private void rteVentas_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'punto_Barra_pruebaDataSet1.Compra' Puede moverla o quitarla según sea necesario.
+            this.compraTableAdapter.Fill(this.punto_Barra_pruebaDataSet1.Compra);
+
+        }
     }
 }

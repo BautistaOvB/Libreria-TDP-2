@@ -38,23 +38,27 @@
             this.BtnSalir = new System.Windows.Forms.Button();
             this.Leditorial = new System.Windows.Forms.Label();
             this.TBeditorial = new System.Windows.Forms.TextBox();
+            this.LPrecio = new System.Windows.Forms.Label();
+            this.Tprecio = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Lnombre_prod
             // 
             this.Lnombre_prod.AutoSize = true;
-            this.Lnombre_prod.BackColor = System.Drawing.SystemColors.Control;
-            this.Lnombre_prod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lnombre_prod.Location = new System.Drawing.Point(181, 20);
+            this.Lnombre_prod.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Lnombre_prod.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lnombre_prod.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Lnombre_prod.Location = new System.Drawing.Point(40, 20);
             this.Lnombre_prod.Name = "Lnombre_prod";
-            this.Lnombre_prod.Size = new System.Drawing.Size(56, 16);
+            this.Lnombre_prod.Size = new System.Drawing.Size(62, 18);
             this.Lnombre_prod.TabIndex = 0;
             this.Lnombre_prod.Text = "Nombre";
             this.Lnombre_prod.Click += new System.EventHandler(this.Lnombre_prod_Click);
             // 
             // TBnombre_prod
             // 
-            this.TBnombre_prod.Location = new System.Drawing.Point(184, 39);
+            this.TBnombre_prod.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.TBnombre_prod.Location = new System.Drawing.Point(43, 39);
             this.TBnombre_prod.Name = "TBnombre_prod";
             this.TBnombre_prod.Size = new System.Drawing.Size(188, 20);
             this.TBnombre_prod.TabIndex = 1;
@@ -62,17 +66,17 @@
             // LCod
             // 
             this.LCod.AutoSize = true;
-            this.LCod.BackColor = System.Drawing.SystemColors.Control;
-            this.LCod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCod.Location = new System.Drawing.Point(181, 72);
+            this.LCod.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.LCod.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LCod.Location = new System.Drawing.Point(40, 72);
             this.LCod.Name = "LCod";
-            this.LCod.Size = new System.Drawing.Size(91, 16);
+            this.LCod.Size = new System.Drawing.Size(103, 18);
             this.LCod.TabIndex = 2;
             this.LCod.Text = "Codigo | ISBN";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(184, 91);
+            this.textBox1.Location = new System.Drawing.Point(43, 91);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(188, 20);
             this.textBox1.TabIndex = 3;
@@ -80,24 +84,24 @@
             // LStock
             // 
             this.LStock.AutoSize = true;
-            this.LStock.BackColor = System.Drawing.SystemColors.Control;
-            this.LStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LStock.Location = new System.Drawing.Point(181, 125);
+            this.LStock.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.LStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LStock.Location = new System.Drawing.Point(40, 125);
             this.LStock.Name = "LStock";
-            this.LStock.Size = new System.Drawing.Size(61, 16);
+            this.LStock.Size = new System.Drawing.Size(66, 18);
             this.LStock.TabIndex = 4;
             this.LStock.Text = "Cantidad";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(184, 144);
+            this.textBox2.Location = new System.Drawing.Point(43, 144);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(188, 20);
             this.textBox2.TabIndex = 5;
             // 
             // BtnGuardar
             // 
-            this.BtnGuardar.Location = new System.Drawing.Point(297, 226);
+            this.BtnGuardar.Location = new System.Drawing.Point(43, 292);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
             this.BtnGuardar.TabIndex = 6;
@@ -106,7 +110,7 @@
             // 
             // BtnSalir
             // 
-            this.BtnSalir.Location = new System.Drawing.Point(389, 226);
+            this.BtnSalir.Location = new System.Drawing.Point(156, 292);
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(75, 23);
             this.BtnSalir.TabIndex = 7;
@@ -116,21 +120,39 @@
             // Leditorial
             // 
             this.Leditorial.AutoSize = true;
-            this.Leditorial.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Leditorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Leditorial.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Leditorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Leditorial.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Leditorial.Location = new System.Drawing.Point(181, 176);
+            this.Leditorial.Location = new System.Drawing.Point(40, 176);
             this.Leditorial.Name = "Leditorial";
-            this.Leditorial.Size = new System.Drawing.Size(56, 16);
+            this.Leditorial.Size = new System.Drawing.Size(61, 18);
             this.Leditorial.TabIndex = 8;
             this.Leditorial.Text = "Editorial";
             // 
             // TBeditorial
             // 
-            this.TBeditorial.Location = new System.Drawing.Point(184, 196);
+            this.TBeditorial.Location = new System.Drawing.Point(43, 196);
             this.TBeditorial.Name = "TBeditorial";
             this.TBeditorial.Size = new System.Drawing.Size(188, 20);
             this.TBeditorial.TabIndex = 9;
+            // 
+            // LPrecio
+            // 
+            this.LPrecio.AutoSize = true;
+            this.LPrecio.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.LPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LPrecio.Location = new System.Drawing.Point(40, 231);
+            this.LPrecio.Name = "LPrecio";
+            this.LPrecio.Size = new System.Drawing.Size(51, 18);
+            this.LPrecio.TabIndex = 10;
+            this.LPrecio.Text = "Precio";
+            // 
+            // Tprecio
+            // 
+            this.Tprecio.Location = new System.Drawing.Point(43, 252);
+            this.Tprecio.Name = "Tprecio";
+            this.Tprecio.Size = new System.Drawing.Size(188, 20);
+            this.Tprecio.TabIndex = 11;
             // 
             // AddProd
             // 
@@ -138,8 +160,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(484, 261);
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClientSize = new System.Drawing.Size(291, 336);
+            this.Controls.Add(this.Tprecio);
+            this.Controls.Add(this.LPrecio);
             this.Controls.Add(this.TBeditorial);
             this.Controls.Add(this.Leditorial);
             this.Controls.Add(this.BtnSalir);
@@ -169,5 +193,7 @@
         private System.Windows.Forms.Button BtnSalir;
         private System.Windows.Forms.Label Leditorial;
         private System.Windows.Forms.TextBox TBeditorial;
+        private System.Windows.Forms.Label LPrecio;
+        private System.Windows.Forms.TextBox Tprecio;
     }
 }

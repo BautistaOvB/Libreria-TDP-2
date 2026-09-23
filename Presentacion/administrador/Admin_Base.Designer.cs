@@ -75,10 +75,11 @@
             // 
             // BtnEditarUsuario
             // 
-            this.BtnEditarUsuario.BackColor = System.Drawing.Color.MidnightBlue;
+            this.BtnEditarUsuario.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BtnEditarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnEditarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnEditarUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.BtnEditarUsuario.Location = new System.Drawing.Point(12, 246);
+            this.BtnEditarUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnEditarUsuario.Location = new System.Drawing.Point(12, 252);
             this.BtnEditarUsuario.Name = "BtnEditarUsuario";
             this.BtnEditarUsuario.Padding = new System.Windows.Forms.Padding(10);
             this.BtnEditarUsuario.Size = new System.Drawing.Size(140, 50);
@@ -88,23 +89,26 @@
             // 
             // btnStock
             // 
-            this.btnStock.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnStock.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStock.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnStock.Location = new System.Drawing.Point(12, 365);
+            this.btnStock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnStock.Location = new System.Drawing.Point(12, 389);
+            this.btnStock.Margin = new System.Windows.Forms.Padding(0);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Padding = new System.Windows.Forms.Padding(10);
+            this.btnStock.Padding = new System.Windows.Forms.Padding(5);
             this.btnStock.Size = new System.Drawing.Size(140, 50);
             this.btnStock.TabIndex = 3;
-            this.btnStock.Text = "Reporte de Stock";
+            this.btnStock.Text = "Ver Inventario";
             this.btnStock.UseVisualStyleBackColor = false;
             // 
             // BtnRptVentas
             // 
-            this.BtnRptVentas.BackColor = System.Drawing.Color.MidnightBlue;
+            this.BtnRptVentas.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BtnRptVentas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnRptVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnRptVentas.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.BtnRptVentas.Location = new System.Drawing.Point(12, 306);
+            this.BtnRptVentas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnRptVentas.Location = new System.Drawing.Point(12, 318);
             this.BtnRptVentas.Name = "BtnRptVentas";
             this.BtnRptVentas.Padding = new System.Windows.Forms.Padding(6);
             this.BtnRptVentas.Size = new System.Drawing.Size(140, 50);
@@ -114,10 +118,11 @@
             // 
             // VerUsuario
             // 
-            this.VerUsuario.BackColor = System.Drawing.Color.MidnightBlue;
+            this.VerUsuario.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.VerUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.VerUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VerUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.VerUsuario.Location = new System.Drawing.Point(12, 186);
+            this.VerUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.VerUsuario.Location = new System.Drawing.Point(12, 189);
             this.VerUsuario.Name = "VerUsuario";
             this.VerUsuario.Padding = new System.Windows.Forms.Padding(10);
             this.VerUsuario.Size = new System.Drawing.Size(140, 50);
@@ -127,15 +132,16 @@
             // 
             // BtnAddUsuario
             // 
-            this.BtnAddUsuario.BackColor = System.Drawing.Color.MidnightBlue;
+            this.BtnAddUsuario.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BtnAddUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnAddUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAddUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAddUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BtnAddUsuario.Location = new System.Drawing.Point(12, 127);
             this.BtnAddUsuario.Name = "BtnAddUsuario";
             this.BtnAddUsuario.Padding = new System.Windows.Forms.Padding(10);
             this.BtnAddUsuario.Size = new System.Drawing.Size(140, 50);
             this.BtnAddUsuario.TabIndex = 0;
-            this.BtnAddUsuario.Text = "Agregar Usuario";
+            this.BtnAddUsuario.Text = "Registrar Usuario";
             this.BtnAddUsuario.UseVisualStyleBackColor = false;
             this.BtnAddUsuario.Click += new System.EventHandler(this.BtnAddUsuario_Click);
             // 
@@ -168,7 +174,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(6, 65);
+            this.label1.Location = new System.Drawing.Point(3, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(313, 29);
             this.label1.TabIndex = 0;
@@ -177,7 +183,7 @@
             // 
             // PanelContenedor
             // 
-            this.PanelContenedor.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelContenedor.BackColor = System.Drawing.Color.LightSteelBlue;
             this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelContenedor.Location = new System.Drawing.Point(163, 100);
             this.PanelContenedor.Name = "PanelContenedor";

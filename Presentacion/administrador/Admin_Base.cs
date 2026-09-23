@@ -15,6 +15,7 @@ namespace Gestion_Libreria.Presentacion.administrador
         public Admin_Base()
         {
             InitializeComponent();
+            this.FormClosed += (s, e) => Application.Exit(); // Cierra la app al cerrar esta ventana
         }
 
         private void BtnAddUsuario_Click(object sender, EventArgs e)
