@@ -1,11 +1,11 @@
 <<<<<<< HEAD
 # Gestion-Libreria
 =======
-<<<<<<< HEAD
 # Libreria-TDP-2
 =======
 # Gestion-Libreria
 
+<<<<<<< Body
 # Especificacion de Requerimientos de Software
 Proyecto: Sistema de Gestión de Librería
 Sistema de Gestión de Ventas e Inventario para Librería
