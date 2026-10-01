@@ -32,5 +32,15 @@ namespace Gestion_Libreria.Presentacion.vendedor
         {
 
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void BtnRteVtaCajero_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,43 +28,57 @@ namespace Gestion_Libreria.Presentacion.administrador
                 string.IsNullOrWhiteSpace(TBpass.Text) ||
                 string.IsNullOrWhiteSpace(TBusername.Text))
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, complete todos los campos.", "Advertencia",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 2. Determinar el ID del Rol según el RadioButton seleccionado
+            // 2. Validar el formato del email (debe tener @ y .)
+            if (!EsEmailValido(TBmail.Text))
+            {
+                MessageBox.Show("Ingrese un email válido (debe contener '@' y '.').",
+                                "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBmail.Focus();
+                return;
+            }
+
+            // 3. Validar que la contraseña tenga al menos 8 caracteres
+            if (TBpass.Text.Length < 8)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 8 caracteres.",
+                                "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBpass.Focus();
+                return;
+            }
+
+            // 4. Determinar el ID del Rol según el RadioButton seleccionado
             int idRolSeleccionado = 0;
 
             if (RBadmin.Checked)
-            {
-                idRolSeleccionado = 1; // Reemplaza 1 por el ID real de Administrador en tu BD
-            }
+                idRolSeleccionado = 1;
             else if (RBvendedor.Checked)
-            {
-                idRolSeleccionado = 2; // Reemplaza 2 por el ID real de Vendedor en tu BD
-            }
+                idRolSeleccionado = 2;
             else if (RBrepositor.Checked)
-            {
-                idRolSeleccionado = 3; // Reemplaza 3 por el ID real de Repositor en tu BD
-            }
+                idRolSeleccionado = 3;
             else
             {
-                MessageBox.Show("Por favor, seleccione un Rol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, seleccione un Rol.", "Advertencia",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 3. Crear el objeto Usuario (Entidad)
+            // 5. Crear el objeto Usuario
             Usuario nuevoUser = new Usuario
             {
-                nombre = TBnombre.Text,
-                apellido = TBapellido.Text,
-                mail = TBmail.Text,
-                password_hash = TBpass.Text, // Recuerda: en producción esto debe ir encriptado
-                username = TBusername.Text,
+                nombre = TBnombre.Text.Trim(),
+                apellido = TBapellido.Text.Trim(),
+                mail = TBmail.Text.Trim(),
+                password_hash = TBpass.Text, // ⚠️ en producción: encriptar
+                username = TBusername.Text.Trim(),
                 id_rol = idRolSeleccionado
             };
 
-            // 4. Enviar a la capa de Datos para guardar en SQL
+            // 6. Guardar
             try
             {
                 UsuarioDatos datos = new UsuarioDatos();
@@ -72,34 +86,52 @@ namespace Gestion_Libreria.Presentacion.administrador
 
                 if (exito)
                 {
-                    MessageBox.Show("Usuario guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Usuario guardado exitosamente.", "Éxito",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Limpiar los campos después de guardar
                     TBnombre.Clear();
                     TBapellido.Clear();
                     TBmail.Clear();
                     TBpass.Clear();
                     TBusername.Clear();
 
-                    // Desmarcar los RadioButtons (opcional, pero buena práctica)
                     RBadmin.Checked = false;
                     RBvendedor.Checked = false;
                     RBrepositor.Checked = false;
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo guardar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se pudo guardar el usuario.", "Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar: " + ex.Message, "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al guardar: " + ex.Message, "Error Crítico",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void Bsalir_Click(object sender, EventArgs e)
         {
             this.Close(); // O Application.Exit() si quieres cerrar todo
+        }
+        private bool EsEmailValido(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email)) return false;
+
+            // Debe tener @ y al menos un . después del @
+            int posArroba = email.IndexOf('@');
+            if (posArroba <= 0) return false;                  // no hay @ o está al inicio
+            if (posArroba == email.Length - 1) return false;   // @ al final
+
+            string dominio = email.Substring(posArroba + 1);
+
+            // El dominio debe tener al menos un punto y no estar al inicio/final
+            if (!dominio.Contains(".")) return false;
+            if (dominio.StartsWith(".") || dominio.EndsWith(".")) return false;
+
+            return true;
         }
         private void Lemail_Click(object sender, EventArgs e)
         {

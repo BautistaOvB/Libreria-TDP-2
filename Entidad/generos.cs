@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Gestion_Libreria.Entidad
 {
-    public class Rol
+    internal class generos
     {
-        public int id_rol { get; set; }
-        public string nombre_rol { get; set; }
+        public int cod_genero { get; set; }
+        public string descripcion { get; set; }
     }
 }

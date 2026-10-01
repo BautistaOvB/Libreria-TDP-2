@@ -29,102 +29,51 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.LbuscarProd = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.punto_Barra_pruebaDataSet = new Gestion_Libreria.Punto_Barra_pruebaDataSet();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.librosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.punto_Barra_pruebaDataSet = new Gestion_Libreria.Punto_Barra_pruebaDataSet();
             this.librosTableAdapter = new Gestion_Libreria.Punto_Barra_pruebaDataSetTableAdapters.LibrosTableAdapter();
-            this.iSBNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAccion = new System.Windows.Forms.DataGridViewButtonColumn();
             this.AddCarrito = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).BeginInit();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).BeginInit();
             this.SuspendLayout();
             // 
-            // LbuscarProd
+            // txtBuscar
             // 
-            this.LbuscarProd.AutoSize = true;
-            this.LbuscarProd.Location = new System.Drawing.Point(27, 24);
-            this.LbuscarProd.Name = "LbuscarProd";
-            this.LbuscarProd.Size = new System.Drawing.Size(86, 13);
-            this.LbuscarProd.TabIndex = 0;
-            this.LbuscarProd.Text = "Buscar Producto";
+            this.txtBuscar.Location = new System.Drawing.Point(30, 30);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(178, 20);
+            this.txtBuscar.TabIndex = 1;
             // 
-            // textBox1
+            // dgvProductos
             // 
-            this.textBox1.Location = new System.Drawing.Point(30, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(178, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iSBNDataGridViewTextBoxColumn,
-            this.nombreDataGridViewTextBoxColumn,
-            this.stockDataGridViewTextBoxColumn,
-            this.precioDataGridViewTextBoxColumn,
-            this.btnAccion});
-            this.dataGridView1.DataSource = this.librosBindingSource;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlText;
-            this.dataGridView1.Location = new System.Drawing.Point(30, 76);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(471, 174);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // punto_Barra_pruebaDataSet
-            // 
-            this.punto_Barra_pruebaDataSet.DataSetName = "Punto_Barra_pruebaDataSet";
-            this.punto_Barra_pruebaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dgvProductos.AllowUserToOrderColumns = true;
+            this.dgvProductos.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.GridColor = System.Drawing.SystemColors.ControlText;
+            this.dgvProductos.Location = new System.Drawing.Point(30, 76);
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.Size = new System.Drawing.Size(471, 174);
+            this.dgvProductos.TabIndex = 2;
             // 
             // librosBindingSource
             // 
             this.librosBindingSource.DataMember = "Libros";
             this.librosBindingSource.DataSource = this.punto_Barra_pruebaDataSet;
             // 
+            // punto_Barra_pruebaDataSet
+            // 
+            this.punto_Barra_pruebaDataSet.DataSetName = "Punto_Barra_pruebaDataSet";
+            this.punto_Barra_pruebaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // librosTableAdapter
             // 
             this.librosTableAdapter.ClearBeforeFill = true;
-            // 
-            // iSBNDataGridViewTextBoxColumn
-            // 
-            this.iSBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN";
-            this.iSBNDataGridViewTextBoxColumn.HeaderText = "ISBN";
-            this.iSBNDataGridViewTextBoxColumn.Name = "iSBNDataGridViewTextBoxColumn";
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            // 
-            // stockDataGridViewTextBoxColumn
-            // 
-            this.stockDataGridViewTextBoxColumn.DataPropertyName = "stock";
-            this.stockDataGridViewTextBoxColumn.HeaderText = "stock";
-            this.stockDataGridViewTextBoxColumn.Name = "stockDataGridViewTextBoxColumn";
-            this.stockDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // precioDataGridViewTextBoxColumn
-            // 
-            this.precioDataGridViewTextBoxColumn.DataPropertyName = "precio";
-            this.precioDataGridViewTextBoxColumn.HeaderText = "precio";
-            this.precioDataGridViewTextBoxColumn.Name = "precioDataGridViewTextBoxColumn";
-            // 
-            // btnAccion
-            // 
-            this.btnAccion.DataPropertyName = "ISBN";
-            this.btnAccion.HeaderText = "Accion";
-            this.btnAccion.Name = "btnAccion";
             // 
             // AddCarrito
             // 
@@ -134,6 +83,7 @@
             this.AddCarrito.TabIndex = 3;
             this.AddCarrito.Text = "Agregar al Carrito";
             this.AddCarrito.UseVisualStyleBackColor = true;
+            this.AddCarrito.Click += new System.EventHandler(this.AddCarrito_Click);
             // 
             // btnCancelar
             // 
@@ -143,43 +93,60 @@
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBuscar.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBuscar.Location = new System.Drawing.Point(234, 26);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(781, 78);
+            this.panel1.TabIndex = 6;
             // 
             // FormProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(519, 324);
+            this.ClientSize = new System.Drawing.Size(783, 426);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.AddCarrito);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.LbuscarProd);
+            this.Controls.Add(this.dgvProductos);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.panel1);
             this.Name = "FormProductos";
             this.Text = "Punto y Barra | Buscar Productos";
             this.Load += new System.EventHandler(this.FormProductos_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label LbuscarProd;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.DataGridView dgvProductos;
         private Punto_Barra_pruebaDataSet punto_Barra_pruebaDataSet;
         private System.Windows.Forms.BindingSource librosBindingSource;
         private Punto_Barra_pruebaDataSetTableAdapters.LibrosTableAdapter librosTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iSBNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precioDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn btnAccion;
         private System.Windows.Forms.Button AddCarrito;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Panel panel1;
     }
 }

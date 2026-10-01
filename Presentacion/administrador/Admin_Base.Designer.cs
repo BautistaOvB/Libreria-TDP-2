@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.BtnEditarUsuario = new System.Windows.Forms.Button();
             this.btnStock = new System.Windows.Forms.Button();
             this.BtnRptVentas = new System.Windows.Forms.Button();
             this.VerUsuario = new System.Windows.Forms.Button();
@@ -52,7 +51,6 @@
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.BtnEditarUsuario);
             this.panel1.Controls.Add(this.btnStock);
             this.panel1.Controls.Add(this.BtnRptVentas);
             this.panel1.Controls.Add(this.VerUsuario);
@@ -73,27 +71,13 @@
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
-            // BtnEditarUsuario
-            // 
-            this.BtnEditarUsuario.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.BtnEditarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnEditarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnEditarUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnEditarUsuario.Location = new System.Drawing.Point(12, 252);
-            this.BtnEditarUsuario.Name = "BtnEditarUsuario";
-            this.BtnEditarUsuario.Padding = new System.Windows.Forms.Padding(10);
-            this.BtnEditarUsuario.Size = new System.Drawing.Size(140, 50);
-            this.BtnEditarUsuario.TabIndex = 4;
-            this.BtnEditarUsuario.Text = "Modificar Usuario";
-            this.BtnEditarUsuario.UseVisualStyleBackColor = false;
-            // 
             // btnStock
             // 
             this.btnStock.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnStock.Location = new System.Drawing.Point(12, 389);
+            this.btnStock.Location = new System.Drawing.Point(12, 333);
             this.btnStock.Margin = new System.Windows.Forms.Padding(0);
             this.btnStock.Name = "btnStock";
             this.btnStock.Padding = new System.Windows.Forms.Padding(5);
@@ -101,6 +85,7 @@
             this.btnStock.TabIndex = 3;
             this.btnStock.Text = "Ver Inventario";
             this.btnStock.UseVisualStyleBackColor = false;
+            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
             // 
             // BtnRptVentas
             // 
@@ -108,13 +93,14 @@
             this.BtnRptVentas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnRptVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRptVentas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnRptVentas.Location = new System.Drawing.Point(12, 318);
+            this.BtnRptVentas.Location = new System.Drawing.Point(12, 262);
             this.BtnRptVentas.Name = "BtnRptVentas";
             this.BtnRptVentas.Padding = new System.Windows.Forms.Padding(6);
             this.BtnRptVentas.Size = new System.Drawing.Size(140, 50);
             this.BtnRptVentas.TabIndex = 2;
             this.BtnRptVentas.Text = "Reporte de Ventas";
             this.BtnRptVentas.UseVisualStyleBackColor = false;
+            this.BtnRptVentas.Click += new System.EventHandler(this.BtnRptVentas_Click);
             // 
             // VerUsuario
             // 
@@ -122,13 +108,14 @@
             this.VerUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.VerUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.VerUsuario.Location = new System.Drawing.Point(12, 189);
+            this.VerUsuario.Location = new System.Drawing.Point(12, 194);
             this.VerUsuario.Name = "VerUsuario";
             this.VerUsuario.Padding = new System.Windows.Forms.Padding(10);
             this.VerUsuario.Size = new System.Drawing.Size(140, 50);
             this.VerUsuario.TabIndex = 1;
             this.VerUsuario.Text = "Ver Usuarios";
             this.VerUsuario.UseVisualStyleBackColor = false;
+            this.VerUsuario.Click += new System.EventHandler(this.VerUsuario_Click);
             // 
             // BtnAddUsuario
             // 
@@ -167,7 +154,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(90, 90);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+//            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label1
             // 
@@ -179,7 +166,6 @@
             this.label1.Size = new System.Drawing.Size(313, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bienvenido Administrador";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // PanelContenedor
             // 
@@ -189,7 +175,6 @@
             this.PanelContenedor.Name = "PanelContenedor";
             this.PanelContenedor.Size = new System.Drawing.Size(621, 361);
             this.PanelContenedor.TabIndex = 2;
-            this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelContenedor_Paint);
             // 
             // Admin_Base
             // 
@@ -219,7 +204,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnStock;
         private System.Windows.Forms.Button BtnRptVentas;
-        private System.Windows.Forms.Button BtnEditarUsuario;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel PanelContenedor;

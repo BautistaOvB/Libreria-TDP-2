@@ -29,40 +29,51 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvVentas = new System.Windows.Forms.DataGridView();
+            this.compraBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.punto_Barra_pruebaDataSet1 = new Gestion_Libreria.Punto_Barra_pruebaDataSet1();
             this.punto_Barra_pruebaDataSet = new Gestion_Libreria.Punto_Barra_pruebaDataSet();
             this.puntoBarrapruebaDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.punto_Barra_pruebaDataSet1 = new Gestion_Libreria.Punto_Barra_pruebaDataSet1();
-            this.compraBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compraTableAdapter = new Gestion_Libreria.Punto_Barra_pruebaDataSet1TableAdapters.CompraTableAdapter();
             this.Lventas = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.idcompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechacompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.punto_Barra_tdpDataSet1 = new Gestion_Libreria.Punto_Barra_tdpDataSet1();
+            this.ventasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ventasTableAdapter = new Gestion_Libreria.Punto_Barra_tdpDataSet1TableAdapters.ventasTableAdapter();
             this.BtnVerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.compraBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.puntoBarrapruebaDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.compraBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ventasBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvVentas
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idcompraDataGridViewTextBoxColumn,
-            this.fechacompraDataGridViewTextBoxColumn,
-            this.totalcompraDataGridViewTextBoxColumn,
+            this.dgvVentas.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BtnVerDetalle});
-            this.dataGridView1.DataSource = this.compraBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 61);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(443, 184);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvVentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVentas.Location = new System.Drawing.Point(0, 75);
+            this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.Size = new System.Drawing.Size(526, 237);
+            this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellContentClick);
+            // 
+            // compraBindingSource
+            // 
+            this.compraBindingSource.DataMember = "Compra";
+            this.compraBindingSource.DataSource = this.punto_Barra_pruebaDataSet1;
+            // 
+            // punto_Barra_pruebaDataSet1
+            // 
+            this.punto_Barra_pruebaDataSet1.DataSetName = "Punto_Barra_pruebaDataSet1";
+            this.punto_Barra_pruebaDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // punto_Barra_pruebaDataSet
             // 
@@ -74,16 +85,6 @@
             this.puntoBarrapruebaDataSetBindingSource.DataSource = this.punto_Barra_pruebaDataSet;
             this.puntoBarrapruebaDataSetBindingSource.Position = 0;
             // 
-            // punto_Barra_pruebaDataSet1
-            // 
-            this.punto_Barra_pruebaDataSet1.DataSetName = "Punto_Barra_pruebaDataSet1";
-            this.punto_Barra_pruebaDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // compraBindingSource
-            // 
-            this.compraBindingSource.DataMember = "Compra";
-            this.compraBindingSource.DataSource = this.punto_Barra_pruebaDataSet1;
-            // 
             // compraTableAdapter
             // 
             this.compraTableAdapter.ClearBeforeFill = true;
@@ -91,41 +92,37 @@
             // Lventas
             // 
             this.Lventas.AutoSize = true;
-            this.Lventas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lventas.Location = new System.Drawing.Point(23, 19);
+            this.Lventas.BackColor = System.Drawing.Color.SteelBlue;
+            this.Lventas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lventas.ForeColor = System.Drawing.Color.AliceBlue;
+            this.Lventas.Location = new System.Drawing.Point(12, 19);
             this.Lventas.Name = "Lventas";
-            this.Lventas.Size = new System.Drawing.Size(167, 24);
+            this.Lventas.Size = new System.Drawing.Size(184, 24);
             this.Lventas.TabIndex = 1;
             this.Lventas.Text = "Reporte de Ventas";
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Location = new System.Drawing.Point(380, 258);
+            this.btnCerrar.Location = new System.Drawing.Point(397, 22);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
             this.btnCerrar.TabIndex = 2;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
             // 
-            // idcompraDataGridViewTextBoxColumn
+            // punto_Barra_tdpDataSet1
             // 
-            this.idcompraDataGridViewTextBoxColumn.DataPropertyName = "id_compra";
-            this.idcompraDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idcompraDataGridViewTextBoxColumn.Name = "idcompraDataGridViewTextBoxColumn";
-            this.idcompraDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idcompraDataGridViewTextBoxColumn.Width = 75;
+            this.punto_Barra_tdpDataSet1.DataSetName = "Punto_Barra_tdpDataSet1";
+            this.punto_Barra_tdpDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // fechacompraDataGridViewTextBoxColumn
+            // ventasBindingSource
             // 
-            this.fechacompraDataGridViewTextBoxColumn.DataPropertyName = "fecha_compra";
-            this.fechacompraDataGridViewTextBoxColumn.HeaderText = "Fecha";
-            this.fechacompraDataGridViewTextBoxColumn.Name = "fechacompraDataGridViewTextBoxColumn";
+            this.ventasBindingSource.DataMember = "ventas";
+            this.ventasBindingSource.DataSource = this.punto_Barra_tdpDataSet1;
             // 
-            // totalcompraDataGridViewTextBoxColumn
+            // ventasTableAdapter
             // 
-            this.totalcompraDataGridViewTextBoxColumn.DataPropertyName = "total_compra";
-            this.totalcompraDataGridViewTextBoxColumn.HeaderText = "Total";
-            this.totalcompraDataGridViewTextBoxColumn.Name = "totalcompraDataGridViewTextBoxColumn";
+            this.ventasTableAdapter.ClearBeforeFill = true;
             // 
             // BtnVerDetalle
             // 
@@ -134,23 +131,36 @@
             this.BtnVerDetalle.Name = "BtnVerDetalle";
             this.BtnVerDetalle.ReadOnly = true;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.btnCerrar);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(526, 75);
+            this.panel1.TabIndex = 3;
+            // 
             // rteVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(484, 293);
-            this.Controls.Add(this.btnCerrar);
+            this.ClientSize = new System.Drawing.Size(526, 312);
             this.Controls.Add(this.Lventas);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvVentas);
+            this.Controls.Add(this.panel1);
             this.Name = "rteVentas";
             this.Text = "Punto y Barra | Ventas";
             this.Load += new System.EventHandler(this.rteVentas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.compraBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.puntoBarrapruebaDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.compraBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ventasBindingSource)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,7 +168,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvVentas;
         private System.Windows.Forms.BindingSource puntoBarrapruebaDataSetBindingSource;
         private Punto_Barra_pruebaDataSet punto_Barra_pruebaDataSet;
         private Punto_Barra_pruebaDataSet1 punto_Barra_pruebaDataSet1;
@@ -166,9 +176,10 @@
         private Punto_Barra_pruebaDataSet1TableAdapters.CompraTableAdapter compraTableAdapter;
         private System.Windows.Forms.Label Lventas;
         private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idcompraDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechacompraDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalcompraDataGridViewTextBoxColumn;
+        private Punto_Barra_tdpDataSet1 punto_Barra_tdpDataSet1;
+        private System.Windows.Forms.BindingSource ventasBindingSource;
+        private Punto_Barra_tdpDataSet1TableAdapters.ventasTableAdapter ventasTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn BtnVerDetalle;
+        private System.Windows.Forms.Panel panel1;
     }
 }
