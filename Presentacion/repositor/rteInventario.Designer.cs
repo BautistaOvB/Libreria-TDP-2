@@ -1,4 +1,4 @@
-﻿namespace Gestion_Libreria.Presentacion.administrador
+﻿namespace Gestion_Libreria.Presentacion.repositor
 {
     partial class rteInventario
     {
@@ -48,6 +48,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtISBN = new System.Windows.Forms.TextBox();
             this.lISBN = new System.Windows.Forms.Label();
+            this.btnMasVendidos = new System.Windows.Forms.Button();
+            this.btnMasCantidad = new System.Windows.Forms.Button();
             this.Cabecera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).BeginInit();
@@ -59,6 +61,8 @@
             // Cabecera
             // 
             this.Cabecera.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Cabecera.Controls.Add(this.btnMasCantidad);
+            this.Cabecera.Controls.Add(this.btnMasVendidos);
             this.Cabecera.Controls.Add(this.txtBuscar);
             this.Cabecera.Controls.Add(this.btnBuscar);
             this.Cabecera.Dock = System.Windows.Forms.DockStyle.Top;
@@ -236,6 +240,24 @@
             this.lISBN.TabIndex = 0;
             this.lISBN.Text = "ISBN:";
             // 
+            // btnMasVendidos
+            // 
+            this.btnMasVendidos.Location = new System.Drawing.Point(12, 12);
+            this.btnMasVendidos.Name = "btnMasVendidos";
+            this.btnMasVendidos.Size = new System.Drawing.Size(97, 34);
+            this.btnMasVendidos.TabIndex = 2;
+            this.btnMasVendidos.Text = "Mas Vendidos";
+            this.btnMasVendidos.UseVisualStyleBackColor = true;
+            // 
+            // btnMasCantidad
+            // 
+            this.btnMasCantidad.Location = new System.Drawing.Point(13, 53);
+            this.btnMasCantidad.Name = "btnMasCantidad";
+            this.btnMasCantidad.Size = new System.Drawing.Size(96, 30);
+            this.btnMasCantidad.TabIndex = 3;
+            this.btnMasCantidad.Text = "Mas Pedidos";
+            this.btnMasCantidad.UseVisualStyleBackColor = true;
+            // 
             // rteInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,5 +302,7 @@
         private System.Windows.Forms.Label lGenero;
         private System.Windows.Forms.TextBox txtGenero;
         private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Button btnMasCantidad;
+        private System.Windows.Forms.Button btnMasVendidos;
     }
 }

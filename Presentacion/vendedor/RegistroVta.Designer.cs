@@ -92,6 +92,7 @@
             this.btnIrAlPago.TabIndex = 3;
             this.btnIrAlPago.Text = "Ir al pago";
             this.btnIrAlPago.UseVisualStyleBackColor = false;
+            this.btnIrAlPago.Click += new System.EventHandler(this.btnIrAlPago_Click_1);
             // 
             // btnCancelar
             // 

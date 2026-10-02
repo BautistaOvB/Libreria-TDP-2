@@ -41,10 +41,8 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lMail = new System.Windows.Forms.Label();
-            this.txtMail = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.pCabecera = new System.Windows.Forms.Panel();
             this.btnBuscarApellido = new System.Windows.Forms.Button();
             this.btnBuscarDNI = new System.Windows.Forms.Button();
             this.txtApellidoBuscar = new System.Windows.Forms.TextBox();
@@ -52,14 +50,24 @@
             this.txtBuscarDNI = new System.Windows.Forms.TextBox();
             this.lblDNI = new System.Windows.Forms.Label();
             this.btnActualizar = new System.Windows.Forms.Button();
+            this.pDatos = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.nombreCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DNIcliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mailCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pCabecera.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lNombre
             // 
             this.lNombre.AutoSize = true;
+            this.lNombre.BackColor = System.Drawing.Color.MidnightBlue;
             this.lNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lNombre.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lNombre.Location = new System.Drawing.Point(34, 34);
@@ -78,6 +86,7 @@
             // lDNI
             // 
             this.lDNI.AutoSize = true;
+            this.lDNI.BackColor = System.Drawing.Color.MidnightBlue;
             this.lDNI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lDNI.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lDNI.Location = new System.Drawing.Point(63, 131);
@@ -96,6 +105,7 @@
             // lDireccion
             // 
             this.lDireccion.AutoSize = true;
+            this.lDireccion.BackColor = System.Drawing.Color.MidnightBlue;
             this.lDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lDireccion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lDireccion.Location = new System.Drawing.Point(23, 183);
@@ -121,6 +131,7 @@
             // lTelefono
             // 
             this.lTelefono.AutoSize = true;
+            this.lTelefono.BackColor = System.Drawing.Color.MidnightBlue;
             this.lTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lTelefono.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lTelefono.Location = new System.Drawing.Point(27, 236);
@@ -132,6 +143,7 @@
             // lApellido
             // 
             this.lApellido.AutoSize = true;
+            this.lApellido.BackColor = System.Drawing.Color.MidnightBlue;
             this.lApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lApellido.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lApellido.Location = new System.Drawing.Point(31, 80);
@@ -158,6 +170,7 @@
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
@@ -170,10 +183,12 @@
             this.btnCancelar.TabIndex = 11;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // lMail
             // 
             this.lMail.AutoSize = true;
+            this.lMail.BackColor = System.Drawing.Color.MidnightBlue;
             this.lMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lMail.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lMail.Location = new System.Drawing.Point(50, 290);
@@ -182,64 +197,53 @@
             this.lMail.TabIndex = 12;
             this.lMail.Text = "Email";
             // 
-            // txtMail
+            // txtEmail
             // 
-            this.txtMail.Location = new System.Drawing.Point(102, 289);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(152, 20);
-            this.txtMail.TabIndex = 13;
+            this.txtEmail.Location = new System.Drawing.Point(102, 289);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(152, 20);
+            this.txtEmail.TabIndex = 13;
             // 
-            // panel1
+            // pCabecera
             // 
-            this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.Controls.Add(this.dgvClientes);
-            this.panel1.Location = new System.Drawing.Point(317, 120);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(607, 322);
-            this.panel1.TabIndex = 14;
-            // 
-            // dgvClientes
-            // 
-            this.dgvClientes.AllowUserToOrderColumns = true;
-            this.dgvClientes.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvClientes.Location = new System.Drawing.Point(0, 0);
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.Size = new System.Drawing.Size(607, 322);
-            this.dgvClientes.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel2.Controls.Add(this.btnBuscarApellido);
-            this.panel2.Controls.Add(this.btnBuscarDNI);
-            this.panel2.Controls.Add(this.txtApellidoBuscar);
-            this.panel2.Controls.Add(this.lblApellido);
-            this.panel2.Controls.Add(this.txtBuscarDNI);
-            this.panel2.Controls.Add(this.lblDNI);
-            this.panel2.Location = new System.Drawing.Point(317, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(607, 122);
-            this.panel2.TabIndex = 15;
+            this.pCabecera.BackColor = System.Drawing.Color.MidnightBlue;
+            this.pCabecera.Controls.Add(this.btnBuscarApellido);
+            this.pCabecera.Controls.Add(this.btnBuscarDNI);
+            this.pCabecera.Controls.Add(this.txtApellidoBuscar);
+            this.pCabecera.Controls.Add(this.lblApellido);
+            this.pCabecera.Controls.Add(this.txtBuscarDNI);
+            this.pCabecera.Controls.Add(this.lblDNI);
+            this.pCabecera.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pCabecera.Location = new System.Drawing.Point(311, 0);
+            this.pCabecera.Name = "pCabecera";
+            this.pCabecera.Size = new System.Drawing.Size(657, 122);
+            this.pCabecera.TabIndex = 15;
             // 
             // btnBuscarApellido
             // 
+            this.btnBuscarApellido.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscarApellido.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBuscarApellido.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnBuscarApellido.Location = new System.Drawing.Point(244, 75);
             this.btnBuscarApellido.Name = "btnBuscarApellido";
             this.btnBuscarApellido.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarApellido.TabIndex = 5;
             this.btnBuscarApellido.Text = "Buscar";
-            this.btnBuscarApellido.UseVisualStyleBackColor = true;
+            this.btnBuscarApellido.UseVisualStyleBackColor = false;
+            this.btnBuscarApellido.Click += new System.EventHandler(this.btnBuscarApellido_Click);
             // 
             // btnBuscarDNI
             // 
+            this.btnBuscarDNI.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscarDNI.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBuscarDNI.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnBuscarDNI.Location = new System.Drawing.Point(244, 40);
             this.btnBuscarDNI.Name = "btnBuscarDNI";
             this.btnBuscarDNI.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarDNI.TabIndex = 4;
             this.btnBuscarDNI.Text = "Buscar";
-            this.btnBuscarDNI.UseVisualStyleBackColor = true;
+            this.btnBuscarDNI.UseVisualStyleBackColor = false;
+            this.btnBuscarDNI.Click += new System.EventHandler(this.btnBuscarDNI_Click);
             // 
             // txtApellidoBuscar
             // 
@@ -287,17 +291,88 @@
             this.btnActualizar.TabIndex = 16;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // pDatos
+            // 
+            this.pDatos.BackColor = System.Drawing.Color.MidnightBlue;
+            this.pDatos.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pDatos.Location = new System.Drawing.Point(0, 0);
+            this.pDatos.Name = "pDatos";
+            this.pDatos.Size = new System.Drawing.Size(311, 460);
+            this.pDatos.TabIndex = 17;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgvClientes);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(311, 122);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(657, 338);
+            this.panel1.TabIndex = 18;
+            // 
+            // dgvClientes
+            // 
+            this.dgvClientes.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombreCliente,
+            this.ApellidoCliente,
+            this.DNIcliente,
+            this.direccion,
+            this.telefonoCliente,
+            this.mailCliente});
+            this.dgvClientes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvClientes.Location = new System.Drawing.Point(0, 0);
+            this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.Size = new System.Drawing.Size(657, 338);
+            this.dgvClientes.TabIndex = 0;
+            // 
+            // nombreCliente
+            // 
+            this.nombreCliente.HeaderText = "Nombre";
+            this.nombreCliente.Name = "nombreCliente";
+            this.nombreCliente.ReadOnly = true;
+            // 
+            // ApellidoCliente
+            // 
+            this.ApellidoCliente.HeaderText = "Apellido";
+            this.ApellidoCliente.Name = "ApellidoCliente";
+            this.ApellidoCliente.ReadOnly = true;
+            // 
+            // DNIcliente
+            // 
+            this.DNIcliente.HeaderText = "DNI";
+            this.DNIcliente.Name = "DNIcliente";
+            this.DNIcliente.ReadOnly = true;
+            // 
+            // direccion
+            // 
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            // 
+            // telefonoCliente
+            // 
+            this.telefonoCliente.HeaderText = "Telefono";
+            this.telefonoCliente.Name = "telefonoCliente";
+            // 
+            // mailCliente
+            // 
+            this.mailCliente.HeaderText = "Correo";
+            this.mailCliente.Name = "mailCliente";
+            this.mailCliente.ReadOnly = true;
             // 
             // addCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Navy;
-            this.ClientSize = new System.Drawing.Size(923, 439);
-            this.Controls.Add(this.btnActualizar);
-            this.Controls.Add(this.panel2);
+            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.ClientSize = new System.Drawing.Size(968, 460);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txtMail);
+            this.Controls.Add(this.btnActualizar);
+            this.Controls.Add(this.pCabecera);
+            this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.lMail);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
@@ -311,12 +386,13 @@
             this.Controls.Add(this.lDNI);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lNombre);
+            this.Controls.Add(this.pDatos);
             this.Name = "addCliente";
             this.Text = "Punto y Barra | Registrar Cliente";
+            this.pCabecera.ResumeLayout(false);
+            this.pCabecera.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,10 +413,8 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lMail;
-        private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Panel pCabecera;
         private System.Windows.Forms.Button btnBuscarApellido;
         private System.Windows.Forms.Button btnBuscarDNI;
         private System.Windows.Forms.TextBox txtApellidoBuscar;
@@ -348,5 +422,14 @@
         private System.Windows.Forms.TextBox txtBuscarDNI;
         private System.Windows.Forms.Label lblDNI;
         private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.Panel pDatos;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgvClientes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DNIcliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefonoCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mailCliente;
     }
 }

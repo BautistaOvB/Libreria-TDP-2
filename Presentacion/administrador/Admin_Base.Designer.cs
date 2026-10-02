@@ -59,7 +59,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(163, 461);
+            this.panel1.Size = new System.Drawing.Size(163, 529);
             this.panel1.TabIndex = 0;
             // 
             // pictureBox2
@@ -78,10 +78,9 @@
             this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnStock.Location = new System.Drawing.Point(12, 333);
+            this.btnStock.Location = new System.Drawing.Point(12, 434);
             this.btnStock.Margin = new System.Windows.Forms.Padding(0);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Padding = new System.Windows.Forms.Padding(5);
             this.btnStock.Size = new System.Drawing.Size(140, 50);
             this.btnStock.TabIndex = 3;
             this.btnStock.Text = "Ver Inventario";
@@ -94,9 +93,8 @@
             this.BtnRptVentas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnRptVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRptVentas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnRptVentas.Location = new System.Drawing.Point(12, 262);
+            this.BtnRptVentas.Location = new System.Drawing.Point(12, 337);
             this.BtnRptVentas.Name = "BtnRptVentas";
-            this.BtnRptVentas.Padding = new System.Windows.Forms.Padding(6);
             this.BtnRptVentas.Size = new System.Drawing.Size(140, 50);
             this.BtnRptVentas.TabIndex = 2;
             this.BtnRptVentas.Text = "Reporte de Ventas";
@@ -109,7 +107,7 @@
             this.VerUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.VerUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.VerUsuario.Location = new System.Drawing.Point(12, 194);
+            this.VerUsuario.Location = new System.Drawing.Point(12, 238);
             this.VerUsuario.Name = "VerUsuario";
             this.VerUsuario.Padding = new System.Windows.Forms.Padding(10);
             this.VerUsuario.Size = new System.Drawing.Size(140, 50);
@@ -124,7 +122,7 @@
             this.BtnAddUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnAddUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAddUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnAddUsuario.Location = new System.Drawing.Point(12, 127);
+            this.BtnAddUsuario.Location = new System.Drawing.Point(12, 149);
             this.BtnAddUsuario.Name = "BtnAddUsuario";
             this.BtnAddUsuario.Size = new System.Drawing.Size(140, 50);
             this.BtnAddUsuario.TabIndex = 0;
@@ -140,7 +138,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(163, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(621, 100);
+            this.panel2.Size = new System.Drawing.Size(884, 100);
             this.panel2.TabIndex = 1;
             // 
             // pictureBox1
@@ -148,10 +146,11 @@
             this.pictureBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.pictureBox1.BackgroundImage = global::Gestion_Libreria.Properties.Resources.punto_y_barra_usuarios_registrados;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox1.Image = global::Gestion_Libreria.Properties.Resources.punto_y_barra_usuarios_registrados;
-            this.pictureBox1.Location = new System.Drawing.Point(528, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(794, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(90, 100);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -165,6 +164,7 @@
             this.label1.Size = new System.Drawing.Size(313, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bienvenido Administrador";
+            this.label1.Visible = false;
             // 
             // PanelContenedor
             // 
@@ -172,7 +172,7 @@
             this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelContenedor.Location = new System.Drawing.Point(163, 100);
             this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(621, 361);
+            this.PanelContenedor.Size = new System.Drawing.Size(884, 429);
             this.PanelContenedor.TabIndex = 2;
             // 
             // Admin_Base
@@ -180,7 +180,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(1047, 529);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

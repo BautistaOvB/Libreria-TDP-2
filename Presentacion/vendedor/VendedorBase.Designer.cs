@@ -53,14 +53,15 @@ namespace Gestion_Libreria.Presentacion.vendedor
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VendedorBase));
             this.BtnCajeroProductos = new System.Windows.Forms.Button();
             this.BtnRegistroVta = new System.Windows.Forms.Button();
             this.BtnRteVtaCajero = new System.Windows.Forms.Button();
             this.PanelBotones = new System.Windows.Forms.Panel();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.PanelContenedor = new System.Windows.Forms.Panel();
             this.btnCliente = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PanelContenedor = new System.Windows.Forms.Panel();
             this.PanelBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -124,6 +125,19 @@ namespace Gestion_Libreria.Presentacion.vendedor
             this.PanelBotones.TabIndex = 2;
             this.PanelBotones.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBotones_Paint);
             // 
+            // btnCliente
+            // 
+            this.btnCliente.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnCliente.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCliente.Location = new System.Drawing.Point(12, 386);
+            this.btnCliente.Name = "btnCliente";
+            this.btnCliente.Size = new System.Drawing.Size(140, 52);
+            this.btnCliente.TabIndex = 5;
+            this.btnCliente.Text = "Gestionar Cliente";
+            this.btnCliente.UseVisualStyleBackColor = false;
+            this.btnCliente.Click += new System.EventHandler(this.btnCliente_Click);
+            // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.LightSteelBlue;
@@ -136,23 +150,6 @@ namespace Gestion_Libreria.Presentacion.vendedor
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // PanelContenedor
-            // 
-            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelContenedor.Location = new System.Drawing.Point(166, 0);
-            this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(634, 450);
-            this.PanelContenedor.TabIndex = 3;
-            // 
-            // btnCliente
-            // 
-            this.btnCliente.Location = new System.Drawing.Point(12, 386);
-            this.btnCliente.Name = "btnCliente";
-            this.btnCliente.Size = new System.Drawing.Size(140, 52);
-            this.btnCliente.TabIndex = 5;
-            this.btnCliente.Text = "Gestionar Cliente";
-            this.btnCliente.UseVisualStyleBackColor = true;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Gestion_Libreria.Properties.Resources.punto_y_barra_azul_blanco;
@@ -163,6 +160,14 @@ namespace Gestion_Libreria.Presentacion.vendedor
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // PanelContenedor
+            // 
+            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelContenedor.Location = new System.Drawing.Point(166, 0);
+            this.PanelContenedor.Name = "PanelContenedor";
+            this.PanelContenedor.Size = new System.Drawing.Size(634, 450);
+            this.PanelContenedor.TabIndex = 3;
+            // 
             // VendedorBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +176,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.PanelBotones);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VendedorBase";
             this.Text = "Punto y Barra | Cajero";
             this.PanelBotones.ResumeLayout(false);

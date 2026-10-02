@@ -25,7 +25,7 @@ namespace Gestion_Libreria.Datos
                     string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
                                             v.id_metodo, v.id_usuario,
                                             m.nombre   AS nombre_metodo,
-                                            u.username AS nombre_usuario
+                                            u.nombre + ' ' + u.apellido AS nombre_usuario
                                      FROM ventas v
                                      INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
                                      INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
@@ -76,7 +76,7 @@ namespace Gestion_Libreria.Datos
                     string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
                                             v.id_metodo, v.id_usuario,
                                             m.nombre   AS nombre_metodo,
-                                            u.username AS nombre_usuario
+                                            u.nombre + ' ' + u.apellido AS nombre_usuario
                                      FROM ventas v
                                      INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
                                      INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
@@ -242,6 +242,254 @@ namespace Gestion_Libreria.Datos
             }
 
             return idVentaGenerado;
+        }
+        public List<MetodoPago> ObtenerMetodosPago()
+        {
+            List<MetodoPago> lista = new List<MetodoPago>();
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+                string query = "SELECT id_metodo, nombre FROM metodos_pago ORDER BY nombre";
+                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new MetodoPago
+                        {
+                            id_metodo = Convert.ToInt32(reader["id_metodo"]),
+                            nombre = reader["nombre"].ToString()
+                        });
+                    }
+                }
+            }
+            return lista;
+        }
+        // ============================================================
+        // Filtrar ventas por rango de fechas
+        // ============================================================
+        public List<Venta> ObtenerPorFecha(DateTime desde, DateTime hasta)
+        {
+            List<Venta> lista = new List<Venta>();
+
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+
+                    // Importante: sumamos 1 día al "hasta" para incluir todo ese día completo
+                    DateTime hastaFinDia = hasta.Date.AddDays(1);
+
+                    string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
+                                    v.id_metodo, v.id_usuario,
+                                    m.nombre   AS nombre_metodo,
+                                    u.nombre + ' ' + u.apellido AS nombre_usuario
+                             FROM ventas v
+                             INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                             INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                             WHERE v.fecha_venta >= @desde AND v.fecha_venta < @hasta
+                             ORDER BY v.fecha_venta DESC";
+
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@desde", desde.Date);
+                        comando.Parameters.AddWithValue("@hasta", hastaFinDia);
+
+                        using (SqlDataReader reader = comando.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lista.Add(new Venta
+                                {
+                                    id_venta = Convert.ToInt32(reader["id_venta"]),
+                                    fecha_venta = Convert.ToDateTime(reader["fecha_venta"]),
+                                    total_venta = Convert.ToDecimal(reader["total_venta"]),
+                                    id_metodo = Convert.ToInt32(reader["id_metodo"]),
+                                    id_usuario = Convert.ToInt32(reader["id_usuario"]),
+                                    nombre_metodo = reader["nombre_metodo"].ToString(),
+                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al filtrar por fecha: " + ex.Message);
+            }
+
+            return lista;
+        }
+
+        // ============================================================
+        // Filtrar ventas por nombre de vendedor (busca en nombre, apellido o username)
+        // ============================================================
+        public List<Venta> ObtenerPorVendedor(string filtro)
+        {
+            List<Venta> lista = new List<Venta>();
+
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+
+                    string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
+                                    v.id_metodo, v.id_usuario,
+                                    m.nombre   AS nombre_metodo,
+                                    u.nombre + ' ' + u.apellido AS nombre_usuario
+                             FROM ventas v
+                             INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                             INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                             WHERE u.nombre LIKE @filtro 
+                                OR u.apellido LIKE @filtro 
+                                OR u.username LIKE @filtro
+                             ORDER BY v.fecha_venta DESC";
+
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+
+                        using (SqlDataReader reader = comando.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lista.Add(new Venta
+                                {
+                                    id_venta = Convert.ToInt32(reader["id_venta"]),
+                                    fecha_venta = Convert.ToDateTime(reader["fecha_venta"]),
+                                    total_venta = Convert.ToDecimal(reader["total_venta"]),
+                                    id_metodo = Convert.ToInt32(reader["id_metodo"]),
+                                    id_usuario = Convert.ToInt32(reader["id_usuario"]),
+                                    nombre_metodo = reader["nombre_metodo"].ToString(),
+                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al filtrar por vendedor: " + ex.Message);
+            }
+
+            return lista;
+        }
+        // ============================================================
+        // Obtener SOLO las ventas de un usuario específico (para reporte del vendedor)
+        // ============================================================
+        public List<Venta> ObtenerPorUsuario(int idUsuario)
+        {
+            List<Venta> lista = new List<Venta>();
+
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+
+                    string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
+                                    v.id_metodo, v.id_usuario,
+                                    m.nombre   AS nombre_metodo,
+                                    u.nombre + ' ' + u.apellido AS nombre_usuario
+                             FROM ventas v
+                             INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                             INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                             WHERE v.id_usuario = @idUsuario
+                             ORDER BY v.fecha_venta DESC";
+
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                        using (SqlDataReader reader = comando.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lista.Add(new Venta
+                                {
+                                    id_venta = Convert.ToInt32(reader["id_venta"]),
+                                    fecha_venta = Convert.ToDateTime(reader["fecha_venta"]),
+                                    total_venta = Convert.ToDecimal(reader["total_venta"]),
+                                    id_metodo = Convert.ToInt32(reader["id_metodo"]),
+                                    id_usuario = Convert.ToInt32(reader["id_usuario"]),
+                                    nombre_metodo = reader["nombre_metodo"].ToString(),
+                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener ventas del usuario: " + ex.Message);
+            }
+
+            return lista;
+        }
+
+        // ============================================================
+        // Obtener ventas de un usuario en un rango de fechas
+        // ============================================================
+        public List<Venta> ObtenerPorUsuarioYFecha(int idUsuario, DateTime desde, DateTime hasta)
+        {
+            List<Venta> lista = new List<Venta>();
+
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+
+                    DateTime hastaFinDia = hasta.Date.AddDays(1);
+
+                    string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
+                                    v.id_metodo, v.id_usuario,
+                                    m.nombre   AS nombre_metodo,
+                                    u.nombre + ' ' + u.apellido AS nombre_usuario
+                             FROM ventas v
+                             INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                             INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                             WHERE v.id_usuario = @idUsuario
+                               AND v.fecha_venta >= @desde 
+                               AND v.fecha_venta < @hasta
+                             ORDER BY v.fecha_venta DESC";
+
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                        comando.Parameters.AddWithValue("@desde", desde.Date);
+                        comando.Parameters.AddWithValue("@hasta", hastaFinDia);
+
+                        using (SqlDataReader reader = comando.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lista.Add(new Venta
+                                {
+                                    id_venta = Convert.ToInt32(reader["id_venta"]),
+                                    fecha_venta = Convert.ToDateTime(reader["fecha_venta"]),
+                                    total_venta = Convert.ToDecimal(reader["total_venta"]),
+                                    id_metodo = Convert.ToInt32(reader["id_metodo"]),
+                                    id_usuario = Convert.ToInt32(reader["id_usuario"]),
+                                    nombre_metodo = reader["nombre_metodo"].ToString(),
+                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al filtrar ventas por fecha: " + ex.Message);
+            }
+
+            return lista;
         }
     }
 }

@@ -250,6 +250,12 @@ namespace Gestion_Libreria.Presentacion.vendedor
 
         private void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
+            FormProductos formProductos = new FormProductos();
+            formProductos.Show();
+        }
+
+        private void btnIrAlPago_Click_1(object sender, EventArgs e)
+        {
 
         }
     }

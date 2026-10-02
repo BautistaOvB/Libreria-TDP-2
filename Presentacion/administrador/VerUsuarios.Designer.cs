@@ -28,88 +28,102 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pCabecera = new System.Windows.Forms.Panel();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.LUsuarios = new System.Windows.Forms.Label();
+            this.pDatabase = new System.Windows.Forms.Panel();
+            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.pContenedor = new System.Windows.Forms.Panel();
+            this.pCabecera.SuspendLayout();
+            this.pDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvUsuarios
+            // pCabecera
             // 
-            this.dgvUsuarios.AllowUserToOrderColumns = true;
-            this.dgvUsuarios.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvUsuarios.ColumnHeadersHeight = 30;
-            this.dgvUsuarios.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvUsuarios.Location = new System.Drawing.Point(12, 88);
-            this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.Size = new System.Drawing.Size(628, 311);
-            this.dgvUsuarios.TabIndex = 0;
-            this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txtBuscar);
-            this.panel1.Controls.Add(this.btnBuscar);
-            this.panel1.Controls.Add(this.LUsuarios);
-            this.panel1.Location = new System.Drawing.Point(13, 13);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(627, 69);
-            this.panel1.TabIndex = 1;
+            this.pCabecera.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.pCabecera.Controls.Add(this.txtBuscar);
+            this.pCabecera.Controls.Add(this.btnBuscar);
+            this.pCabecera.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pCabecera.Location = new System.Drawing.Point(0, 0);
+            this.pCabecera.Name = "pCabecera";
+            this.pCabecera.Size = new System.Drawing.Size(901, 82);
+            this.pCabecera.TabIndex = 1;
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(415, 26);
+            this.txtBuscar.Location = new System.Drawing.Point(563, 26);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(100, 20);
+            this.txtBuscar.Size = new System.Drawing.Size(196, 20);
             this.txtBuscar.TabIndex = 2;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(526, 24);
+            this.btnBuscar.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBuscar.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBuscar.Location = new System.Drawing.Point(777, 26);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.UseVisualStyleBackColor = false;
             // 
-            // LUsuarios
+            // pDatabase
             // 
-            this.LUsuarios.AutoSize = true;
-            this.LUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LUsuarios.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.LUsuarios.Location = new System.Drawing.Point(14, 17);
-            this.LUsuarios.Name = "LUsuarios";
-            this.LUsuarios.Size = new System.Drawing.Size(215, 37);
-            this.LUsuarios.TabIndex = 0;
-            this.LUsuarios.Text = "Ver Usuarios";
+            this.pDatabase.Controls.Add(this.dgvUsuarios);
+            this.pDatabase.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pDatabase.Location = new System.Drawing.Point(0, 82);
+            this.pDatabase.Name = "pDatabase";
+            this.pDatabase.Size = new System.Drawing.Size(636, 329);
+            this.pDatabase.TabIndex = 2;
+            // 
+            // dgvUsuarios
+            // 
+            this.dgvUsuarios.BackgroundColor = System.Drawing.Color.MidnightBlue;
+            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUsuarios.Location = new System.Drawing.Point(0, 0);
+            this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.Size = new System.Drawing.Size(636, 329);
+            this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
+            this.dgvUsuarios.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellDoubleClick);
+            // 
+            // pContenedor
+            // 
+            this.pContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pContenedor.Location = new System.Drawing.Point(636, 82);
+            this.pContenedor.Name = "pContenedor";
+            this.pContenedor.Size = new System.Drawing.Size(265, 329);
+            this.pContenedor.TabIndex = 3;
             // 
             // VerUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(684, 411);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dgvUsuarios);
+            this.ClientSize = new System.Drawing.Size(901, 411);
+            this.Controls.Add(this.pContenedor);
+            this.Controls.Add(this.pDatabase);
+            this.Controls.Add(this.pCabecera);
             this.Name = "VerUsuarios";
-            this.Text = "Usuarios";
+            this.Text = "Punto y Barra | Usuarios";
             this.Load += new System.EventHandler(this.VerUsuarios_Load);
+            this.pCabecera.ResumeLayout(false);
+            this.pCabecera.PerformLayout();
+            this.pDatabase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvUsuarios;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LUsuarios;
+        private System.Windows.Forms.Panel pCabecera;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Panel pDatabase;
+        private System.Windows.Forms.DataGridView dgvUsuarios;
+        private System.Windows.Forms.Panel pContenedor;
     }
 }

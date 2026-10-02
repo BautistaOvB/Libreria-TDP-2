@@ -44,6 +44,10 @@
             this.TBapellido = new System.Windows.Forms.TextBox();
             this.Lusername = new System.Windows.Forms.Label();
             this.TBusername = new System.Windows.Forms.TextBox();
+            this.pDBusuarios = new System.Windows.Forms.Panel();
+            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.pDBusuarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
             // Lnombre
@@ -199,12 +203,33 @@
             this.TBusername.Size = new System.Drawing.Size(150, 20);
             this.TBusername.TabIndex = 15;
             // 
+            // pDBusuarios
+            // 
+            this.pDBusuarios.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.pDBusuarios.Controls.Add(this.dgvUsuarios);
+            this.pDBusuarios.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pDBusuarios.Location = new System.Drawing.Point(290, 0);
+            this.pDBusuarios.Name = "pDBusuarios";
+            this.pDBusuarios.Size = new System.Drawing.Size(681, 473);
+            this.pDBusuarios.TabIndex = 16;
+            // 
+            // dgvUsuarios
+            // 
+            this.dgvUsuarios.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUsuarios.Location = new System.Drawing.Point(0, 0);
+            this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.Size = new System.Drawing.Size(681, 473);
+            this.dgvUsuarios.TabIndex = 0;
+            // 
             // addUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(303, 473);
+            this.ClientSize = new System.Drawing.Size(971, 473);
+            this.Controls.Add(this.pDBusuarios);
             this.Controls.Add(this.TBusername);
             this.Controls.Add(this.Lusername);
             this.Controls.Add(this.TBapellido);
@@ -223,6 +248,8 @@
             this.Controls.Add(this.Lnombre);
             this.Name = "addUsuario";
             this.Text = "Agregar Usuario";
+            this.pDBusuarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +273,7 @@
         private System.Windows.Forms.TextBox TBapellido;
         private System.Windows.Forms.Label Lusername;
         private System.Windows.Forms.TextBox TBusername;
+        private System.Windows.Forms.Panel pDBusuarios;
+        private System.Windows.Forms.DataGridView dgvUsuarios;
     }
 }
