@@ -200,6 +200,7 @@
             // 
             // dgvClientes
             // 
+            this.dgvClientes.AllowUserToOrderColumns = true;
             this.dgvClientes.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Dock = System.Windows.Forms.DockStyle.Fill;

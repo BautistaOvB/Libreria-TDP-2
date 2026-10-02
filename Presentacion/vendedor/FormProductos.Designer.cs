@@ -38,9 +38,12 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pBotones = new System.Windows.Forms.Panel();
+            this.pFondo = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).BeginInit();
+            this.pBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBuscar
@@ -55,10 +58,11 @@
             this.dgvProductos.AllowUserToOrderColumns = true;
             this.dgvProductos.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.GridColor = System.Drawing.SystemColors.ControlText;
-            this.dgvProductos.Location = new System.Drawing.Point(30, 76);
+            this.dgvProductos.Location = new System.Drawing.Point(0, 78);
             this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.Size = new System.Drawing.Size(471, 174);
+            this.dgvProductos.Size = new System.Drawing.Size(783, 348);
             this.dgvProductos.TabIndex = 2;
             // 
             // librosBindingSource
@@ -77,7 +81,7 @@
             // 
             // AddCarrito
             // 
-            this.AddCarrito.Location = new System.Drawing.Point(30, 270);
+            this.AddCarrito.Location = new System.Drawing.Point(21, 33);
             this.AddCarrito.Name = "AddCarrito";
             this.AddCarrito.Size = new System.Drawing.Size(83, 42);
             this.AddCarrito.TabIndex = 3;
@@ -87,7 +91,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(136, 270);
+            this.btnCancelar.Location = new System.Drawing.Point(138, 33);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(82, 42);
             this.btnCancelar.TabIndex = 4;
@@ -110,10 +114,29 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(781, 78);
+            this.panel1.Size = new System.Drawing.Size(783, 78);
             this.panel1.TabIndex = 6;
+            // 
+            // pBotones
+            // 
+            this.pBotones.Controls.Add(this.AddCarrito);
+            this.pBotones.Controls.Add(this.btnCancelar);
+            this.pBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pBotones.Location = new System.Drawing.Point(0, 326);
+            this.pBotones.Name = "pBotones";
+            this.pBotones.Size = new System.Drawing.Size(783, 100);
+            this.pBotones.TabIndex = 7;
+            // 
+            // pFondo
+            // 
+            this.pFondo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pFondo.Location = new System.Drawing.Point(0, 0);
+            this.pFondo.Name = "pFondo";
+            this.pFondo.Size = new System.Drawing.Size(783, 426);
+            this.pFondo.TabIndex = 8;
             // 
             // FormProductos
             // 
@@ -121,18 +144,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(783, 426);
+            this.Controls.Add(this.pBotones);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.AddCarrito);
             this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pFondo);
             this.Name = "FormProductos";
             this.Text = "Punto y Barra | Buscar Productos";
             this.Load += new System.EventHandler(this.FormProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).EndInit();
+            this.pBotones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,5 +172,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pBotones;
+        private System.Windows.Forms.Panel pFondo;
     }
 }

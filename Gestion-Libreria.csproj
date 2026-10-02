@@ -236,12 +236,6 @@
     <Compile Include="Presentacion\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MDIParent1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MDIParent1.Designer.cs">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Presentacion\repositor\AddProd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,12 +266,6 @@
     </Compile>
     <Compile Include="Presentacion\vendedor\FormProductos.Designer.cs">
       <DependentUpon>FormProductos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\vendedor\modificarCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Presentacion\vendedor\modificarCliente.Designer.cs">
-      <DependentUpon>modificarCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\vendedor\ProdDetalles.cs">
       <SubType>Form</SubType>
@@ -357,9 +345,6 @@
     <EmbeddedResource Include="Presentacion\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MDIParent1.resx">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\repositor\AddProd.resx">
       <DependentUpon>AddProd.cs</DependentUpon>
     </EmbeddedResource>
@@ -374,9 +359,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\vendedor\FormProductos.resx">
       <DependentUpon>FormProductos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\vendedor\modificarCliente.resx">
-      <DependentUpon>modificarCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\vendedor\ProdDetalles.resx">
       <DependentUpon>ProdDetalles.cs</DependentUpon>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.BtnIngresar = new System.Windows.Forms.Button();
             this.usernameText = new System.Windows.Forms.TextBox();
             this.PassText = new System.Windows.Forms.TextBox();
@@ -137,6 +138,7 @@
             this.Controls.Add(this.PassText);
             this.Controls.Add(this.usernameText);
             this.Controls.Add(this.BtnIngresar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.Text = "Inicio Sesion";
             ((System.ComponentModel.ISupportInitialize)(this.imgInicio)).EndInit();

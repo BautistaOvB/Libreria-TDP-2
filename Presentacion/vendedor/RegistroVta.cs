@@ -247,5 +247,10 @@ namespace Gestion_Libreria.Presentacion.vendedor
             FormProductos formProductos = new FormProductos();
             formProductos.Show();
         }
+
+        private void btnAgregarCarrito_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
