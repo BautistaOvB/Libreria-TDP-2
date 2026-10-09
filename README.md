@@ -1,15 +1,15 @@
 # Gestion-Libreria
 
-# Especificacion de Requerimientos de Software
+## Especificacion de Requerimientos de Software
 Proyecto: Sistema de Gestión de Librería
 Sistema de Gestión de Ventas e Inventario para Librería
 Alumnos: 
 •	Ovalle Bravo Bautista
 •	Marcos Valentin Romero Cristanchi
-1. Introducción
-1.1 Propósito
+### 1. Introducción
+#### 1.1 Propósito
 El propósito de este documento es especificar de manera detallada los requisitos funcionales y no funcionales del Sistema de Gestión de Ventas e Inventario. Este documento servirá como guía para el equipo de desarrollo, prueba y validación con los interesados (stakeholders).
-1.2 Alcance
+#### 1.2 Alcance
 El sistema es una aplicación de escritorio diseñada para automatizar la operatoria diaria de la librería. Comprende:
 •	Gestión centralizada del catálogo de libros (autores, editoriales, categorías, ISBN).
 •	Administración de cuentas de usuario y niveles de acceso según roles.
@@ -17,42 +17,42 @@ El sistema es una aplicación de escritorio diseñada para automatizar la operat
 •	Registro de ventas, cálculo de totales/impuestos y emisión de comprobantes digitales e impresos.
 •	Generación de reportes operativos e históricos para la toma de decisiones.
 Fuera del alcance (Fase 1): Integración con pasarelas de pago online, tienda e-commerce y facturación electrónica directa con entes fiscales (se contempla su factibilidad para futuras versiones).
-1.3 Definiciones, Acrónimos y Siglas
+#### 1.3 Definiciones, Acrónimos y Siglas
 •	ERS / SRS: Especificación de Requerimientos de Software (Software Requirements Specification).
 •	GUI: Interfaz Gráfica de Usuario (Graphical User Interface).
 •	Admin: Administrador con privilegios totales del sistema.
 •	ISBN: Número Estándar Internacional del Libro (International Standard Book Number).
 •	SKU / Código Interno: Identificador único del producto dentro del inventario de la librería.
 •	CRUD: Crear, Leer, Actualizar y Eliminar (Create, Read, Update, Delete).
-1.4 Referencias
+#### 1.4 Referencias
 •	Estándar IEEE 830-1998 para la Especificación de Requerimientos de Software.
 •	Documentación oficial de Microsoft .NET, C# y WinForms / WPF.
 •	Manuales técnicos y mejores prácticas de diseño de BD en Microsoft SQL Server.
-1.5 Visión General del Documento
+#### 1.5 Visión General del Documento
 Este documento está dividido en cuatro secciones principales: la Sección 1 introduce el proyecto y sus objetivos; la Sección 2 describe la perspectiva del producto, roles y restricciones tecnológicas; la Sección 3 detalla los requisitos específicos (funcionales, no funcionales y casos de uso); y la Sección 4 incluye apéndices y diagramas complementarios.
-2. Descripción General
-2.1 Perspectiva del Producto
+### 2. Descripción General
+#### 2.1 Perspectiva del Producto
 El sistema es un producto autónomo de escritorio (standalone/client-server) desarrollado con la plataforma .NET (C#) sobre Windows Forms (WinForms) o WPF. Interactúa de forma directa con una base de datos relacional local o de red de área local (LAN) alojada en Microsoft SQL Server.
-2.2 Funciones del Producto
+#### 2.2 Funciones del Producto
 •	Módulo de Autenticación y Seguridad: Control de acceso mediante credenciales encriptadas y roles de usuario.
 •	Módulo de Catálogo e Inventario: Alta, modificación, consulta y baja lógica de libros, así como actualización e historial de movimientos de stock.
 •	Módulo de Punto de Venta (POS): Búsqueda ágil de libros (por ISBN, título, autor o lectura de código de barras), armado de carrito de compras, aplicación de promociones/descuentos y registro final de la transacción.
 •	Módulo de Reportes: Visualización e impresión de estadísticas clave sobre facturación diaria/mensual, productos más vendidos y stock crítico.
-2.3 Características de los Usuarios
+#### 2.3 Características de los Usuarios
 •	Administrador: Usuario con perfil avanzado. Encargado de la configuración general, gestión de usuarios, auditoría.
 •	Repositor / Encargado de Depósito: Usuario operativo. Responsable del ingreso de mercancía, modificación de catálogo de libros, proveedores y control físico de stock.
 •	Vendedor / Cajero: Usuario operativo de atención al cliente. Orientado a la agilidad operativa en caja, cobro y emisión de facturas/comprobantes.
-2.4 Restricciones
+#### 2.4 Restricciones
 •	Plataforma de Ejecución: Sistemas operativos Microsoft Windows 10 / 11.
 •	Entorno de Desarrollo: Visual Studio con lenguaje C# (.NET Framework 4.8 o .NET 8 Desktop Runtime).
 •	Base de Datos: Microsoft SQL Server (Express o Standard Edition).
 •	Arquitectura: Diseño en capas (Presentación, Lógica de Negocio y Acceso a Datos / Repositorios).
 •	Hardware: Compatible con impresoras térmicas de tickets y lectores de códigos de barras USB/Bluetooth de simulación de teclado.
-2.5 Suposiciones y Dependencias
+#### 2.5 Suposiciones y Dependencias
 •	Se asume que las terminales de trabajo cuentan con la infraestructura de red LAN correctamente configurada para conectarse al servidor de SQL Server.
 •	El cliente dispondrá del hardware adecuado (lector de código de barras e impresora).
-3. Requisitos Específicos
-3.1 Requisitos Funcionales (RF)
+### 3. Requisitos Específicos
+#### 3.1 Requisitos Funcionales (RF)
 Gestión de Seguridad y Usuarios
 •	RF1.1 - Autenticación de Usuarios: El sistema debe requerir nombre de usuario y contraseña para acceder.
 •	RF1.2 - Gestión de Perfiles: El Administrador podrá crear, modificar, desactivar (baja lógica) y resetear contraseñas de usuarios.
@@ -71,7 +71,7 @@ Reportes e Informes
 •	RF4.1 - Reporte de Ventas por Período: Generar informes de facturación filtrados por rango de fechas (diario, semanal, mensual) y por vendedor.
 •	RF4.2 - Reporte de Ranking de Ventas: Visualización de los libros más vendidos (bestsellers) en un determinado rango de tiempo.
 •	RF4.3 - Reporte de Inventario y Valorización: Reporte con el valor total del stock almacenado (a precio de costo y precio de venta).
-3.2 Requisitos No Funcionales (RNF)
+#### 3.2 Requisitos No Funcionales (RNF)
 Rendimiento
 •	RNF1.1: El tiempo de respuesta de las consultas en pantalla (búsqueda de libros, agregar al carrito) no debe superar los 1.5 segundos.
 •	RNF1.2: La generación e impresión de un comprobante de venta debe procesarse en un tiempo máximo de 2 segundos.
@@ -82,7 +82,7 @@ Usabilidad
 •	RNF3.1: La interfaz gráfica debe diseñarse respetando un patrón visual claro, intuitivo y estandarizado, permitiendo operar la pantalla de ventas principalmente mediante el teclado (atajos de teclado para acelerar el cobro).
 Concurrencia y Disponibilidad
 •	RNF4.1: El sistema y la base de datos deben soportar un mínimo de 5 usuarios concurrentes conectados simultáneamente en la red local sin pérdida de integridad de datos.
-3.3 Casos de Uso Clave
+#### 3.3 Casos de Uso Clave
 Caso de Uso 1: Registrar Venta
 •	Actor Principal: Vendedor.
 •	Precondición: El Vendedor ha iniciado sesión en el sistema y se encuentra en la pantalla de ventas.
@@ -103,16 +103,16 @@ Caso de Uso 2: Ajuste de Stock por Ingreso de Mercancía
 3.	Introduce la cantidad de unidades recibidas y la nota de pedido/proveedor.
 4.	Confirma la operación.
 5.	El sistema suma la cantidad al stock actual y registra el movimiento en el historial de inventario.
-4. Apéndices
-4.1 Glosario de Términos
+### 4. Apéndices
+#### 4.1 Glosario de Términos
 •	Baja Lógica: Marcado de un registro en la base de datos como "inactivo" o "eliminado" sin borrarlo físicamente, preservando la integridad referencial de los datos históricos.
 •	Mapeo Objeto-Relacional (ORM): Herramienta técnica (como Entity Framework o Dapper) utilizada en C# para mapear las tablas de SQL Server a clases y objetos en el código.
-4.2 Referencias Técnicas y Entorno Recomendado
+#### 4.2 Referencias Técnicas y Entorno Recomendado
 •	IDE: Microsoft Visual Studio Community / Professional (versión 2022 en adelante).
 •	Framework: .NET 8.0 Windows Desktop App o .NET Framework 4.8.
 •	Motor BD: Microsoft SQL Server Express 2019 / 2022.
 •	Herramientas de Reportes: Microsoft Reporting Services (RDLC), Crystal Reports o librerías de generación PDF (e.g., QuestPDF, iTextSharp).
-4.3 Diagrama Entidad-Relación (DER)
+#### 4.3 Diagrama Entidad-Relación (DER)
 El modelo de datos del sistema se compone de 9 tablas organizadas en tres dominios funcionales: Seguridad, Catálogo/Inventario y Ventas/Compras.
 
 4.3.1 Modelo Conceptual
@@ -211,3 +211,4 @@ VENTA → ANULACION_VENTA	1:N	Una venta puede tener una o más anulaciones (hist
 6.	RNF2.2 → AUDITORIA registra todas las operaciones críticas (altas, bajas, modificación de precios y anulaciones).
 7.	RF3.3 → PAGO permite múltiples registros por venta para soportar pagos mixtos.
 
+# Script para armar la base de datos:

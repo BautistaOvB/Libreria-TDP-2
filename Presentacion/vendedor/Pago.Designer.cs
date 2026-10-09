@@ -38,7 +38,7 @@
             this.lTitular = new System.Windows.Forms.Label();
             this.lNro = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnPagar = new System.Windows.Forms.Button();
+            this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtCvv = new System.Windows.Forms.TextBox();
             this.txtTitular = new System.Windows.Forms.TextBox();
             this.txtNtarjeta = new System.Windows.Forms.TextBox();
@@ -105,7 +105,6 @@
             this.dgvCarrito.Name = "dgvCarrito";
             this.dgvCarrito.Size = new System.Drawing.Size(497, 398);
             this.dgvCarrito.TabIndex = 0;
-        //  this.dgvCarrito.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCarrito_CellContentClick);
             // 
             // panel2
             // 
@@ -114,7 +113,7 @@
             this.panel2.Controls.Add(this.lTitular);
             this.panel2.Controls.Add(this.lNro);
             this.panel2.Controls.Add(this.btnCancelar);
-            this.panel2.Controls.Add(this.btnPagar);
+            this.panel2.Controls.Add(this.btnConfirmar);
             this.panel2.Controls.Add(this.txtCvv);
             this.panel2.Controls.Add(this.txtTitular);
             this.panel2.Controls.Add(this.txtNtarjeta);
@@ -171,17 +170,17 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             // 
-            // btnPagar
+            // btnConfirmar
             // 
-            this.btnPagar.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnPagar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPagar.ForeColor = System.Drawing.Color.AliceBlue;
-            this.btnPagar.Location = new System.Drawing.Point(385, 125);
-            this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(97, 23);
-            this.btnPagar.TabIndex = 7;
-            this.btnPagar.Text = "Confirmar pago";
-            this.btnPagar.UseVisualStyleBackColor = false;
+            this.btnConfirmar.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnConfirmar.ForeColor = System.Drawing.Color.AliceBlue;
+            this.btnConfirmar.Location = new System.Drawing.Point(385, 125);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(97, 23);
+            this.btnConfirmar.TabIndex = 7;
+            this.btnConfirmar.Text = "Confirmar pago";
+            this.btnConfirmar.UseVisualStyleBackColor = false;
             // 
             // txtCvv
             // 
@@ -322,6 +321,6 @@
         private System.Windows.Forms.Label lTitular;
         private System.Windows.Forms.Label lNro;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnPagar;
+        private System.Windows.Forms.Button btnConfirmar;
     }
 }

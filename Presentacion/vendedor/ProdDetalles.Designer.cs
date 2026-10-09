@@ -38,7 +38,7 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.lPrecio = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
-            this.BtnCarrito = new System.Windows.Forms.Button();
+            this.BtnAgregarCarrito = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -136,14 +136,15 @@
             this.txtPrecio.Size = new System.Drawing.Size(134, 20);
             this.txtPrecio.TabIndex = 9;
             // 
-            // BtnCarrito
+            // BtnAgregarCarrito
             // 
-            this.BtnCarrito.Location = new System.Drawing.Point(198, 306);
-            this.BtnCarrito.Name = "BtnCarrito";
-            this.BtnCarrito.Size = new System.Drawing.Size(88, 45);
-            this.BtnCarrito.TabIndex = 10;
-            this.BtnCarrito.Text = "Agregar al carrito";
-            this.BtnCarrito.UseVisualStyleBackColor = true;
+            this.BtnAgregarCarrito.Location = new System.Drawing.Point(198, 306);
+            this.BtnAgregarCarrito.Name = "BtnAgregarCarrito";
+            this.BtnAgregarCarrito.Size = new System.Drawing.Size(88, 45);
+            this.BtnAgregarCarrito.TabIndex = 10;
+            this.BtnAgregarCarrito.Text = "Agregar al carrito";
+            this.BtnAgregarCarrito.UseVisualStyleBackColor = true;
+            this.BtnAgregarCarrito.Click += new System.EventHandler(this.btnAgregarCarrito_Click);
             // 
             // BtnSalir
             // 
@@ -153,6 +154,7 @@
             this.BtnSalir.TabIndex = 11;
             this.BtnSalir.Text = "Salir";
             this.BtnSalir.UseVisualStyleBackColor = true;
+            this.BtnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // ProdDetalles
             // 
@@ -161,7 +163,7 @@
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(328, 387);
             this.Controls.Add(this.BtnSalir);
-            this.Controls.Add(this.BtnCarrito);
+            this.Controls.Add(this.BtnAgregarCarrito);
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.lPrecio);
             this.Controls.Add(this.txtStock);
@@ -191,7 +193,7 @@
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label lPrecio;
         private System.Windows.Forms.TextBox txtPrecio;
-        private System.Windows.Forms.Button BtnCarrito;
+        private System.Windows.Forms.Button BtnAgregarCarrito;
         private System.Windows.Forms.Button BtnSalir;
     }
 }

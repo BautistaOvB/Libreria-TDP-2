@@ -133,10 +133,7 @@ namespace Gestion_Libreria.Presentacion.administrador
 
             return true;
         }
-        private void Lemail_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
 

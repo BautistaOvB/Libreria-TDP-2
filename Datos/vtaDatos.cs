@@ -176,17 +176,35 @@ namespace Gestion_Libreria.Datos
             {
                 conexion.Open();
 
-                // 🔑 Transacción: si algo falla, NADA se guarda
                 using (SqlTransaction transaccion = conexion.BeginTransaction())
                 {
                     try
                     {
-                        // -------- 1) Calcular total --------
+                        // 1) Validar stock y calcular total
                         decimal total = 0;
-                        foreach (Libro l in carrito)
-                            total += l.Precio;
 
-                        // -------- 2) Insertar cabecera en 'ventas' --------
+                        foreach (Libro l in carrito)
+                        {
+                            // Verificar stock actual
+                            string queryCheck = "SELECT stock FROM libros WHERE id_libro = @idLibro";
+                            using (SqlCommand cmd = new SqlCommand(queryCheck, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idLibro", l.id_libro);
+                                object result = cmd.ExecuteScalar();
+
+                                if (result == null)
+                                    throw new Exception($"El libro '{l.Nombre}' no existe.");
+
+                                int stockActual = Convert.ToInt32(result);
+
+                                if (stockActual <= 0)
+                                    throw new Exception($"No hay stock del libro '{l.Nombre}'.");
+                            }
+
+                            total += l.Precio;
+                        }
+
+                        // 2) Insertar cabecera
                         string queryVenta = @"INSERT INTO ventas (fecha_venta, total_venta, id_metodo, id_usuario)
                                       VALUES (GETDATE(), @total, @idMetodo, @idUsuario);
                                       SELECT SCOPE_IDENTITY();";
@@ -196,14 +214,12 @@ namespace Gestion_Libreria.Datos
                             cmd.Parameters.AddWithValue("@total", total);
                             cmd.Parameters.AddWithValue("@idMetodo", idMetodo);
                             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-
                             idVentaGenerado = Convert.ToInt32(cmd.ExecuteScalar());
                         }
 
-                        // -------- 3) Insertar detalle + descontar stock --------
+                        // 3) Insertar detalle + descontar stock
                         foreach (Libro l in carrito)
                         {
-                            // 3.1) Insertar en venta_detalles
                             string queryDetalle = @"INSERT INTO venta_detalles
                         (id_venta, id_libro, cantidad, precio_unitario, subtotal)
                         VALUES (@idVenta, @idLibro, 1, @precio, @subtotal)";
@@ -217,7 +233,6 @@ namespace Gestion_Libreria.Datos
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 3.2) Descontar stock del libro
                             string queryStock = @"UPDATE libros
                                           SET stock = stock - 1
                                           WHERE id_libro = @idLibro";
@@ -229,12 +244,10 @@ namespace Gestion_Libreria.Datos
                             }
                         }
 
-                        // ✅ Todo OK → confirmamos
                         transaccion.Commit();
                     }
-                    catch (Exception)
+                    catch
                     {
-                        // ❌ Falló algo → deshacemos TODO
                         transaccion.Rollback();
                         throw;
                     }
@@ -490,6 +503,95 @@ namespace Gestion_Libreria.Datos
             }
 
             return lista;
+        }
+        public int RegistrarVentaConCantidades(int idUsuario, int idMetodo, List<ItemCarrito> carrito)
+        {
+            int idVentaGenerado = 0;
+
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+
+                using (SqlTransaction transaccion = conexion.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1) Validar stock y calcular total
+                        decimal total = 0;
+
+                        foreach (ItemCarrito item in carrito)
+                        {
+                            string queryCheck = "SELECT stock FROM libros WHERE id_libro = @idLibro";
+                            using (SqlCommand cmd = new SqlCommand(queryCheck, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
+                                object result = cmd.ExecuteScalar();
+
+                                if (result == null)
+                                    throw new Exception($"El libro '{item.Libro.Nombre}' no existe.");
+
+                                int stockActual = Convert.ToInt32(result);
+
+                                if (stockActual < item.Cantidad)
+                                    throw new Exception($"Stock insuficiente de '{item.Libro.Nombre}'. Disponible: {stockActual}, solicitado: {item.Cantidad}.");
+                            }
+
+                            total += item.Subtotal;
+                        }
+
+                        // 2) Insertar cabecera
+                        string queryVenta = @"INSERT INTO ventas (fecha_venta, total_venta, id_metodo, id_usuario)
+                                      VALUES (GETDATE(), @total, @idMetodo, @idUsuario);
+                                      SELECT SCOPE_IDENTITY();";
+
+                        using (SqlCommand cmd = new SqlCommand(queryVenta, conexion, transaccion))
+                        {
+                            cmd.Parameters.AddWithValue("@total", total);
+                            cmd.Parameters.AddWithValue("@idMetodo", idMetodo);
+                            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                            idVentaGenerado = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        // 3) Insertar detalle + descontar stock
+                        foreach (ItemCarrito item in carrito)
+                        {
+                            string queryDetalle = @"INSERT INTO venta_detalles
+                        (id_venta, id_libro, cantidad, precio_unitario, subtotal)
+                        VALUES (@idVenta, @idLibro, @cantidad, @precio, @subtotal)";
+
+                            using (SqlCommand cmd = new SqlCommand(queryDetalle, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idVenta", idVentaGenerado);
+                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
+                                cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                                cmd.Parameters.AddWithValue("@precio", item.Libro.Precio);
+                                cmd.Parameters.AddWithValue("@subtotal", item.Subtotal);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            string queryStock = @"UPDATE libros
+                                          SET stock = stock - @cantidad
+                                          WHERE id_libro = @idLibro";
+
+                            using (SqlCommand cmd = new SqlCommand(queryStock, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
+                                cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaccion.Commit();
+                    }
+                    catch
+                    {
+                        transaccion.Rollback();
+                        throw;
+                    }
+                }
+            }
+
+            return idVentaGenerado;
         }
     }
 }

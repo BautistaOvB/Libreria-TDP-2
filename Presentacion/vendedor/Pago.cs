@@ -8,13 +8,16 @@ namespace Gestion_Libreria.Presentacion.vendedor
 {
     public partial class Pago : Form
     {
-        private List<Libro> carrito;
+        private List<ItemCarrito> carrito;
         private decimal total;
+
+        // 🔑 Para que RegistroVta sepa el ID de venta generado
+        public int IdVentaGenerado { get; private set; } = 0;
 
         // ============================================================
         // CONSTRUCTOR: recibe el carrito
         // ============================================================
-        public Pago(List<Libro> carritoRecibido)
+        public Pago(List<ItemCarrito> carritoRecibido)
         {
             InitializeComponent();
 
@@ -22,13 +25,13 @@ namespace Gestion_Libreria.Presentacion.vendedor
 
             // Calculamos el total
             total = 0;
-            foreach (Libro l in carrito)
-                total += l.Precio;
+            foreach (ItemCarrito item in carrito)
+                total += item.Subtotal;
 
             // Suscribimos eventos
             this.Load += Pago_Load;
             this.cmbMetodo.SelectedIndexChanged += cmbMetodo_SelectedIndexChanged;
-            //this.btnPagar.Click += btnPagar_Click;
+            this.btnConfirmar.Click += btnConfirmar_Click;
             this.btnCancelar.Click += btnCancelar_Click;
         }
 
@@ -42,11 +45,10 @@ namespace Gestion_Libreria.Presentacion.vendedor
             CargarMetodosPago();
             CargarClientes();
 
-            // Al principio, los campos de tarjeta están deshabilitados
             HabilitarCamposTarjeta(false);
 
-            // Mostramos el total
-            
+            // Mostrar total en algún label
+            // lblTotal.Text = "Total: $" + total.ToString("N2");
         }
 
         // ============================================================
@@ -69,7 +71,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 Name = "colNombre",
                 HeaderText = "Libro",
                 DataPropertyName = "Nombre",
-                FillWeight = 45
+                FillWeight = 40
             });
 
             dgvCarrito.Columns.Add(new DataGridViewTextBoxColumn
@@ -77,14 +79,14 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 Name = "colISBN",
                 HeaderText = "ISBN",
                 DataPropertyName = "ISBN",
-                FillWeight = 25
+                FillWeight = 20
             });
 
             dgvCarrito.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colCantidad",
                 HeaderText = "Cant.",
-                DataPropertyName = "cantidad",
+                DataPropertyName = "Cantidad",
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -102,7 +104,20 @@ namespace Gestion_Libreria.Presentacion.vendedor
                     Format = "C2",
                     Alignment = DataGridViewContentAlignment.MiddleRight
                 },
-                FillWeight = 20
+                FillWeight = 15
+            });
+
+            dgvCarrito.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colSubtotal",
+                HeaderText = "Subtotal",
+                DataPropertyName = "Subtotal",
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Format = "C2",
+                    Alignment = DataGridViewContentAlignment.MiddleRight
+                },
+                FillWeight = 15
             });
         }
 
@@ -111,17 +126,20 @@ namespace Gestion_Libreria.Presentacion.vendedor
         // ============================================================
         private void CargarCarrito()
         {
-            // ⚠️ Como tu clase Libro no tiene la propiedad "cantidad" (siempre es 1),
-            // usamos una lista anónima para agregar ese campo
+            // 🔑 Ahora usamos la clase ItemCarrito directamente,
+            // pero creamos una lista anónima para que los nombres de
+            // propiedades coincidan con DataPropertyName.
             var listaParaMostrar = new List<object>();
-            foreach (Libro l in carrito)
+
+            foreach (ItemCarrito item in carrito)
             {
                 listaParaMostrar.Add(new
                 {
-                    Nombre = l.Nombre,
-                    ISBN = l.ISBN,
-                    cantidad = 1,
-                    Precio = l.Precio
+                    Nombre = item.Libro.Nombre,
+                    ISBN = item.Libro.ISBN,
+                    Cantidad = item.Cantidad,
+                    Precio = item.Libro.Precio,
+                    Subtotal = item.Subtotal
                 });
             }
 
@@ -158,18 +176,9 @@ namespace Gestion_Libreria.Presentacion.vendedor
         {
             try
             {
-                // ⚠️ Si todavía no tenés ClienteDatos, cargamos opciones manuales
                 cmbCliente.Items.Clear();
                 cmbCliente.Items.Add("Consumidor Final");
                 cmbCliente.SelectedIndex = 0;
-
-                // Cuando tengas ClienteDatos:
-                // ClienteDatos datos = new ClienteDatos();
-                // List<Cliente> clientes = datos.ObtenerTodos();
-                // cmbCliente.DataSource = clientes;
-                // cmbCliente.DisplayMember = "nombre";
-                // cmbCliente.ValueMember = "id_cliente";
-                // cmbCliente.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -258,9 +267,11 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 int idMetodo = (int)cmbMetodo.SelectedValue;
 
                 VentaDatos datos = new VentaDatos();
-                int idVenta = datos.RegistrarVenta(idUsuario, idMetodo, carrito);
 
-                MessageBox.Show($"¡Venta #{idVenta} registrada con éxito!\n" +
+                // 🔑 Llamamos al nuevo método que maneja cantidades
+                IdVentaGenerado = datos.RegistrarVentaConCantidades(idUsuario, idMetodo, carrito);
+
+                MessageBox.Show($"¡Venta #{IdVentaGenerado} registrada con éxito!\n" +
                                 $"Total: ${total:N2}",
                                 "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

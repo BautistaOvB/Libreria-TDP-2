@@ -110,7 +110,54 @@ namespace Gestion_Libreria.Datos
 
             return lista;
         }
+        public Libro ObtenerPorId(int idLibro)
+        {
+            Libro libro = null;
 
- 
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+
+                    string query = @"SELECT l.id_libro, l.ISBN, l.nombre, l.descripcion,
+                                    l.stock, l.precio, l.cod_genero,
+                                    g.descripcion AS nombre_genero
+                             FROM libros l
+                             INNER JOIN generos g ON l.cod_genero = g.cod_genero
+                             WHERE l.id_libro = @id";
+
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@id", idLibro);
+
+                        using (SqlDataReader reader = comando.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                libro = new Libro
+                                {
+                                    id_libro = Convert.ToInt32(reader["id_libro"]),
+                                    ISBN = reader["ISBN"].ToString(),
+                                    Nombre = reader["nombre"].ToString(),
+                                    Descripcion = reader["descripcion"].ToString(),
+                                    Stock = Convert.ToInt32(reader["stock"]),
+                                    Precio = Convert.ToDecimal(reader["precio"]),
+                                    cod_genero = Convert.ToInt32(reader["cod_genero"]),
+                                    nombre_genero = reader["nombre_genero"].ToString()
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener libro: " + ex.Message);
+            }
+
+            return libro;
+        }
+
     }     
 }

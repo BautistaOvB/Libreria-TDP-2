@@ -53,12 +53,13 @@
             // Lnombre
             // 
             this.Lnombre.AutoSize = true;
-            this.Lnombre.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Lnombre.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Lnombre.Location = new System.Drawing.Point(40, 48);
             this.Lnombre.Name = "Lnombre";
             this.Lnombre.Size = new System.Drawing.Size(44, 13);
             this.Lnombre.TabIndex = 0;
             this.Lnombre.Text = "Nombre";
+            
             // 
             // TBnombre
             // 
@@ -70,13 +71,13 @@
             // Lemail
             // 
             this.Lemail.AutoSize = true;
-            this.Lemail.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Lemail.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Lemail.Location = new System.Drawing.Point(43, 155);
             this.Lemail.Name = "Lemail";
             this.Lemail.Size = new System.Drawing.Size(32, 13);
             this.Lemail.TabIndex = 2;
             this.Lemail.Text = "Email";
-            this.Lemail.Click += new System.EventHandler(this.Lemail_Click);
+           
             // 
             // TBmail
             // 
@@ -88,7 +89,7 @@
             // LPass
             // 
             this.LPass.AutoSize = true;
-            this.LPass.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.LPass.ForeColor = System.Drawing.Color.MidnightBlue;
             this.LPass.Location = new System.Drawing.Point(40, 213);
             this.LPass.Name = "LPass";
             this.LPass.Size = new System.Drawing.Size(61, 13);
@@ -100,13 +101,14 @@
             this.TBpass.BackColor = System.Drawing.SystemColors.Window;
             this.TBpass.Location = new System.Drawing.Point(43, 229);
             this.TBpass.Name = "TBpass";
+            this.TBpass.PasswordChar = '*';
             this.TBpass.Size = new System.Drawing.Size(150, 20);
             this.TBpass.TabIndex = 5;
             // 
             // Lrol
             // 
             this.Lrol.AutoSize = true;
-            this.Lrol.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Lrol.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Lrol.Location = new System.Drawing.Point(40, 345);
             this.Lrol.Name = "Lrol";
             this.Lrol.Size = new System.Drawing.Size(23, 13);
@@ -117,7 +119,7 @@
             // 
             this.RBvendedor.AutoSize = true;
             this.RBvendedor.Checked = true;
-            this.RBvendedor.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.RBvendedor.ForeColor = System.Drawing.Color.MidnightBlue;
             this.RBvendedor.Location = new System.Drawing.Point(43, 361);
             this.RBvendedor.Name = "RBvendedor";
             this.RBvendedor.Size = new System.Drawing.Size(71, 17);
@@ -130,7 +132,7 @@
             // RBadmin
             // 
             this.RBadmin.AutoSize = true;
-            this.RBadmin.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.RBadmin.ForeColor = System.Drawing.Color.MidnightBlue;
             this.RBadmin.Location = new System.Drawing.Point(120, 361);
             this.RBadmin.Name = "RBadmin";
             this.RBadmin.Size = new System.Drawing.Size(88, 17);
@@ -141,7 +143,7 @@
             // RBrepositor
             // 
             this.RBrepositor.AutoSize = true;
-            this.RBrepositor.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.RBrepositor.ForeColor = System.Drawing.Color.MidnightBlue;
             this.RBrepositor.Location = new System.Drawing.Point(214, 361);
             this.RBrepositor.Name = "RBrepositor";
             this.RBrepositor.Size = new System.Drawing.Size(70, 17);
@@ -151,33 +153,40 @@
             // 
             // BGuardar
             // 
+            this.BGuardar.BackColor = System.Drawing.Color.SteelBlue;
+            this.BGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BGuardar.ForeColor = System.Drawing.Color.AliceBlue;
             this.BGuardar.Location = new System.Drawing.Point(26, 438);
             this.BGuardar.Name = "BGuardar";
             this.BGuardar.Size = new System.Drawing.Size(75, 23);
             this.BGuardar.TabIndex = 10;
             this.BGuardar.Text = "Guardar";
-            this.BGuardar.UseVisualStyleBackColor = true;
-            this.BGuardar.Click += new System.EventHandler(this.BGuardar_Click);
+            this.BGuardar.UseVisualStyleBackColor = false;
+            
             // 
             // Bsalir
             // 
+            this.Bsalir.BackColor = System.Drawing.Color.SteelBlue;
+            this.Bsalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Bsalir.ForeColor = System.Drawing.Color.AliceBlue;
             this.Bsalir.Location = new System.Drawing.Point(120, 438);
             this.Bsalir.Name = "Bsalir";
             this.Bsalir.Size = new System.Drawing.Size(75, 23);
             this.Bsalir.TabIndex = 11;
             this.Bsalir.Text = "Salir";
-            this.Bsalir.UseVisualStyleBackColor = true;
+            this.Bsalir.UseVisualStyleBackColor = false;
             this.Bsalir.Click += new System.EventHandler(this.Bsalir_Click);
             // 
             // LBapellido
             // 
             this.LBapellido.AutoSize = true;
-            this.LBapellido.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.LBapellido.ForeColor = System.Drawing.Color.MidnightBlue;
             this.LBapellido.Location = new System.Drawing.Point(43, 99);
             this.LBapellido.Name = "LBapellido";
             this.LBapellido.Size = new System.Drawing.Size(44, 13);
             this.LBapellido.TabIndex = 12;
             this.LBapellido.Text = "Apellido";
+            
             // 
             // TBapellido
             // 
@@ -189,7 +198,7 @@
             // Lusername
             // 
             this.Lusername.AutoSize = true;
-            this.Lusername.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Lusername.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Lusername.Location = new System.Drawing.Point(40, 276);
             this.Lusername.Name = "Lusername";
             this.Lusername.Size = new System.Drawing.Size(98, 13);
@@ -215,7 +224,7 @@
             // 
             // dgvUsuarios
             // 
-            this.dgvUsuarios.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvUsuarios.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsuarios.Location = new System.Drawing.Point(0, 0);
@@ -227,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(971, 473);
             this.Controls.Add(this.pDBusuarios);
             this.Controls.Add(this.TBusername);

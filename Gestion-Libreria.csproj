@@ -176,7 +176,9 @@
     <Compile Include="Datos\proveedorDatos.cs" />
     <Compile Include="Datos\UsuarioDatos.cs" />
     <Compile Include="Datos\vtaDatos.cs" />
+    <Compile Include="Entidad\Cliente.cs" />
     <Compile Include="Entidad\generos.cs" />
+    <Compile Include="Entidad\itemCarrito.cs" />
     <Compile Include="Entidad\Libro.cs" />
     <Compile Include="Entidad\MetodoPago.cs" />
     <Compile Include="Entidad\Proveedor.cs" />
