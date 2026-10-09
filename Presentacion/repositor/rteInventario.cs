@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Gestion_Libreria.Datos;
 using Gestion_Libreria.Entidad;
 
-namespace Gestion_Libreria.Presentacion.administrador
+namespace Gestion_Libreria.Presentacion.repositor
 {
     public partial class rteInventario : Form
     {

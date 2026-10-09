@@ -3,88 +3,20 @@ using Gestion_Libreria.Entidad;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Gestion_Libreria.Presentacion.vendedor
 {
     public partial class RegistroVta : Form
     {
-        private List<Libro> carrito = new List<Libro>();
+        private List<ItemCarrito> carrito = new List<ItemCarrito>();
         private VentaDatos vtaDatos = new VentaDatos();
+        private Libro libroActual;
 
         public RegistroVta()
         {
             InitializeComponent();
-            ConfigurarGrilla();   // ← Se crea la grilla por código
-        }
-
-        // ============================================================
-        // CONFIGURAR LA GRILLA POR CÓDIGO
-        // ============================================================
-        private void ConfigurarGrilla()
-        {
-            dgvCarrito = new DataGridView();
-
-            // Propiedades generales
-            dgvCarrito.Name = "dgvCarrito";
-            dgvCarrito.Location = new Point(40, 130);      // Ajusta según tu form
-            dgvCarrito.Size = new Size(600, 200);          // Ajusta según tu form
-            dgvCarrito.AllowUserToAddRows = false;
-            dgvCarrito.AllowUserToDeleteRows = false;
-            dgvCarrito.AllowUserToResizeRows = false;
-            dgvCarrito.ReadOnly = true;
-            dgvCarrito.RowHeadersVisible = false;
-            dgvCarrito.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCarrito.MultiSelect = false;
-            dgvCarrito.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvCarrito.BackgroundColor = Color.White;
-
-            // ----- Columnas -----
-            // 1. Libro
-            DataGridViewTextBoxColumn colLibro = new DataGridViewTextBoxColumn();
-            colLibro.Name = "colLibro";
-            colLibro.HeaderText = "Libro";
-            colLibro.FillWeight = 40;
-            dgvCarrito.Columns.Add(colLibro);
-
-            // 2. ISBN
-            DataGridViewTextBoxColumn colISBN = new DataGridViewTextBoxColumn();
-            colISBN.Name = "colISBN";
-            colISBN.HeaderText = "ISBN";
-            colISBN.FillWeight = 20;
-            dgvCarrito.Columns.Add(colISBN);
-
-            // 3. Cantidad
-            DataGridViewTextBoxColumn colCantidad = new DataGridViewTextBoxColumn();
-            colCantidad.Name = "colCantidad";
-            colCantidad.HeaderText = "Cantidad";
-            colCantidad.FillWeight = 10;
-            colCantidad.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvCarrito.Columns.Add(colCantidad);
-
-            // 4. Precio
-            DataGridViewTextBoxColumn colPrecio = new DataGridViewTextBoxColumn();
-            colPrecio.Name = "colPrecio";
-            colPrecio.HeaderText = "Precio";
-            colPrecio.FillWeight = 15;
-            colPrecio.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCarrito.Columns.Add(colPrecio);
-
-            // 5. Acción (botón "Quitar")
-            DataGridViewButtonColumn colAccion = new DataGridViewButtonColumn();
-            colAccion.Name = "colAccion";
-            colAccion.HeaderText = "Acción";
-            colAccion.Text = "Quitar";
-            colAccion.UseColumnTextForButtonValue = true;
-            colAccion.FillWeight = 15;
-            colAccion.FlatStyle = FlatStyle.Flat;
-            dgvCarrito.Columns.Add(colAccion);
-
-            // ----- Evento de clic en celda -----
-            dgvCarrito.CellContentClick += dgvCarrito_CellContentClick;
-
-            // 🔑 Agregamos la grilla al formulario
-            this.Controls.Add(dgvCarrito);
         }
 
         // ============================================================
@@ -92,57 +24,182 @@ namespace Gestion_Libreria.Presentacion.vendedor
         // ============================================================
         private void FormRegistrarVenta_Load(object sender, EventArgs e)
         {
+            // 🔑 Inicializar NumericUpDown
+            nudCantidad.Minimum = 1;
+            nudCantidad.Maximum = 1000;
+            nudCantidad.Value = 1;
+
+            // 🔑 Configurar grilla acá, ya con el panel con tamaño real
+            ConfigurarGrilla();
             RefrescarCarrito();
         }
 
         // ============================================================
-        // AGREGAR PRODUCTO
+        // CONFIGURAR GRILLA DENTRO DE pDgvCarrito
         // ============================================================
-        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        private void ConfigurarGrilla()
         {
-            FormProductos frmBuscar = new FormProductos();
-
-            if (frmBuscar.ShowDialog() == DialogResult.OK)
+            if (pDgvCarrito == null)
             {
-                List<Libro> seleccionados = frmBuscar.ObtenerCarrito();
+                MessageBox.Show("❌ pDgvCarrito es null.");
+                return;
+            }
 
-                foreach (Libro l in seleccionados)
+            // Limpiar el panel por si ya tiene algo
+            pDgvCarrito.Controls.Clear();
+
+            DataGridView dgv = new DataGridView();
+
+            dgv.Name = "dgvCarrito";
+            dgv.Dock = DockStyle.Fill;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ReadOnly = true;
+            dgv.RowHeadersVisible = false;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.BackgroundColor = Color.White;
+
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "colLibro", HeaderText = "Libro", FillWeight = 35 });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "colISBN", HeaderText = "ISBN", FillWeight = 20 });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "colCantidad", HeaderText = "Cantidad", FillWeight = 10 });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "colPrecio", HeaderText = "Precio", FillWeight = 15 });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "colSubtotal", HeaderText = "Subtotal", FillWeight = 15 });
+            dgv.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "colAccion",
+                HeaderText = "Acción",
+                Text = "Quitar",
+                UseColumnTextForButtonValue = true,
+                FillWeight = 15,
+                FlatStyle = FlatStyle.Flat
+            });
+
+            dgv.CellContentClick += dgvCarrito_CellContentClick;
+
+            pDgvCarrito.Controls.Add(dgv);
+            dgv.BringToFront();
+        }
+
+        private DataGridView ObtenerGrilla()
+        {
+            foreach (Control c in pDgvCarrito.Controls)
+            {
+                if (c is DataGridView dgv && dgv.Name == "dgvCarrito")
+                    return dgv;
+            }
+            return null;
+        }
+
+        // ============================================================
+        // BUSCAR PRODUCTO
+        // ============================================================
+        private void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+            using (FormProductos frmProductos = new FormProductos())
+            {
+                if (frmProductos.ShowDialog() == DialogResult.OK)
                 {
-                    if (carrito.Exists(x => x.id_libro == l.id_libro))
+                    libroActual = frmProductos.ObtenerLibroSeleccionado();
+
+                    if (libroActual != null)
                     {
-                        MessageBox.Show($"'{l.Nombre}' ya está en el carrito.",
-                            "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        carrito.Add(l);
+                        txtProducto.Text = libroActual.Nombre;
+                        txtStock.Text = libroActual.Stock.ToString();
+                        txtPrecio.Text = libroActual.Precio.ToString("N2");
+                        nudCantidad.Value = 1;   // 🔑 resetear cantidad
+                        nudCantidad.Focus();
                     }
                 }
-
-                RefrescarCarrito();
             }
         }
 
         // ============================================================
-        // REFRESCAR GRILLA Y TOTALES
+        // AGREGAR AL CARRITO
+        // ============================================================
+        private void btnAgregarCarrito_Click(object sender, EventArgs e)
+        {
+            if (libroActual == null)
+            {
+                MessageBox.Show("Primero buscá un producto.",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int cantidad = (int)nudCantidad.Value;
+
+            if (cantidad <= 0)
+            {
+                MessageBox.Show("La cantidad debe ser mayor a 0.",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ItemCarrito itemExistente = carrito.FirstOrDefault(i => i.Libro.id_libro == libroActual.id_libro);
+
+            int cantidadYaEnCarrito = itemExistente?.Cantidad ?? 0;
+            int cantidadTotal = cantidadYaEnCarrito + cantidad;
+
+            if (cantidadTotal > libroActual.Stock)
+            {
+                int stockDisponible = libroActual.Stock - cantidadYaEnCarrito;
+                MessageBox.Show($"Stock insuficiente. Disponible: {stockDisponible}.",
+                    "Sin stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (itemExistente != null)
+            {
+                itemExistente.Cantidad = cantidadTotal;
+            }
+            else
+            {
+                carrito.Add(new ItemCarrito
+                {
+                    Libro = libroActual,
+                    Cantidad = cantidad
+                });
+            }
+
+            RefrescarCarrito();
+            LimpiarCampos();
+        }
+
+        private void LimpiarCampos()
+        {
+            libroActual = null;
+            txtProducto.Text = "";
+            txtStock.Text = "";
+            txtPrecio.Text = "";
+            nudCantidad.Value = 1;
+        }
+
+        // ============================================================
+        // REFRESCAR CARRITO
         // ============================================================
         private void RefrescarCarrito()
         {
-            dgvCarrito.Rows.Clear();
+            DataGridView dgv = ObtenerGrilla();
+            if (dgv == null) return;
+
+            dgv.Rows.Clear();
 
             decimal subtotal = 0;
 
-            foreach (Libro l in carrito)
+            foreach (ItemCarrito item in carrito)
             {
-                dgvCarrito.Rows.Add(
-                    l.Nombre,
-                    l.ISBN,
-                    1,
-                    l.Precio.ToString("N2"),
+                dgv.Rows.Add(
+                    item.Libro.Nombre,
+                    item.Libro.ISBN,
+                    item.Cantidad,
+                    item.Libro.Precio.ToString("N2"),
+                    item.Subtotal.ToString("N2"),
                     "Quitar"
                 );
 
-                subtotal += l.Precio;
+                subtotal += item.Subtotal;
             }
 
             lblSubtotal.Text = "Subtotal: $" + subtotal.ToString("N2");
@@ -150,13 +207,16 @@ namespace Gestion_Libreria.Presentacion.vendedor
         }
 
         // ============================================================
-        // CLIC EN BOTÓN "Quitar"
+        // QUITAR LIBRO DEL CARRITO
         // ============================================================
         private void dgvCarrito_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
-            if (dgvCarrito.Columns[e.ColumnIndex].Name == "colAccion")
+            DataGridView dgv = ObtenerGrilla();
+            if (dgv == null) return;
+
+            if (dgv.Columns[e.ColumnIndex].Name == "colAccion")
             {
                 DialogResult r = MessageBox.Show(
                     "¿Quitar este libro del carrito?",
@@ -167,28 +227,6 @@ namespace Gestion_Libreria.Presentacion.vendedor
                     carrito.RemoveAt(e.RowIndex);
                     RefrescarCarrito();
                 }
-            }
-        }
-
-        // ============================================================
-        // VACIAR CARRITO
-        // ============================================================
-        private void btnVaciarCarrito_Click(object sender, EventArgs e)
-        {
-            if (carrito.Count == 0)
-            {
-                MessageBox.Show("El carrito ya está vacío.");
-                return;
-            }
-
-            DialogResult r = MessageBox.Show(
-                "¿Vaciar todo el carrito?",
-                "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (r == DialogResult.Yes)
-            {
-                carrito.Clear();
-                RefrescarCarrito();
             }
         }
 
@@ -212,40 +250,23 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 return;
             }
 
-            int idUsuario = 1;
-            int idMetodo = 1;
-
-            try
+            using (Pago frmPago = new Pago(carrito))
             {
-                int idVenta = vtaDatos.RegistrarVenta(idUsuario, idMetodo, carrito);
+                if (frmPago.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show($"¡Venta #{frmPago.IdVentaGenerado} registrada con éxito!",
+                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show($"¡Venta #{idVenta} registrada con éxito!",
-                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                carrito.Clear();
-                RefrescarCarrito();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al registrar venta: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    carrito.Clear();
+                    RefrescarCarrito();
+                    LimpiarCampos();
+                }
             }
         }
 
-        public List<Libro> ObtenerCarrito()
+        public List<ItemCarrito> ObtenerCarrito()
         {
             return carrito;
-        }
-
-        private void pCabecera_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btnAgregarProducto_Click_1(object sender, EventArgs e)
-        {
-            FormProductos formProductos = new FormProductos();
-            formProductos.Show();
         }
     }
 }

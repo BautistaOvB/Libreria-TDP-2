@@ -173,10 +173,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\LibroDatos.cs" />
+    <Compile Include="Datos\proveedorDatos.cs" />
     <Compile Include="Datos\UsuarioDatos.cs" />
     <Compile Include="Datos\vtaDatos.cs" />
+    <Compile Include="Entidad\Cliente.cs" />
     <Compile Include="Entidad\generos.cs" />
+    <Compile Include="Entidad\itemCarrito.cs" />
     <Compile Include="Entidad\Libro.cs" />
+    <Compile Include="Entidad\MetodoPago.cs" />
     <Compile Include="Entidad\Proveedor.cs" />
     <Compile Include="Entidad\Rol.cs" />
     <Compile Include="Entidad\Usuario.cs" />
@@ -236,17 +240,23 @@
     <Compile Include="Presentacion\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MDIParent1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MDIParent1.Designer.cs">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Presentacion\repositor\AddProd.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Presentacion\repositor\AddProd.Designer.cs">
       <DependentUpon>AddProd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\repositor\AddProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\repositor\AddProveedor.Designer.cs">
+      <DependentUpon>AddProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\repositor\reporteEgresos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\repositor\reporteEgresos.Designer.cs">
+      <DependentUpon>reporteEgresos.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\repositor\ReporteIngresos.cs">
       <SubType>Form</SubType>
@@ -259,6 +269,12 @@
     </Compile>
     <Compile Include="Presentacion\repositor\RepositorBase.Designer.cs">
       <DependentUpon>RepositorBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\repositor\rteInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\repositor\rteInventario.Designer.cs">
+      <DependentUpon>rteInventario.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Sesion.cs" />
     <Compile Include="Presentacion\vendedor\addCliente.cs">
@@ -273,11 +289,11 @@
     <Compile Include="Presentacion\vendedor\FormProductos.Designer.cs">
       <DependentUpon>FormProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\vendedor\modificarCliente.cs">
+    <Compile Include="Presentacion\vendedor\Pago.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\vendedor\modificarCliente.Designer.cs">
-      <DependentUpon>modificarCliente.cs</DependentUpon>
+    <Compile Include="Presentacion\vendedor\Pago.Designer.cs">
+      <DependentUpon>Pago.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\vendedor\ProdDetalles.cs">
       <SubType>Form</SubType>
@@ -357,11 +373,14 @@
     <EmbeddedResource Include="Presentacion\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MDIParent1.resx">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\repositor\AddProd.resx">
       <DependentUpon>AddProd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\repositor\AddProveedor.resx">
+      <DependentUpon>AddProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\repositor\reporteEgresos.resx">
+      <DependentUpon>reporteEgresos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\repositor\ReporteIngresos.resx">
       <DependentUpon>ReporteIngresos.cs</DependentUpon>
@@ -369,14 +388,17 @@
     <EmbeddedResource Include="Presentacion\repositor\RepositorBase.resx">
       <DependentUpon>RepositorBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\repositor\rteInventario.resx">
+      <DependentUpon>rteInventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\vendedor\addCliente.resx">
       <DependentUpon>addCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\vendedor\FormProductos.resx">
       <DependentUpon>FormProductos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\vendedor\modificarCliente.resx">
-      <DependentUpon>modificarCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Presentacion\vendedor\Pago.resx">
+      <DependentUpon>Pago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\vendedor\ProdDetalles.resx">
       <DependentUpon>ProdDetalles.cs</DependentUpon>

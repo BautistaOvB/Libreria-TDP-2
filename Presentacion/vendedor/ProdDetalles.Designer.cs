@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LISBN = new System.Windows.Forms.Label();
-            this.tbISBN = new System.Windows.Forms.TextBox();
+            this.txtISBN = new System.Windows.Forms.TextBox();
             this.lTitulo = new System.Windows.Forms.Label();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.txtGenero = new System.Windows.Forms.TextBox();
@@ -37,8 +37,8 @@
             this.lDisponibles = new System.Windows.Forms.Label();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.lPrecio = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.BtnCarrito = new System.Windows.Forms.Button();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.BtnAgregarCarrito = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -53,13 +53,13 @@
             this.LISBN.TabIndex = 0;
             this.LISBN.Text = "ISBN";
             // 
-            // tbISBN
+            // txtISBN
             // 
-            this.tbISBN.Location = new System.Drawing.Point(88, 41);
-            this.tbISBN.Name = "tbISBN";
-            this.tbISBN.ReadOnly = true;
-            this.tbISBN.Size = new System.Drawing.Size(175, 20);
-            this.tbISBN.TabIndex = 1;
+            this.txtISBN.Location = new System.Drawing.Point(88, 41);
+            this.txtISBN.Name = "txtISBN";
+            this.txtISBN.ReadOnly = true;
+            this.txtISBN.Size = new System.Drawing.Size(175, 20);
+            this.txtISBN.TabIndex = 1;
             // 
             // lTitulo
             // 
@@ -129,21 +129,22 @@
             this.lPrecio.TabIndex = 8;
             this.lPrecio.Text = "Precio:";
             // 
-            // textBox1
+            // txtPrecio
             // 
-            this.textBox1.Location = new System.Drawing.Point(88, 247);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(134, 20);
-            this.textBox1.TabIndex = 9;
+            this.txtPrecio.Location = new System.Drawing.Point(88, 247);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(134, 20);
+            this.txtPrecio.TabIndex = 9;
             // 
-            // BtnCarrito
+            // BtnAgregarCarrito
             // 
-            this.BtnCarrito.Location = new System.Drawing.Point(198, 306);
-            this.BtnCarrito.Name = "BtnCarrito";
-            this.BtnCarrito.Size = new System.Drawing.Size(88, 45);
-            this.BtnCarrito.TabIndex = 10;
-            this.BtnCarrito.Text = "Agregar al carrito";
-            this.BtnCarrito.UseVisualStyleBackColor = true;
+            this.BtnAgregarCarrito.Location = new System.Drawing.Point(198, 306);
+            this.BtnAgregarCarrito.Name = "BtnAgregarCarrito";
+            this.BtnAgregarCarrito.Size = new System.Drawing.Size(88, 45);
+            this.BtnAgregarCarrito.TabIndex = 10;
+            this.BtnAgregarCarrito.Text = "Agregar al carrito";
+            this.BtnAgregarCarrito.UseVisualStyleBackColor = true;
+            this.BtnAgregarCarrito.Click += new System.EventHandler(this.btnAgregarCarrito_Click);
             // 
             // BtnSalir
             // 
@@ -153,6 +154,7 @@
             this.BtnSalir.TabIndex = 11;
             this.BtnSalir.Text = "Salir";
             this.BtnSalir.UseVisualStyleBackColor = true;
+            this.BtnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // ProdDetalles
             // 
@@ -161,8 +163,8 @@
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(328, 387);
             this.Controls.Add(this.BtnSalir);
-            this.Controls.Add(this.BtnCarrito);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.BtnAgregarCarrito);
+            this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.lPrecio);
             this.Controls.Add(this.txtStock);
             this.Controls.Add(this.lDisponibles);
@@ -170,7 +172,7 @@
             this.Controls.Add(this.txtGenero);
             this.Controls.Add(this.txtTitulo);
             this.Controls.Add(this.lTitulo);
-            this.Controls.Add(this.tbISBN);
+            this.Controls.Add(this.txtISBN);
             this.Controls.Add(this.LISBN);
             this.Name = "ProdDetalles";
             this.Text = "Detalle de Producto";
@@ -182,7 +184,7 @@
         #endregion
 
         private System.Windows.Forms.Label LISBN;
-        private System.Windows.Forms.TextBox tbISBN;
+        private System.Windows.Forms.TextBox txtISBN;
         private System.Windows.Forms.Label lTitulo;
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.TextBox txtGenero;
@@ -190,8 +192,8 @@
         private System.Windows.Forms.Label lDisponibles;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label lPrecio;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button BtnCarrito;
+        private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Button BtnAgregarCarrito;
         private System.Windows.Forms.Button BtnSalir;
     }
 }

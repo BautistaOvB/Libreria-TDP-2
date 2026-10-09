@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reporteVentas));
             this.pCabecera = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.txtDNIcliente = new System.Windows.Forms.TextBox();
-            this.btnBuscarDni = new System.Windows.Forms.Button();
-            this.btnBuscarxFecha = new System.Windows.Forms.Button();
-            this.lblDNI = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
+            this.lblDNI = new System.Windows.Forms.Label();
+            this.btnBuscarFecha = new System.Windows.Forms.Button();
+            this.btnBuscarDni = new System.Windows.Forms.Button();
+            this.txtDNIcliente = new System.Windows.Forms.TextBox();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             this.pLeft = new System.Windows.Forms.Panel();
+            this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
-            this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.pCabecera.SuspendLayout();
             this.pLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
             // pCabecera
@@ -52,37 +53,48 @@
             this.pCabecera.BackColor = System.Drawing.Color.DarkBlue;
             this.pCabecera.Controls.Add(this.lblFecha);
             this.pCabecera.Controls.Add(this.lblDNI);
-            this.pCabecera.Controls.Add(this.btnBuscarxFecha);
+            this.pCabecera.Controls.Add(this.btnBuscarFecha);
             this.pCabecera.Controls.Add(this.btnBuscarDni);
             this.pCabecera.Controls.Add(this.txtDNIcliente);
-            this.pCabecera.Controls.Add(this.dateTimePicker2);
-            this.pCabecera.Controls.Add(this.dateTimePicker1);
+            this.pCabecera.Controls.Add(this.dtpHasta);
+            this.pCabecera.Controls.Add(this.dtpDesde);
             this.pCabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.pCabecera.Location = new System.Drawing.Point(0, 0);
             this.pCabecera.Name = "pCabecera";
             this.pCabecera.Size = new System.Drawing.Size(1150, 129);
             this.pCabecera.TabIndex = 0;
             // 
-            // dateTimePicker1
+            // lblFecha
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(24, 32);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 0;
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblFecha.Location = new System.Drawing.Point(24, 13);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(40, 13);
+            this.lblFecha.TabIndex = 6;
+            this.lblFecha.Text = "Fecha:";
             // 
-            // dateTimePicker2
+            // lblDNI
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(257, 32);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 1;
+            this.lblDNI.AutoSize = true;
+            this.lblDNI.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblDNI.Location = new System.Drawing.Point(21, 60);
+            this.lblDNI.Name = "lblDNI";
+            this.lblDNI.Size = new System.Drawing.Size(62, 13);
+            this.lblDNI.TabIndex = 5;
+            this.lblDNI.Text = "Documento";
             // 
-            // txtDNIcliente
+            // btnBuscarFecha
             // 
-            this.txtDNIcliente.Location = new System.Drawing.Point(24, 76);
-            this.txtDNIcliente.Name = "txtDNIcliente";
-            this.txtDNIcliente.Size = new System.Drawing.Size(170, 20);
-            this.txtDNIcliente.TabIndex = 2;
+            this.btnBuscarFecha.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscarFecha.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBuscarFecha.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBuscarFecha.Location = new System.Drawing.Point(475, 29);
+            this.btnBuscarFecha.Name = "btnBuscarFecha";
+            this.btnBuscarFecha.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarFecha.TabIndex = 4;
+            this.btnBuscarFecha.Text = "Buscar";
+            this.btnBuscarFecha.UseVisualStyleBackColor = false;
             // 
             // btnBuscarDni
             // 
@@ -96,37 +108,26 @@
             this.btnBuscarDni.Text = "Buscar";
             this.btnBuscarDni.UseVisualStyleBackColor = false;
             // 
-            // btnBuscarxFecha
+            // txtDNIcliente
             // 
-            this.btnBuscarxFecha.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnBuscarxFecha.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBuscarxFecha.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBuscarxFecha.Location = new System.Drawing.Point(475, 29);
-            this.btnBuscarxFecha.Name = "btnBuscarxFecha";
-            this.btnBuscarxFecha.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarxFecha.TabIndex = 4;
-            this.btnBuscarxFecha.Text = "Buscar";
-            this.btnBuscarxFecha.UseVisualStyleBackColor = false;
+            this.txtDNIcliente.Location = new System.Drawing.Point(24, 76);
+            this.txtDNIcliente.Name = "txtDNIcliente";
+            this.txtDNIcliente.Size = new System.Drawing.Size(170, 20);
+            this.txtDNIcliente.TabIndex = 2;
             // 
-            // lblDNI
+            // dtpHasta
             // 
-            this.lblDNI.AutoSize = true;
-            this.lblDNI.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblDNI.Location = new System.Drawing.Point(21, 60);
-            this.lblDNI.Name = "lblDNI";
-            this.lblDNI.Size = new System.Drawing.Size(62, 13);
-            this.lblDNI.TabIndex = 5;
-            this.lblDNI.Text = "Documento";
+            this.dtpHasta.Location = new System.Drawing.Point(257, 32);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(200, 20);
+            this.dtpHasta.TabIndex = 1;
             // 
-            // lblFecha
+            // dtpDesde
             // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblFecha.Location = new System.Drawing.Point(24, 13);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(40, 13);
-            this.lblFecha.TabIndex = 6;
-            this.lblFecha.Text = "Fecha:";
+            this.dtpDesde.Location = new System.Drawing.Point(24, 32);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(200, 20);
+            this.dtpDesde.TabIndex = 0;
             // 
             // pLeft
             // 
@@ -136,6 +137,18 @@
             this.pLeft.Name = "pLeft";
             this.pLeft.Size = new System.Drawing.Size(550, 342);
             this.pLeft.TabIndex = 1;
+            // 
+            // dgvVentas
+            // 
+            this.dgvVentas.AllowUserToOrderColumns = true;
+            this.dgvVentas.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVentas.Location = new System.Drawing.Point(0, 0);
+            this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.Size = new System.Drawing.Size(550, 342);
+            this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellClick);
             // 
             // panel1
             // 
@@ -148,6 +161,7 @@
             // 
             // dgvDetalle
             // 
+            this.dgvDetalle.AllowUserToOrderColumns = true;
             this.dgvDetalle.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -155,17 +169,7 @@
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.Size = new System.Drawing.Size(600, 342);
             this.dgvDetalle.TabIndex = 0;
-            this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // dgvVentas
-            // 
-            this.dgvVentas.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvVentas.Location = new System.Drawing.Point(0, 0);
-            this.dgvVentas.Name = "dgvVentas";
-            this.dgvVentas.Size = new System.Drawing.Size(550, 342);
-            this.dgvVentas.TabIndex = 0;
+            this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellClick);
             // 
             // reporteVentas
             // 
@@ -175,14 +179,15 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pLeft);
             this.Controls.Add(this.pCabecera);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "reporteVentas";
-            this.Text = "reporteVentas";
+            this.Text = "Punto y Barra | Reporte de Ventas";
             this.pCabecera.ResumeLayout(false);
             this.pCabecera.PerformLayout();
             this.pLeft.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -191,11 +196,11 @@
 
         private System.Windows.Forms.Panel pCabecera;
         private System.Windows.Forms.TextBox txtDNIcliente;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpHasta;
+        private System.Windows.Forms.DateTimePicker dtpDesde;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblDNI;
-        private System.Windows.Forms.Button btnBuscarxFecha;
+        private System.Windows.Forms.Button btnBuscarFecha;
         private System.Windows.Forms.Button btnBuscarDni;
         private System.Windows.Forms.Panel pLeft;
         private System.Windows.Forms.Panel panel1;

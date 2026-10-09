@@ -4,73 +4,61 @@ using System.Windows.Forms;
 using Gestion_Libreria.Datos;
 using Gestion_Libreria.Entidad;
 
-namespace Gestion_Libreria.Presentacion.vendedor
+namespace Gestion_Libreria.Presentacion.repositor
 {
-    public partial class reporteVentas : Form
+    public partial class reporteEgresos : Form
     {
-
         private List<Venta> listaVentas;
-        private int idUsuarioLogueado;
 
-        // ============================================================
-        // CONSTRUCTORES
-        // ============================================================
-        public reporteVentas()
+        public reporteEgresos()
         {
             InitializeComponent();
 
-            // Suscribimos el evento para mostrar el detalle al hacer clic
-            this.dgvVentas.CellClick += dgvVentas_CellClick;
-
-            // ✅ AGREGAR ESTA LÍNEA: conectar el evento Load
-            this.Load += reporteVentas_Load;
+            // Suscribimos el evento Load y el CellClick
+            this.Load += reporteEgresos_Load;
+            this.dgvEgresos.CellClick += dgvEgresos_CellClick;
         }
 
-        public reporteVentas(int idUsuario) : this()
+        private void reporteEgresos_Load(object sender, EventArgs e)
         {
-            idUsuarioLogueado = idUsuario;
-        }
-
-        private void reporteVentas_Load(object sender, EventArgs e)
-        {
-            ConfigurarGrillaVentas();
+            ConfigurarGrillaEgresos();
             ConfigurarGrillaDetalle();
-            CargarVentas();
+            CargarEgresos();
         }
 
         // ============================================================
-        // CONFIGURAMOS LAS COLUMNAS DE dgvVentas (ya existe en el diseñador)
+        // CONFIGURAMOS LA GRILLA DE EGRESOS (dgvEgresos)
         // ============================================================
-        private void ConfigurarGrillaVentas()
+        private void ConfigurarGrillaEgresos()
         {
-            dgvVentas.AutoGenerateColumns = false;
-            dgvVentas.AllowUserToAddRows = false;
-            dgvVentas.ReadOnly = true;
-            dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvVentas.MultiSelect = false;
-            dgvVentas.RowHeadersVisible = false;
-            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvEgresos.AutoGenerateColumns = false;
+            dgvEgresos.AllowUserToAddRows = false;
+            dgvEgresos.ReadOnly = true;
+            dgvEgresos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEgresos.MultiSelect = false;
+            dgvEgresos.RowHeadersVisible = false;
+            dgvEgresos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvVentas.Columns.Clear();
+            dgvEgresos.Columns.Clear();
 
-            dgvVentas.Columns.Add(new DataGridViewTextBoxColumn
+            dgvEgresos.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "colIdVenta",
+                Name = "colID",
                 HeaderText = "ID",
                 DataPropertyName = "id_venta",
-                FillWeight = 15
+                FillWeight = 10
             });
 
-            dgvVentas.Columns.Add(new DataGridViewTextBoxColumn
+            dgvEgresos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colFecha",
                 HeaderText = "Fecha",
                 DataPropertyName = "fecha_venta",
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" },
-                FillWeight = 30
+                FillWeight = 25
             });
 
-            dgvVentas.Columns.Add(new DataGridViewTextBoxColumn
+            dgvEgresos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colTotal",
                 HeaderText = "Total",
@@ -83,31 +71,39 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 FillWeight = 25
             });
 
-            dgvVentas.Columns.Add(new DataGridViewTextBoxColumn
+            dgvEgresos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colMetodo",
                 HeaderText = "Método",
                 DataPropertyName = "nombre_metodo",
-                FillWeight = 30
+                FillWeight = 20
+            });
+
+            dgvEgresos.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colVendedor",
+                HeaderText = "Vendedor",
+                DataPropertyName = "nombre_usuario",
+                FillWeight = 20
             });
         }
 
         // ============================================================
-        // CONFIGURAMOS LAS COLUMNAS DE dgvDetalle (ya existe en el diseñador)
+        // CONFIGURAMOS LA GRILLA DE DETALLE (dgvDetalleEgreso)
         // ============================================================
         private void ConfigurarGrillaDetalle()
         {
-            dgvDetalle.AutoGenerateColumns = false;
-            dgvDetalle.AllowUserToAddRows = false;
-            dgvDetalle.ReadOnly = true;
-            dgvDetalle.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDetalle.MultiSelect = false;
-            dgvDetalle.RowHeadersVisible = false;
-            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDetalleEgreso.AutoGenerateColumns = false;
+            dgvDetalleEgreso.AllowUserToAddRows = false;
+            dgvDetalleEgreso.ReadOnly = true;
+            dgvDetalleEgreso.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalleEgreso.MultiSelect = false;
+            dgvDetalleEgreso.RowHeadersVisible = false;
+            dgvDetalleEgreso.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvDetalle.Columns.Clear();
+            dgvDetalleEgreso.Columns.Clear();
 
-            dgvDetalle.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDetalleEgreso.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colISBN",
                 HeaderText = "ISBN",
@@ -115,7 +111,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 FillWeight = 30
             });
 
-            dgvDetalle.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDetalleEgreso.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colNombreLibro",
                 HeaderText = "Libro",
@@ -123,7 +119,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 FillWeight = 35
             });
 
-            dgvDetalle.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDetalleEgreso.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colCantidad",
                 HeaderText = "Cant.",
@@ -135,7 +131,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 FillWeight = 10
             });
 
-            dgvDetalle.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDetalleEgreso.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colPrecioUnitario",
                 HeaderText = "Precio Unit.",
@@ -148,7 +144,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 FillWeight = 15
             });
 
-            dgvDetalle.Columns.Add(new DataGridViewTextBoxColumn
+            dgvDetalleEgreso.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colSubtotal",
                 HeaderText = "Subtotal",
@@ -163,48 +159,52 @@ namespace Gestion_Libreria.Presentacion.vendedor
         }
 
         // ============================================================
-        // CARGAR LAS VENTAS DEL VENDEDOR LOGUEADO
+        // CARGAR TODOS LOS EGRESOS (VENTAS)
         // ============================================================
-        private void CargarVentas()
+        private void CargarEgresos()
         {
             try
             {
                 VentaDatos datos = new VentaDatos();
+                listaVentas = datos.ObtenerTodas();
 
-                if (idUsuarioLogueado > 0)
-                    listaVentas = datos.ObtenerPorUsuario(idUsuarioLogueado);
-                else
-                    listaVentas = datos.ObtenerTodas();
+                dgvEgresos.DataSource = null;
+                dgvEgresos.DataSource = listaVentas;
 
-                dgvVentas.DataSource = null;
-                dgvVentas.DataSource = listaVentas;
-
-                dgvDetalle.DataSource = null;
+                dgvDetalleEgreso.DataSource = null;
+                //LimpiarCabecera();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar ventas: " + ex.Message,
+                MessageBox.Show("Error al cargar egresos: " + ex.Message,
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // ============================================================
-        // AL HACER CLIC EN UNA VENTA, MOSTRAR EL DETALLE
+        // AL HACER CLIC EN UN EGRESO, CARGAR CABECERA + DETALLE
         // ============================================================
-        private void dgvVentas_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvEgresos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
             try
             {
-                Venta ventaSeleccionada = (Venta)dgvVentas.Rows[e.RowIndex].DataBoundItem;
+                Venta ventaSeleccionada = (Venta)dgvEgresos.Rows[e.RowIndex].DataBoundItem;
                 if (ventaSeleccionada == null) return;
 
+                // Llenamos la cabecera
+                /*txtNVenta.Text = ventaSeleccionada.id_venta.ToString();
+                txtVendedor.Text = ventaSeleccionada.nombre_usuario;
+                txtTotal.Text = ventaSeleccionada.total_venta.ToString("C2");
+                txtMetodoPago.Text = ventaSeleccionada.nombre_metodo;
+                */
+                // Cargamos el detalle
                 VentaDatos datos = new VentaDatos();
                 List<VentaDetalle> detalles = datos.ObtenerDetalles(ventaSeleccionada.id_venta);
 
-                dgvDetalle.DataSource = null;
-                dgvDetalle.DataSource = detalles;
+                dgvDetalleEgreso.DataSource = null;
+                dgvDetalleEgreso.DataSource = detalles;
             }
             catch (Exception ex)
             {
@@ -214,17 +214,24 @@ namespace Gestion_Libreria.Presentacion.vendedor
         }
 
         // ============================================================
+        // LIMPIAR CABECERA
+        // ============================================================
+        /*private void LimpiarCabecera()
+        {
+            txtNVenta.Clear();
+            txtVendedor.Clear();
+            txtTotal.Clear();
+            txtMetodoPago.Clear();
+        }*/
+
+        // ============================================================
         // BOTÓN FILTRAR POR FECHA
-        // ⚠️ Asegurate de conectar tu botón "Buscar" a este método
         // ============================================================
         private void btnBuscarFecha_Click(object sender, EventArgs e)
         {
             try
             {
-                DateTime desde = dtpDesde.Value;
-                DateTime hasta = dtpHasta.Value;
-
-                if (desde.Date > hasta.Date)
+                if (dtpDesde.Value.Date > dtpHasta.Value.Date)
                 {
                     MessageBox.Show("La fecha 'Desde' no puede ser mayor que la fecha 'Hasta'.",
                                     "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -232,20 +239,17 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 }
 
                 VentaDatos datos = new VentaDatos();
+                listaVentas = datos.ObtenerPorFecha(dtpDesde.Value, dtpHasta.Value);
 
-                if (idUsuarioLogueado > 0)
-                    listaVentas = datos.ObtenerPorUsuarioYFecha(idUsuarioLogueado, desde, hasta);
-                else
-                    listaVentas = datos.ObtenerPorFecha(desde, hasta);
+                dgvEgresos.DataSource = null;
+                dgvEgresos.DataSource = listaVentas;
 
-                dgvVentas.DataSource = null;
-                dgvVentas.DataSource = listaVentas;
-
-                dgvDetalle.DataSource = null;
+                dgvDetalleEgreso.DataSource = null;
+                //LimpiarCabecera();
 
                 if (listaVentas.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron ventas en ese rango de fechas.",
+                    MessageBox.Show("No se encontraron egresos en ese rango de fechas.",
                                     "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

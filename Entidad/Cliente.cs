@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Gestion_Libreria.Entidad
 {
-    public class generos
+    internal class Cliente
     {
-        public int cod_genero { get; set; }
-        public string descripcion { get; set; }
+        public int dni { get; set; }
+        public string nombre { get; set; }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace Gestion_Libreria.Presentacion.administrador
     {
         private List<Usuario> listaUsuarios;
         private List<Usuario> usuariosMostrados; // Lista actual visible (con filtro aplicado)
-
+        private Form formularioActivo = null;
         public VerUsuarios()
         {
             InitializeComponent();
@@ -105,12 +105,28 @@ namespace Gestion_Libreria.Presentacion.administrador
             if (e.RowIndex < 0) return; // Ignorar clic en encabezado
 
             // ✅ Usar la lista de objetos, no las columnas del grid
-            Usuario usuarioSeleccionado = usuariosMostrados[e.RowIndex];
 
-            mostrarUsuario frm = new mostrarUsuario(usuarioSeleccionado.id_usuario);
-            frm.ShowDialog();
+            Usuario usuarioSeleccionado = usuariosMostrados[e.RowIndex];
+            AbrirFormularioEnPanel(new mostrarUsuario(usuarioSeleccionado.id_usuario));
 
             CargarUsuarios();
+        }
+
+        private void AbrirFormularioEnPanel(Form formHijo)
+        {
+            if (formularioActivo != null)
+                formularioActivo.Close();
+
+            formularioActivo = formHijo;
+
+            formHijo.TopLevel = false;
+            formHijo.FormBorderStyle = FormBorderStyle.None;
+            formHijo.Dock = DockStyle.Fill;
+            formHijo.StartPosition = FormStartPosition.Manual;
+
+            pContenedor.Controls.Clear();
+            pContenedor.Controls.Add(formHijo);
+            formHijo.Show();
         }
 
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -119,9 +135,7 @@ namespace Gestion_Libreria.Presentacion.administrador
 
             // ✅ Usar la lista de objetos, no las columnas del grid
             Usuario usuarioSeleccionado = usuariosMostrados[e.RowIndex];
-
-            mostrarUsuario frm = new mostrarUsuario(usuarioSeleccionado.id_usuario);
-            frm.ShowDialog();
+            AbrirFormularioEnPanel(new mostrarUsuario(usuarioSeleccionado.id_usuario));
 
             CargarUsuarios();
         }
