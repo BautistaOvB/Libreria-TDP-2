@@ -17,6 +17,7 @@ namespace Gestion_Libreria.Entidad
         // Campos del JOIN
         public string nombre_metodo { get; set; }
         public string nombre_usuario { get; set; }
+        public string nombre_cliente { get; set; }
     }
 
 

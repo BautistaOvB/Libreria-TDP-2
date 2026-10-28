@@ -128,8 +128,9 @@ namespace Gestion_Libreria.Presentacion.vendedor
             // btnCliente
             // 
             this.btnCliente.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnCliente.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCliente.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCliente.Location = new System.Drawing.Point(12, 386);
             this.btnCliente.Name = "btnCliente";
             this.btnCliente.Size = new System.Drawing.Size(140, 52);

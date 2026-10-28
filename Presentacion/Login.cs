@@ -42,6 +42,8 @@ namespace Gestion_Libreria.Presentacion
                     Sesion.NombreUsuario = userLogueado.username;
                     Sesion.NombreRol = userLogueado.nombre_rol;
                     Sesion.IdRol = userLogueado.id_rol;
+                    Sesion.Nombre = userLogueado.nombre;
+                    Sesion.Apellido = userLogueado.apellido;
 
                     // 5. Redirigir según el Rol
                     AbrirVentanaPorRol(Sesion.NombreRol);

@@ -62,7 +62,7 @@ namespace Gestion_Libreria.Datos
         // ============================================================
         // Buscar libros por nombre (LIKE)
         // ============================================================
-        public List<Libro> BuscarPorNombre(string filtro)
+        public List<Libro> Buscar(string filtro)
         {
             List<Libro> lista = new List<Libro>();
 
@@ -73,12 +73,13 @@ namespace Gestion_Libreria.Datos
                     conexion.Open();
 
                     string query = @"SELECT l.id_libro, l.ISBN, l.nombre,
-                                    l.stock, l.precio, l.cod_genero,
-                                    g.descripcion AS nombre_genero
-                             FROM libros l
-                             INNER JOIN generos g ON l.cod_genero = g.cod_genero
-                             WHERE l.nombre LIKE @filtro
-                             ORDER BY l.nombre";
+                                            l.stock, l.precio, l.cod_genero,
+                                            g.descripcion AS nombre_genero
+                                     FROM libros l
+                                     INNER JOIN generos g ON l.cod_genero = g.cod_genero
+                                     WHERE l.nombre LIKE @filtro
+                                        OR l.ISBN   LIKE @filtro
+                                     ORDER BY l.nombre";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -110,6 +111,7 @@ namespace Gestion_Libreria.Datos
 
             return lista;
         }
+        
         public Libro ObtenerPorId(int idLibro)
         {
             Libro libro = null;

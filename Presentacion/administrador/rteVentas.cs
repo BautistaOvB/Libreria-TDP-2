@@ -66,7 +66,7 @@ namespace Gestion_Libreria.Presentacion.administrador
                 Name = "colPrecioUnitario",
                 HeaderText = "Precio Unit.",
                 DataPropertyName = "precio_unitario",
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "C2", Alignment = DataGridViewContentAlignment.MiddleRight }
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "C", Alignment = DataGridViewContentAlignment.MiddleRight }
             });
 
             dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn
@@ -102,9 +102,6 @@ namespace Gestion_Libreria.Presentacion.administrador
 
         private void PersonalizarColumnas()
         {
-            if (dgvVentas.Columns["id_venta"] != null)
-                dgvVentas.Columns["id_venta"].HeaderText = "ID";
-
             if (dgvVentas.Columns["fecha_venta"] != null)
             {
                 dgvVentas.Columns["fecha_venta"].HeaderText = "Fecha";
@@ -114,7 +111,7 @@ namespace Gestion_Libreria.Presentacion.administrador
             if (dgvVentas.Columns["total_venta"] != null)
             {
                 dgvVentas.Columns["total_venta"].HeaderText = "Total";
-                dgvVentas.Columns["total_venta"].DefaultCellStyle.Format = "C2";
+                dgvVentas.Columns["total_venta"].DefaultCellStyle.Format = "C";
             }
 
             if (dgvVentas.Columns["nombre_metodo"] != null)
@@ -126,8 +123,7 @@ namespace Gestion_Libreria.Presentacion.administrador
             if (dgvVentas.Columns["id_metodo"] != null)
                 dgvVentas.Columns["id_metodo"].Visible = false;
 
-            if (dgvVentas.Columns["id_usuario"] != null)
-                dgvVentas.Columns["id_usuario"].Visible = false;
+            
         }
 
         // ============================================================

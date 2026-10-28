@@ -16,6 +16,12 @@ namespace Gestion_Libreria.Presentacion.vendedor
             InitializeComponent();
         }
 
+        public bool MostrarBotonAgregar { get; set; } = true;
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            BtnAgregarCarrito.Visible = MostrarBotonAgregar;
+        }
         public void CargarLibro(Libro libro)
         {
             if (libro == null) return;

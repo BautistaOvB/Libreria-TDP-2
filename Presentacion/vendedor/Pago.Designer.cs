@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pago));
             this.pCabecera = new System.Windows.Forms.Panel();
             this.lCarrito = new System.Windows.Forms.Label();
             this.pDatagrid = new System.Windows.Forms.Panel();
@@ -42,7 +43,6 @@
             this.txtCvv = new System.Windows.Forms.TextBox();
             this.txtTitular = new System.Windows.Forms.TextBox();
             this.txtNtarjeta = new System.Windows.Forms.TextBox();
-            this.cmbCliente = new System.Windows.Forms.ComboBox();
             this.lCliente = new System.Windows.Forms.Label();
             this.lMetodo = new System.Windows.Forms.Label();
             this.cmbMetodo = new System.Windows.Forms.ComboBox();
@@ -52,6 +52,7 @@
             this.puntoBarratdpDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.metodospagoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.metodos_pagoTableAdapter = new Gestion_Libreria.Punto_Barra_tdpDataSet1TableAdapters.metodos_pagoTableAdapter();
+            this.txtCliente = new System.Windows.Forms.TextBox();
             this.pCabecera.SuspendLayout();
             this.pDatagrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarrito)).BeginInit();
@@ -109,6 +110,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel2.Controls.Add(this.txtCliente);
             this.panel2.Controls.Add(this.lCvv);
             this.panel2.Controls.Add(this.lTitular);
             this.panel2.Controls.Add(this.lNro);
@@ -117,7 +119,6 @@
             this.panel2.Controls.Add(this.txtCvv);
             this.panel2.Controls.Add(this.txtTitular);
             this.panel2.Controls.Add(this.txtNtarjeta);
-            this.panel2.Controls.Add(this.cmbCliente);
             this.panel2.Controls.Add(this.lCliente);
             this.panel2.Controls.Add(this.lMetodo);
             this.panel2.Controls.Add(this.cmbMetodo);
@@ -203,23 +204,15 @@
             this.txtNtarjeta.Size = new System.Drawing.Size(117, 20);
             this.txtNtarjeta.TabIndex = 4;
             // 
-            // cmbCliente
-            // 
-            this.cmbCliente.FormattingEnabled = true;
-            this.cmbCliente.Location = new System.Drawing.Point(49, 78);
-            this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new System.Drawing.Size(121, 21);
-            this.cmbCliente.TabIndex = 3;
-            // 
             // lCliente
             // 
             this.lCliente.AutoSize = true;
             this.lCliente.ForeColor = System.Drawing.Color.LightSteelBlue;
             this.lCliente.Location = new System.Drawing.Point(46, 61);
             this.lCliente.Name = "lCliente";
-            this.lCliente.Size = new System.Drawing.Size(110, 13);
+            this.lCliente.Size = new System.Drawing.Size(39, 13);
             this.lCliente.TabIndex = 2;
-            this.lCliente.Text = "Seleccione un Cliente";
+            this.lCliente.Text = "Cliente";
             // 
             // lMetodo
             // 
@@ -271,6 +264,13 @@
             // 
             this.metodos_pagoTableAdapter.ClearBeforeFill = true;
             // 
+            // txtCliente
+            // 
+            this.txtCliente.Location = new System.Drawing.Point(49, 78);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.Size = new System.Drawing.Size(152, 20);
+            this.txtCliente.TabIndex = 12;
+            // 
             // Pago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,8 +279,9 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pDatagrid);
             this.Controls.Add(this.pCabecera);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Pago";
-            this.Text = "Pago";
+            this.Text = "Pagar por Punto y Barra";
             this.Load += new System.EventHandler(this.Pago_Load);
             this.pCabecera.ResumeLayout(false);
             this.pCabecera.PerformLayout();
@@ -314,7 +315,6 @@
         private System.Windows.Forms.TextBox txtCvv;
         private System.Windows.Forms.TextBox txtTitular;
         private System.Windows.Forms.TextBox txtNtarjeta;
-        private System.Windows.Forms.ComboBox cmbCliente;
         private System.Windows.Forms.Label lCliente;
         private System.Windows.Forms.BindingSource metodospagoBindingSource1;
         private System.Windows.Forms.Label lCvv;
@@ -322,5 +322,6 @@
         private System.Windows.Forms.Label lNro;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.TextBox txtCliente;
     }
 }

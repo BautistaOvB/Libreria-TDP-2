@@ -12,6 +12,8 @@ namespace Gestion_Libreria.Presentacion
         public static string NombreUsuario { get; set; }
         public static string NombreRol { get; set; } // "Administrador", "Vendedor", etc.
         public static int IdRol { get; set; }
+        public static string Nombre { get; set; }
+        public static string Apellido { get; set; }
 
     }
 }

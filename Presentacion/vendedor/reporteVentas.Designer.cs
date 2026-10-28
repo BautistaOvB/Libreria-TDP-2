@@ -41,6 +41,7 @@
             this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
+            this.btnImprimirFactura = new System.Windows.Forms.Button();
             this.pCabecera.SuspendLayout();
             this.pLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
@@ -51,6 +52,7 @@
             // pCabecera
             // 
             this.pCabecera.BackColor = System.Drawing.Color.DarkBlue;
+            this.pCabecera.Controls.Add(this.btnImprimirFactura);
             this.pCabecera.Controls.Add(this.lblFecha);
             this.pCabecera.Controls.Add(this.lblDNI);
             this.pCabecera.Controls.Add(this.btnBuscarFecha);
@@ -171,6 +173,19 @@
             this.dgvDetalle.TabIndex = 0;
             this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellClick);
             // 
+            // btnImprimirFactura
+            // 
+            this.btnImprimirFactura.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnImprimirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnImprimirFactura.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnImprimirFactura.Location = new System.Drawing.Point(963, 76);
+            this.btnImprimirFactura.Name = "btnImprimirFactura";
+            this.btnImprimirFactura.Size = new System.Drawing.Size(75, 41);
+            this.btnImprimirFactura.TabIndex = 7;
+            this.btnImprimirFactura.Text = "Imprimir Factura";
+            this.btnImprimirFactura.UseVisualStyleBackColor = false;
+            this.btnImprimirFactura.Click += new System.EventHandler(this.btnImprimirFactura_Click);
+            // 
             // reporteVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,5 +221,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvDetalle;
         private System.Windows.Forms.DataGridView dgvVentas;
+        private System.Windows.Forms.Button btnImprimirFactura;
     }
 }

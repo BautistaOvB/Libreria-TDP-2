@@ -1,5 +1,6 @@
 ﻿using Gestion_Libreria.Datos;
 using Gestion_Libreria.Entidad;
+using Gestion_Libreria.Presentacion; 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,6 +14,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
         private List<ItemCarrito> carrito = new List<ItemCarrito>();
         private VentaDatos vtaDatos = new VentaDatos();
         private Libro libroActual;
+        private int idClienteSeleccionado = 0;
 
         public RegistroVta()
         {
@@ -28,6 +30,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
             nudCantidad.Minimum = 1;
             nudCantidad.Maximum = 1000;
             nudCantidad.Value = 1;
+            txtNombreVendedor.Text = Sesion.Nombre + " " + Sesion.Apellido;
+            txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
             // 🔑 Configurar grilla acá, ya con el panel con tamaño real
             ConfigurarGrilla();
@@ -100,6 +104,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
         {
             using (FormProductos frmProductos = new FormProductos())
             {
+                frmProductos.ModoSeleccion = true;
                 if (frmProductos.ShowDialog() == DialogResult.OK)
                 {
                     libroActual = frmProductos.ObtenerLibroSeleccionado();
@@ -119,7 +124,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
         // ============================================================
         // AGREGAR AL CARRITO
         // ============================================================
-        private void btnAgregarCarrito_Click(object sender, EventArgs e)
+        private void BtnAgregarCarrito_Click(object sender, EventArgs e)
         {
             if (libroActual == null)
             {
@@ -174,6 +179,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
             txtStock.Text = "";
             txtPrecio.Text = "";
             nudCantidad.Value = 1;
+            txtDNIcliente.Text = "";
+            txtApellidoNombre.Text = "";
         }
 
         // ============================================================
@@ -250,7 +257,17 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 return;
             }
 
-            using (Pago frmPago = new Pago(carrito))
+            if (idClienteSeleccionado == 0)
+            {
+                MessageBox.Show("Por favor, seleccioná o creá un cliente antes de continuar con el pago.",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDNIcliente.Focus(); // Ponemos el foco en el DNI para que sea más rápido
+                return;
+            }
+            string nombreCliente = txtApellidoNombre.Text; // "Apellido, Nombre"
+
+            // Si pasa ambas validaciones, abre el formulario de Pago
+            using (Pago frmPago = new Pago(carrito, idClienteSeleccionado, nombreCliente))
             {
                 if (frmPago.ShowDialog() == DialogResult.OK)
                 {
@@ -260,13 +277,64 @@ namespace Gestion_Libreria.Presentacion.vendedor
                     carrito.Clear();
                     RefrescarCarrito();
                     LimpiarCampos();
+
                 }
-            }
+
+            }  
+               
+            
         }
 
         public List<ItemCarrito> ObtenerCarrito()
         {
             return carrito;
         }
-    }
+
+        private void btnNuevoCliente_Click(object sender, EventArgs e)
+        {
+            using (addCliente frmNuevo = new addCliente())
+            {
+                frmNuevo.ModoBusqueda = false; // 🔑 Modo normal (muestra pDatos)
+
+                if (frmNuevo.ShowDialog() == DialogResult.OK)
+                {
+                    // Si guardó un cliente nuevo, podés cargarlo automáticamente en la venta
+                    Cliente cliente = frmNuevo.ClienteSeleccionado;
+                    if (cliente != null)
+                    {
+                        idClienteSeleccionado = cliente.id_cliente; 
+                        txtDNIcliente.Text = cliente.dni;
+                        txtApellidoNombre.Text = cliente.apellido + ", " + cliente.nombre;
+                    }
+                }
+            }
+        }
+
+    private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            // Creamos el formulario en modo búsqueda
+            using (addCliente frmBuscar = new addCliente())
+            {
+                frmBuscar.ModoBusqueda = true; // 🔑 Activamos el modo búsqueda (oculta pDatos)
+
+                // Mostramos el formulario como diálogo
+                if (frmBuscar.ShowDialog() == DialogResult.OK)
+                {
+                    // Recuperamos el cliente seleccionado
+                    Cliente cliente = frmBuscar.ClienteSeleccionado;
+
+                    if (cliente != null)
+                    {
+                        idClienteSeleccionado = cliente.id_cliente;
+                        // 🔑 Cargamos los datos en los TextBox de RegistroVta
+                        txtDNIcliente.Text = cliente.dni;
+                        txtApellidoNombre.Text = cliente.apellido + ", " + cliente.nombre;
+
+                        // Opcional: Guardar el ID del cliente en una variable privada para usarlo al pagar
+                        // idClienteSeleccionado = cliente.id_cliente;
+                    }
+                }
+            }
+        }
+    }    
 }

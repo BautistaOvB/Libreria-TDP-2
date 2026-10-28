@@ -1,4 +1,4 @@
-# Gestion-Libreria
+# **Gestion-Libreria**
 
 ## Especificacion de Requerimientos de Software
 Proyecto: Sistema de Gestión de Librería
@@ -10,7 +10,7 @@ Alumnos:
 •	Ovalle Bravo Bautista
 
 •	Marcos Valentin Romero Cristanchi
-
+---
 
 ### 1. Introducción
 
@@ -64,6 +64,7 @@ Fuera del alcance (Fase 1): Integración con pasarelas de pago online, tienda e-
 
 Este documento está dividido en cuatro secciones principales: la Sección 1 introduce el proyecto y sus objetivos; la Sección 2 describe la perspectiva del producto, roles y restricciones tecnológicas; la Sección 3 detalla los requisitos específicos (funcionales, no funcionales y casos de uso); y la Sección 4 incluye apéndices y diagramas complementarios.
 
+---
 
 ### 2. Descripción General
 
@@ -73,21 +74,19 @@ Este documento está dividido en cuatro secciones principales: la Sección 1 int
 El sistema es un producto autónomo de escritorio (standalone/client-server) desarrollado con la plataforma .NET (C#) sobre Windows Forms (WinForms) o WPF. Interactúa de forma directa con una base de datos relacional local o de red de área local (LAN) alojada en Microsoft SQL Server.
 
 #### 2.2 Funciones del Producto
-•	Módulo de Autenticación y Seguridad: Control de acceso mediante credenciales encriptadas y roles de usuario.
+-	Módulo de Autenticación y Seguridad: Control de acceso mediante credenciales encriptadas y roles de usuario.
 
-•	Módulo de Catálogo e Inventario: Alta, modificación, consulta y baja lógica de libros, así como actualización e historial de movimientos de stock.
+-	Módulo de Catálogo e Inventario: Alta, modificación, consulta y baja lógica de libros, así como actualización e historial de movimientos de stock.
 
-•	Módulo de Punto de Venta (POS): Búsqueda ágil de libros (por ISBN, título, autor o lectura de código de barras), armado de carrito de compras, aplicación de promociones/descuentos y registro final de la transacción.
+-	Módulo de Punto de Venta (POS): Búsqueda ágil de libros (por ISBN, título, autor o lectura de código de barras), armado de carrito de compras, aplicación de promociones/descuentos y registro final de la transacción.
 
-•	Módulo de Reportes: Visualización e impresión de estadísticas clave sobre facturación diaria/mensual, productos más vendidos y stock crítico.
+-	Módulo de Reportes: Visualización e impresión de estadísticas clave sobre facturación diaria/mensual, productos más vendidos y stock crítico.
 
 
 #### 2.3 Características de los Usuarios
-•	Administrador: Usuario con perfil avanzado. Encargado de la configuración general, gestión de usuarios, auditoría.
-
-•	Repositor / Encargado de Depósito: Usuario operativo. Responsable del ingreso de mercancía, modificación de catálogo de libros, proveedores y control físico de stock.
-
-•	Vendedor / Cajero: Usuario operativo de atención al cliente. Orientado a la agilidad operativa en caja, cobro y emisión de facturas/comprobantes.
+-Administrador: Usuario con perfil avanzado. Encargado de la configuración general, gestión de usuarios, auditoría.
+-Repositor / Encargado de Depósito: Usuario operativo. Responsable del ingreso de mercancía, modificación de catálogo de libros, proveedores y control físico de stock.
+-Vendedor / Cajero: Usuario operativo de atención al cliente. Orientado a la agilidad operativa en caja, cobro y emisión de facturas/comprobantes.
 
 
 #### 2.4 Restricciones
@@ -406,3 +405,4 @@ VENTA → ANULACION_VENTA	1:N	Una venta puede tener una o más anulaciones (hist
 7.	RF3.3 → PAGO permite múltiples registros por venta para soportar pagos mixtos.
 
 # Script para armar la base de datos:
+

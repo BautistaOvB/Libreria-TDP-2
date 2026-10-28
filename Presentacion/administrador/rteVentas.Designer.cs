@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.compraBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.punto_Barra_pruebaDataSet1 = new Gestion_Libreria.Punto_Barra_pruebaDataSet1();
-            this.punto_Barra_pruebaDataSet = new Gestion_Libreria.Punto_Barra_pruebaDataSet();
+            
             this.puntoBarrapruebaDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.compraTableAdapter = new Gestion_Libreria.Punto_Barra_pruebaDataSet1TableAdapters.CompraTableAdapter();
+            
             this.punto_Barra_tdpDataSet1 = new Gestion_Libreria.Punto_Barra_tdpDataSet1();
             this.ventasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ventasTableAdapter = new Gestion_Libreria.Punto_Barra_tdpDataSet1TableAdapters.ventasTableAdapter();
@@ -57,8 +56,7 @@
             this.lAbonado = new System.Windows.Forms.Label();
             this.txtMetodoPago = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.compraBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).BeginInit();
+            
             ((System.ComponentModel.ISupportInitialize)(this.puntoBarrapruebaDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ventasBindingSource)).BeginInit();
@@ -72,26 +70,23 @@
             // compraBindingSource
             // 
             this.compraBindingSource.DataMember = "Compra";
-            this.compraBindingSource.DataSource = this.punto_Barra_pruebaDataSet1;
+           
             // 
             // punto_Barra_pruebaDataSet1
             // 
-            this.punto_Barra_pruebaDataSet1.DataSetName = "Punto_Barra_pruebaDataSet1";
-            this.punto_Barra_pruebaDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            
             // 
             // punto_Barra_pruebaDataSet
             // 
-            this.punto_Barra_pruebaDataSet.DataSetName = "Punto_Barra_pruebaDataSet";
-            this.punto_Barra_pruebaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+           
             // 
             // puntoBarrapruebaDataSetBindingSource
             // 
-            this.puntoBarrapruebaDataSetBindingSource.DataSource = this.punto_Barra_pruebaDataSet;
-            this.puntoBarrapruebaDataSetBindingSource.Position = 0;
+            
             // 
             // compraTableAdapter
             // 
-            this.compraTableAdapter.ClearBeforeFill = true;
+           
             // 
             // punto_Barra_tdpDataSet1
             // 
@@ -311,8 +306,7 @@
             this.Text = "Punto y Barra | Ventas";
             this.Load += new System.EventHandler(this.rteVentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.compraBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).EndInit();
+            
             ((System.ComponentModel.ISupportInitialize)(this.puntoBarrapruebaDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ventasBindingSource)).EndInit();
@@ -328,10 +322,9 @@
 
         #endregion
         private System.Windows.Forms.BindingSource puntoBarrapruebaDataSetBindingSource;
-        private Punto_Barra_pruebaDataSet punto_Barra_pruebaDataSet;
-        private Punto_Barra_pruebaDataSet1 punto_Barra_pruebaDataSet1;
+        
         private System.Windows.Forms.BindingSource compraBindingSource;
-        private Punto_Barra_pruebaDataSet1TableAdapters.CompraTableAdapter compraTableAdapter;
+        
         private Punto_Barra_tdpDataSet1 punto_Barra_tdpDataSet1;
         private System.Windows.Forms.BindingSource ventasBindingSource;
         private Punto_Barra_tdpDataSet1TableAdapters.ventasTableAdapter ventasTableAdapter;
