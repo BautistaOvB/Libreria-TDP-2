@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Gestion_Libreria.Datos;
 using Gestion_Libreria.Entidad;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 namespace Gestion_Libreria.Presentacion.vendedor
 {
@@ -10,6 +12,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
     {
         private List<ItemCarrito> carrito;
         private decimal total;
+        private int idCliente;
+        private string nombreCliente;
 
         // 🔑 Para que RegistroVta sepa el ID de venta generado
         public int IdVentaGenerado { get; private set; } = 0;
@@ -17,11 +21,13 @@ namespace Gestion_Libreria.Presentacion.vendedor
         // ============================================================
         // CONSTRUCTOR: recibe el carrito
         // ============================================================
-        public Pago(List<ItemCarrito> carritoRecibido)
+        public Pago(List<ItemCarrito> carritoRecibido, int idClienteRecibido, string nombreClienteRecibido)
         {
             InitializeComponent();
 
             carrito = carritoRecibido;
+            idCliente = idClienteRecibido;
+            nombreCliente = nombreClienteRecibido;
 
             // Calculamos el total
             total = 0;
@@ -47,6 +53,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
 
             HabilitarCamposTarjeta(false);
 
+            txtCliente.Text = nombreCliente;
+            txtCliente.ReadOnly = true;
             // Mostrar total en algún label
             // lblTotal.Text = "Total: $" + total.ToString("N2");
         }
@@ -176,9 +184,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
         {
             try
             {
-                cmbCliente.Items.Clear();
-                cmbCliente.Items.Add("Consumidor Final");
-                cmbCliente.SelectedIndex = 0;
+
             }
             catch (Exception ex)
             {
@@ -232,14 +238,6 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 return;
             }
 
-            if (cmbCliente.SelectedIndex < 0)
-            {
-                MessageBox.Show("Debés seleccionar un cliente.",
-                                "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbCliente.Focus();
-                return;
-            }
-
             MetodoPago metodo = (MetodoPago)cmbMetodo.SelectedItem;
             string nombre = metodo.nombre.ToLower();
 
@@ -263,16 +261,17 @@ namespace Gestion_Libreria.Presentacion.vendedor
 
             try
             {
-                int idUsuario = 1; // ⚠️ Cambiar por el usuario logueado
+                // 🔑 USAMOS EL ID DEL USUARIO LOGUEADO
+                // (Asumo que tenés una clase estática "Sesion" que guarda esto)
+                int idUsuario = Sesion.IdUsuario;
                 int idMetodo = (int)cmbMetodo.SelectedValue;
 
                 VentaDatos datos = new VentaDatos();
 
-                // 🔑 Llamamos al nuevo método que maneja cantidades
-                IdVentaGenerado = datos.RegistrarVentaConCantidades(idUsuario, idMetodo, carrito);
+                // 🔑 Llamamos al método pasando el ID del cliente
+                IdVentaGenerado = datos.RegistrarVentaConCantidades(idUsuario, idMetodo, idCliente, carrito);
 
-                MessageBox.Show($"¡Venta #{IdVentaGenerado} registrada con éxito!\n" +
-                                $"Total: ${total:N2}",
+                MessageBox.Show($"¡Venta #{IdVentaGenerado} registrada con éxito!\nTotal: {total:C2}",
                                 "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.DialogResult = DialogResult.OK;
@@ -280,8 +279,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar venta: " + ex.Message,
-                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al registrar venta: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -292,6 +290,11 @@ namespace Gestion_Libreria.Presentacion.vendedor
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

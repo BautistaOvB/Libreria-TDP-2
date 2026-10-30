@@ -10,8 +10,9 @@ namespace Gestion_Libreria.Presentacion.vendedor
     {
         private LibroDatos libroDatos = new LibroDatos();
         private ProdDetalles detalleProducto;
-
-        // 🔑 Libro que se va a devolver a RegistroVta
+        // Propiedad para indicar si se permite agregar al carrito (modo selección)
+        public bool ModoSeleccion { get; set; } = false;
+        // Libro que se va a devolver a RegistroVta
         private Libro libroSeleccionado;
 
         public FormProductos()
@@ -26,6 +27,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
             detalleProducto.TopLevel = false;
             detalleProducto.FormBorderStyle = FormBorderStyle.None;
             detalleProducto.Dock = DockStyle.Fill;
+
+            detalleProducto.MostrarBotonAgregar = ModoSeleccion;
 
             detalleProducto.AgregarAlCarrito += Detalle_AgregarAlCarrito;
             detalleProducto.Salir += Detalle_Salir;
@@ -64,7 +67,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
             {
                 List<Libro> lista = string.IsNullOrWhiteSpace(filtro)
                     ? libroDatos.ObtenerTodos()
-                    : libroDatos.BuscarPorNombre(filtro);
+                    : libroDatos.Buscar(filtro);
 
                 dgvProductos.DataSource = null;
                 dgvProductos.DataSource = lista;
@@ -80,7 +83,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 if (dgvProductos.Columns["nombre_genero"] != null)
                     dgvProductos.Columns["nombre_genero"].HeaderText = "Género";
                 if (dgvProductos.Columns["Precio"] != null)
-                    dgvProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
+                    dgvProductos.Columns["Precio"].DefaultCellStyle.Format = "C";
             }
             catch (Exception ex)
             {

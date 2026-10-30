@@ -54,7 +54,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
 
         private void BtnRteVtaCajero_Click(object sender, EventArgs e)
         {
-            abrirFormularioEnPanel(new reporteVentas());
+            abrirFormularioEnPanel(new reporteVentas(Sesion.IdUsuario));
         }
 
         private void btnCliente_Click(object sender, EventArgs e)

@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Gestion_Libreria.Entidad
 {
-    internal class Cliente
+    public class Cliente
     {
-        public int dni { get; set; }
+        public int id_cliente { get; set; }
+        public string dni { get; set; }
         public string nombre { get; set; }
-
+        public string apellido { get; set; }
+        public string mail { get; set; }
+        public string direccion { get; set; }
+        public string numero_telefono { get; set; }
 
     }
 }

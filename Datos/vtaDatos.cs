@@ -593,5 +593,98 @@ namespace Gestion_Libreria.Datos
 
             return idVentaGenerado;
         }
+        // 🔑 Firma actualizada con el idCliente
+        public int RegistrarVentaConCantidades(int idUsuario, int idMetodo, int idCliente, List<ItemCarrito> carrito)
+        {
+            int idVentaGenerado = 0;
+
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+
+                using (SqlTransaction transaccion = conexion.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1) Validar stock y calcular total (Sin cambios)
+                        decimal total = 0;
+                        foreach (ItemCarrito item in carrito)
+                        {
+                            string queryCheck = "SELECT stock FROM libros WHERE id_libro = @idLibro";
+                            using (SqlCommand cmd = new SqlCommand(queryCheck, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
+                                object result = cmd.ExecuteScalar();
+
+                                if (result == null)
+                                    throw new Exception($"El libro '{item.Libro.Nombre}' no existe.");
+
+                                int stockActual = Convert.ToInt32(result);
+
+                                if (stockActual < item.Cantidad)
+                                    throw new Exception($"Stock insuficiente de '{item.Libro.Nombre}'. Disponible: {stockActual}, solicitado: {item.Cantidad}.");
+                            }
+
+                            total += item.Subtotal;
+                        }
+
+                        // 2) Insertar cabecera (🔑 AGREGAMOS id_cliente)
+                        string queryVenta = @"INSERT INTO ventas (fecha_venta, total_venta, id_metodo, id_usuario, id_cliente)
+                                      VALUES (GETDATE(), @total, @idMetodo, @idUsuario, @idCliente);
+                                      SELECT SCOPE_IDENTITY();";
+
+                        using (SqlCommand cmd = new SqlCommand(queryVenta, conexion, transaccion))
+                        {
+                            cmd.Parameters.AddWithValue("@total", total);
+                            cmd.Parameters.AddWithValue("@idMetodo", idMetodo);
+                            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                            cmd.Parameters.AddWithValue("@idCliente", idCliente); // 🔑 Se guarda en la BD
+
+                            idVentaGenerado = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        // 3) Insertar detalle + descontar stock (Sin cambios)
+                        foreach (ItemCarrito item in carrito)
+                        {
+                            // Insertamos el detalle
+                            string queryDetalle = @"INSERT INTO venta_detalles
+                                            (id_venta, id_libro, cantidad, precio_unitario, subtotal)
+                                            VALUES (@idVenta, @idLibro, @cantidad, @precio, @subtotal)";
+
+                            using (SqlCommand cmd = new SqlCommand(queryDetalle, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idVenta", idVentaGenerado);
+                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
+                                cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                                cmd.Parameters.AddWithValue("@precio", item.Libro.Precio);
+                                cmd.Parameters.AddWithValue("@subtotal", item.Subtotal);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // Descontamos el stock
+                            string queryStock = @"UPDATE libros
+                                          SET stock = stock - @cantidad
+                                          WHERE id_libro = @idLibro";
+
+                            using (SqlCommand cmd = new SqlCommand(queryStock, conexion, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
+                                cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaccion.Commit();
+                    }
+                    catch
+                    {
+                        transaccion.Rollback();
+                        throw; // Relanzamos para que el formulario Pago muestre el error real
+                    }
+                }
+            }
+
+            return idVentaGenerado;
+        }
     }
 }

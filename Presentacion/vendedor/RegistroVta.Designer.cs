@@ -35,8 +35,9 @@
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.btnBuscarProducto = new System.Windows.Forms.Button();
             this.pCabecera = new System.Windows.Forms.Panel();
-            this.btnAgregarAlCarrito = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnNuevoCliente = new System.Windows.Forms.Button();
+            this.BtnAgregarAlCarrito = new System.Windows.Forms.Button();
+            this.btnBuscarCliente = new System.Windows.Forms.Button();
             this.lblCantiad = new System.Windows.Forms.Label();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.lblPrecio = new System.Windows.Forms.Label();
@@ -47,10 +48,10 @@
             this.txtProducto = new System.Windows.Forms.TextBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.lblFecha = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtNombreVendedor = new System.Windows.Forms.TextBox();
             this.lblVenedor = new System.Windows.Forms.Label();
             this.lblNombreCompleto = new System.Windows.Forms.Label();
-            this.txtNyA = new System.Windows.Forms.TextBox();
+            this.txtApellidoNombre = new System.Windows.Forms.TextBox();
             this.txtDNIcliente = new System.Windows.Forms.TextBox();
             this.lblClienteDNI = new System.Windows.Forms.Label();
             this.pDgvCarrito = new System.Windows.Forms.Panel();
@@ -120,8 +121,9 @@
             // 
             // pCabecera
             // 
-            this.pCabecera.Controls.Add(this.btnAgregarAlCarrito);
-            this.pCabecera.Controls.Add(this.btnBuscar);
+            this.pCabecera.Controls.Add(this.btnNuevoCliente);
+            this.pCabecera.Controls.Add(this.BtnAgregarAlCarrito);
+            this.pCabecera.Controls.Add(this.btnBuscarCliente);
             this.pCabecera.Controls.Add(this.lblCantiad);
             this.pCabecera.Controls.Add(this.nudCantidad);
             this.pCabecera.Controls.Add(this.lblPrecio);
@@ -132,10 +134,10 @@
             this.pCabecera.Controls.Add(this.txtProducto);
             this.pCabecera.Controls.Add(this.txtFecha);
             this.pCabecera.Controls.Add(this.lblFecha);
-            this.pCabecera.Controls.Add(this.textBox2);
+            this.pCabecera.Controls.Add(this.txtNombreVendedor);
             this.pCabecera.Controls.Add(this.lblVenedor);
             this.pCabecera.Controls.Add(this.lblNombreCompleto);
-            this.pCabecera.Controls.Add(this.txtNyA);
+            this.pCabecera.Controls.Add(this.txtApellidoNombre);
             this.pCabecera.Controls.Add(this.btnBuscarProducto);
             this.pCabecera.Controls.Add(this.txtDNIcliente);
             this.pCabecera.Controls.Add(this.lblClienteDNI);
@@ -145,30 +147,44 @@
             this.pCabecera.Size = new System.Drawing.Size(938, 187);
             this.pCabecera.TabIndex = 10;
             // 
-            // btnAgregarAlCarrito
+            // btnNuevoCliente
             // 
-            this.btnAgregarAlCarrito.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnAgregarAlCarrito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarAlCarrito.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnAgregarAlCarrito.Location = new System.Drawing.Point(830, 132);
-            this.btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
-            this.btnAgregarAlCarrito.Size = new System.Drawing.Size(75, 43);
-            this.btnAgregarAlCarrito.TabIndex = 24;
-            this.btnAgregarAlCarrito.Text = "Agregar al Carrito";
-            this.btnAgregarAlCarrito.UseVisualStyleBackColor = false;
-            this.btnAgregarAlCarrito.Click += new System.EventHandler(this.btnAgregarCarrito_Click);
+            this.btnNuevoCliente.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnNuevoCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoCliente.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnNuevoCliente.Location = new System.Drawing.Point(331, 43);
+            this.btnNuevoCliente.Name = "btnNuevoCliente";
+            this.btnNuevoCliente.Size = new System.Drawing.Size(75, 38);
+            this.btnNuevoCliente.TabIndex = 25;
+            this.btnNuevoCliente.Text = "Nuevo Cliente";
+            this.btnNuevoCliente.UseVisualStyleBackColor = false;
+            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
             // 
-            // btnBuscar
+            // BtnAgregarAlCarrito
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBuscar.Location = new System.Drawing.Point(242, 43);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 38);
-            this.btnBuscar.TabIndex = 23;
-            this.btnBuscar.Text = "Buscar Cliente";
-            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.BtnAgregarAlCarrito.BackColor = System.Drawing.Color.SteelBlue;
+            this.BtnAgregarAlCarrito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAgregarAlCarrito.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAgregarAlCarrito.Location = new System.Drawing.Point(830, 132);
+            this.BtnAgregarAlCarrito.Name = "BtnAgregarAlCarrito";
+            this.BtnAgregarAlCarrito.Size = new System.Drawing.Size(75, 43);
+            this.BtnAgregarAlCarrito.TabIndex = 24;
+            this.BtnAgregarAlCarrito.Text = "Agregar al Carrito";
+            this.BtnAgregarAlCarrito.UseVisualStyleBackColor = false;
+            this.BtnAgregarAlCarrito.Click += new System.EventHandler(this.BtnAgregarCarrito_Click);
+            // 
+            // btnBuscarCliente
+            // 
+            this.btnBuscarCliente.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarCliente.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBuscarCliente.Location = new System.Drawing.Point(242, 43);
+            this.btnBuscarCliente.Name = "btnBuscarCliente";
+            this.btnBuscarCliente.Size = new System.Drawing.Size(75, 38);
+            this.btnBuscarCliente.TabIndex = 23;
+            this.btnBuscarCliente.Text = "Buscar Cliente";
+            this.btnBuscarCliente.UseVisualStyleBackColor = false;
+            this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
             // 
             // lblCantiad
             // 
@@ -243,7 +259,7 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(460, 10);
+            this.txtFecha.Location = new System.Drawing.Point(564, 10);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.ReadOnly = true;
             this.txtFecha.Size = new System.Drawing.Size(126, 20);
@@ -253,19 +269,19 @@
             // 
             this.lblFecha.AutoSize = true;
             this.lblFecha.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblFecha.Location = new System.Drawing.Point(374, 13);
+            this.lblFecha.Location = new System.Drawing.Point(475, 13);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(83, 13);
             this.lblFecha.TabIndex = 13;
             this.lblFecha.Text = "Fecha de Venta";
             // 
-            // textBox2
+            // txtNombreVendedor
             // 
-            this.textBox2.Location = new System.Drawing.Point(145, 10);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(134, 20);
-            this.textBox2.TabIndex = 12;
+            this.txtNombreVendedor.Location = new System.Drawing.Point(145, 10);
+            this.txtNombreVendedor.Name = "txtNombreVendedor";
+            this.txtNombreVendedor.ReadOnly = true;
+            this.txtNombreVendedor.Size = new System.Drawing.Size(134, 20);
+            this.txtNombreVendedor.TabIndex = 12;
             // 
             // lblVenedor
             // 
@@ -281,23 +297,25 @@
             // 
             this.lblNombreCompleto.AutoSize = true;
             this.lblNombreCompleto.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblNombreCompleto.Location = new System.Drawing.Point(362, 53);
+            this.lblNombreCompleto.Location = new System.Drawing.Point(466, 49);
             this.lblNombreCompleto.Name = "lblNombreCompleto";
             this.lblNombreCompleto.Size = new System.Drawing.Size(92, 13);
             this.lblNombreCompleto.TabIndex = 10;
             this.lblNombreCompleto.Text = "Apellido y Nombre";
             // 
-            // txtNyA
+            // txtApellidoNombre
             // 
-            this.txtNyA.Location = new System.Drawing.Point(460, 50);
-            this.txtNyA.Name = "txtNyA";
-            this.txtNyA.Size = new System.Drawing.Size(138, 20);
-            this.txtNyA.TabIndex = 9;
+            this.txtApellidoNombre.Location = new System.Drawing.Point(564, 46);
+            this.txtApellidoNombre.Name = "txtApellidoNombre";
+            this.txtApellidoNombre.ReadOnly = true;
+            this.txtApellidoNombre.Size = new System.Drawing.Size(138, 20);
+            this.txtApellidoNombre.TabIndex = 9;
             // 
             // txtDNIcliente
             // 
             this.txtDNIcliente.Location = new System.Drawing.Point(107, 53);
             this.txtDNIcliente.Name = "txtDNIcliente";
+            this.txtDNIcliente.ReadOnly = true;
             this.txtDNIcliente.Size = new System.Drawing.Size(129, 20);
             this.txtDNIcliente.TabIndex = 7;
             // 
@@ -365,10 +383,10 @@
         private System.Windows.Forms.Panel pResumen;
         private System.Windows.Forms.TextBox txtFecha;
         private System.Windows.Forms.Label lblFecha;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtNombreVendedor;
         private System.Windows.Forms.Label lblVenedor;
         private System.Windows.Forms.Label lblNombreCompleto;
-        private System.Windows.Forms.TextBox txtNyA;
+        private System.Windows.Forms.TextBox txtApellidoNombre;
         private System.Windows.Forms.TextBox txtDNIcliente;
         private System.Windows.Forms.Label lblClienteDNI;
         private System.Windows.Forms.Label lblCantiad;
@@ -379,7 +397,8 @@
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.TextBox txtProducto;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button btnAgregarAlCarrito;
+        private System.Windows.Forms.Button btnBuscarCliente;
+        private System.Windows.Forms.Button BtnAgregarAlCarrito;
+        private System.Windows.Forms.Button btnNuevoCliente;
     }
 }

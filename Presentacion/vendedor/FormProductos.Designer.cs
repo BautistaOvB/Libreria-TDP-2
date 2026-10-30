@@ -31,15 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.librosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.punto_Barra_pruebaDataSet = new Gestion_Libreria.Punto_Barra_pruebaDataSet();
-            this.librosTableAdapter = new Gestion_Libreria.Punto_Barra_pruebaDataSetTableAdapters.LibrosTableAdapter();
+            
             this.btnBuscar = new System.Windows.Forms.Button();
             this.pCabecera = new System.Windows.Forms.Panel();
             this.pFondo = new System.Windows.Forms.Panel();
-            this.pDetalle = new System.Windows.Forms.Panel();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.pDetalle = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).BeginInit();
+            
             this.pFondo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -54,16 +53,15 @@
             // librosBindingSource
             // 
             this.librosBindingSource.DataMember = "Libros";
-            this.librosBindingSource.DataSource = this.punto_Barra_pruebaDataSet;
+            
             // 
             // punto_Barra_pruebaDataSet
             // 
-            this.punto_Barra_pruebaDataSet.DataSetName = "Punto_Barra_pruebaDataSet";
-            this.punto_Barra_pruebaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            
             // 
             // librosTableAdapter
             // 
-            this.librosTableAdapter.ClearBeforeFill = true;
+           
             // 
             // btnBuscar
             // 
@@ -96,24 +94,27 @@
             this.pFondo.Size = new System.Drawing.Size(867, 431);
             this.pFondo.TabIndex = 9;
             // 
-            // pDetalle
-            // 
-            this.pDetalle.BackColor = System.Drawing.Color.SteelBlue;
-            this.pDetalle.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pDetalle.Location = new System.Drawing.Point(558, 78);
-            this.pDetalle.Name = "pDetalle";
-            this.pDetalle.Size = new System.Drawing.Size(309, 431);
-            this.pDetalle.TabIndex = 0;
-            // 
             // dgvProductos
             // 
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductos.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvProductos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.Location = new System.Drawing.Point(0, 0);
             this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
             this.dgvProductos.Size = new System.Drawing.Size(867, 431);
             this.dgvProductos.TabIndex = 0;
+            // 
+            // pDetalle
+            // 
+            this.pDetalle.BackColor = System.Drawing.Color.SteelBlue;
+            this.pDetalle.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pDetalle.Location = new System.Drawing.Point(572, 78);
+            this.pDetalle.Name = "pDetalle";
+            this.pDetalle.Size = new System.Drawing.Size(295, 431);
+            this.pDetalle.TabIndex = 0;
             // 
             // FormProductos
             // 
@@ -130,7 +131,7 @@
             this.Text = "Punto y Barra | Buscar Productos";
             this.Load += new System.EventHandler(this.FormProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_pruebaDataSet)).EndInit();
+            
             this.pFondo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
@@ -140,9 +141,9 @@
 
         #endregion
         private System.Windows.Forms.TextBox txtBuscar;
-        private Punto_Barra_pruebaDataSet punto_Barra_pruebaDataSet;
+        
         private System.Windows.Forms.BindingSource librosBindingSource;
-        private Punto_Barra_pruebaDataSetTableAdapters.LibrosTableAdapter librosTableAdapter;
+        
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Panel pCabecera;
         private System.Windows.Forms.Panel pFondo;
