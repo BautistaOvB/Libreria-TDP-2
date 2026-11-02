@@ -39,6 +39,9 @@ namespace Gestion_Libreria.Presentacion.vendedor
             this.cmbMetodo.SelectedIndexChanged += cmbMetodo_SelectedIndexChanged;
             this.btnConfirmar.Click += btnConfirmar_Click;
             this.btnCancelar.Click += btnCancelar_Click;
+
+            this.txtNtarjeta.KeyPress += txtNtarjeta_KeyPress;
+            this.txtCvv.KeyPress += txtCvv_KeyPress;
         }
 
         // ============================================================
@@ -292,7 +295,37 @@ namespace Gestion_Libreria.Presentacion.vendedor
             this.Close();
         }
 
+
+        // ============================================================
+        // VALIDACIÓN: Solo números en N° Tarjeta
+        // ============================================================
+        private void txtNtarjeta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitimos solo dígitos y teclas de control (Backspace, Delete, flechas, etc.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla presionada
+            }
+        }
+
+        // ============================================================
+        // VALIDACIÓN: Solo números en CVV
+        // ============================================================
+        private void txtCvv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitimos solo dígitos y teclas de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla presionada
+            }
+        }
+
         private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNtarjeta_TextChanged(object sender, EventArgs e)
         {
 
         }

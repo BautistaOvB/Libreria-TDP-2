@@ -31,14 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.librosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            
             this.btnBuscar = new System.Windows.Forms.Button();
             this.pCabecera = new System.Windows.Forms.Panel();
             this.pFondo = new System.Windows.Forms.Panel();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.pDetalle = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).BeginInit();
-            
             this.pFondo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -53,15 +51,6 @@
             // librosBindingSource
             // 
             this.librosBindingSource.DataMember = "Libros";
-            
-            // 
-            // punto_Barra_pruebaDataSet
-            // 
-            
-            // 
-            // librosTableAdapter
-            // 
-           
             // 
             // btnBuscar
             // 
@@ -82,7 +71,7 @@
             this.pCabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.pCabecera.Location = new System.Drawing.Point(0, 0);
             this.pCabecera.Name = "pCabecera";
-            this.pCabecera.Size = new System.Drawing.Size(867, 78);
+            this.pCabecera.Size = new System.Drawing.Size(1020, 78);
             this.pCabecera.TabIndex = 6;
             // 
             // pFondo
@@ -91,7 +80,7 @@
             this.pFondo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pFondo.Location = new System.Drawing.Point(0, 78);
             this.pFondo.Name = "pFondo";
-            this.pFondo.Size = new System.Drawing.Size(867, 431);
+            this.pFondo.Size = new System.Drawing.Size(1020, 431);
             this.pFondo.TabIndex = 9;
             // 
             // dgvProductos
@@ -104,14 +93,14 @@
             this.dgvProductos.Location = new System.Drawing.Point(0, 0);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.Size = new System.Drawing.Size(867, 431);
+            this.dgvProductos.Size = new System.Drawing.Size(1020, 431);
             this.dgvProductos.TabIndex = 0;
             // 
             // pDetalle
             // 
             this.pDetalle.BackColor = System.Drawing.Color.SteelBlue;
             this.pDetalle.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pDetalle.Location = new System.Drawing.Point(572, 78);
+            this.pDetalle.Location = new System.Drawing.Point(725, 78);
             this.pDetalle.Name = "pDetalle";
             this.pDetalle.Size = new System.Drawing.Size(295, 431);
             this.pDetalle.TabIndex = 0;
@@ -121,7 +110,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(867, 509);
+            this.ClientSize = new System.Drawing.Size(1020, 509);
             this.Controls.Add(this.pDetalle);
             this.Controls.Add(this.pFondo);
             this.Controls.Add(this.btnBuscar);
@@ -131,7 +120,6 @@
             this.Text = "Punto y Barra | Buscar Productos";
             this.Load += new System.EventHandler(this.FormProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).EndInit();
-            
             this.pFondo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
