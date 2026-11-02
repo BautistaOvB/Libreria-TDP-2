@@ -84,6 +84,10 @@ namespace Gestion_Libreria.Presentacion.vendedor
                     dgvProductos.Columns["nombre_genero"].HeaderText = "Género";
                 if (dgvProductos.Columns["Precio"] != null)
                     dgvProductos.Columns["Precio"].DefaultCellStyle.Format = "C";
+                if(dgvProductos.Columns["Proveedores"] != null)
+                    dgvProductos.Columns["Proveedores"].HeaderText = "Proveedores";
+                if(dgvProductos.Columns["Autor"] != null)
+                    dgvProductos.Columns["Autor"].HeaderText = "Autor";
             }
             catch (Exception ex)
             {

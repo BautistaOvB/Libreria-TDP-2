@@ -35,6 +35,7 @@
             this.pDatagrid = new System.Windows.Forms.Panel();
             this.dgvCarrito = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtCliente = new System.Windows.Forms.TextBox();
             this.lCvv = new System.Windows.Forms.Label();
             this.lTitular = new System.Windows.Forms.Label();
             this.lNro = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@
             this.puntoBarratdpDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.metodospagoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.metodos_pagoTableAdapter = new Gestion_Libreria.Punto_Barra_tdpDataSet1TableAdapters.metodos_pagoTableAdapter();
-            this.txtCliente = new System.Windows.Forms.TextBox();
             this.pCabecera.SuspendLayout();
             this.pDatagrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarrito)).BeginInit();
@@ -129,6 +129,13 @@
             this.panel2.Size = new System.Drawing.Size(497, 160);
             this.panel2.TabIndex = 2;
             // 
+            // txtCliente
+            // 
+            this.txtCliente.Location = new System.Drawing.Point(49, 78);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.Size = new System.Drawing.Size(152, 20);
+            this.txtCliente.TabIndex = 12;
+            // 
             // lCvv
             // 
             this.lCvv.AutoSize = true;
@@ -203,6 +210,7 @@
             this.txtNtarjeta.Name = "txtNtarjeta";
             this.txtNtarjeta.Size = new System.Drawing.Size(117, 20);
             this.txtNtarjeta.TabIndex = 4;
+            this.txtNtarjeta.TextChanged += new System.EventHandler(this.txtNtarjeta_TextChanged);
             // 
             // lCliente
             // 
@@ -263,13 +271,6 @@
             // metodos_pagoTableAdapter
             // 
             this.metodos_pagoTableAdapter.ClearBeforeFill = true;
-            // 
-            // txtCliente
-            // 
-            this.txtCliente.Location = new System.Drawing.Point(49, 78);
-            this.txtCliente.Name = "txtCliente";
-            this.txtCliente.Size = new System.Drawing.Size(152, 20);
-            this.txtCliente.TabIndex = 12;
             // 
             // Pago
             // 

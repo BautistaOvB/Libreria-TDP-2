@@ -21,19 +21,31 @@ namespace Gestion_Libreria.Presentacion.administrador
 
         private void BGuardar_Click(object sender, EventArgs e)
         {
-            // 1. Validar que los campos de texto no estén vacíos
+            // 1. Validar que TODOS los campos de texto no estén vacíos (incluyendo los que faltaban)
             if (string.IsNullOrWhiteSpace(TBnombre.Text) ||
                 string.IsNullOrWhiteSpace(TBapellido.Text) ||
                 string.IsNullOrWhiteSpace(TBmail.Text) ||
                 string.IsNullOrWhiteSpace(TBpass.Text) ||
-                string.IsNullOrWhiteSpace(TBusername.Text))
+                string.IsNullOrWhiteSpace(TBusername.Text) ||
+                string.IsNullOrWhiteSpace(TBDni.Text) ||      // <--- Agregado
+                string.IsNullOrWhiteSpace(TBtelefono.Text) || // <--- Agregado (asumiendo nombre TBtelefono)
+                string.IsNullOrWhiteSpace(TBdireccion.Text))  // <--- Agregado (asumiendo nombre TBdireccion)
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Advertencia",
+                MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Advertencia",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 2. Validar el formato del email (debe tener @ y .)
+            // 2. Validar que el DNI tenga la longitud correcta (ejemplo: 8 dígitos)
+            if (TBDni.Text.Length < 7 || TBDni.Text.Length > 8)
+            {
+                MessageBox.Show("El DNI debe tener entre 7 y 8 números.", "Advertencia",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBDni.Focus();
+                return;
+            }
+
+            // 3. Validar el formato del email
             if (!EsEmailValido(TBmail.Text))
             {
                 MessageBox.Show("Ingrese un email válido (debe contener '@' y '.').",
@@ -42,7 +54,7 @@ namespace Gestion_Libreria.Presentacion.administrador
                 return;
             }
 
-            // 3. Validar que la contraseña tenga al menos 8 caracteres
+            // 4. Validar que la contraseña tenga al menos 8 caracteres
             if (TBpass.Text.Length < 8)
             {
                 MessageBox.Show("La contraseña debe tener al menos 8 caracteres.",
@@ -51,7 +63,7 @@ namespace Gestion_Libreria.Presentacion.administrador
                 return;
             }
 
-            // 4. Determinar el ID del Rol según el RadioButton seleccionado
+            // 5. Determinar el ID del Rol
             int idRolSeleccionado = 0;
 
             if (RBadmin.Checked)
@@ -67,21 +79,28 @@ namespace Gestion_Libreria.Presentacion.administrador
                 return;
             }
 
-            // 5. Crear el objeto Usuario
+            // 6. Crear el objeto Usuario
+            // NOTA: Asegúrate de que tu clase 'Usuario' tenga las propiedades para DNI, Telefono y Direccion.
+            // Si tu base de datos no tiene estos campos, deberías agregarlos.
             Usuario nuevoUser = new Usuario
             {
                 nombre = TBnombre.Text.Trim(),
                 apellido = TBapellido.Text.Trim(),
                 mail = TBmail.Text.Trim(),
-                password_hash = TBpass.Text, // ⚠️ en producción: encriptar
+                password_hash = TBpass.Text,
                 username = TBusername.Text.Trim(),
-                id_rol = idRolSeleccionado
+                id_rol = idRolSeleccionado,
+                // Descomenta y asigna estas líneas si tu entidad Usuario las tiene:
+                // dni = TBDni.Text.Trim(),
+                // telefono = TBtelefono.Text.Trim(),
+                // direccion = TBdireccion.Text.Trim()
             };
 
-            // 6. Guardar
+            // 7. Guardar
             try
             {
                 UsuarioDatos datos = new UsuarioDatos();
+                // Aquí asumo que tu método Agregar recibe el objeto y lo inserta.
                 bool exito = datos.Agregar(nuevoUser);
 
                 if (exito)
@@ -89,11 +108,15 @@ namespace Gestion_Libreria.Presentacion.administrador
                     MessageBox.Show("Usuario guardado exitosamente.", "Éxito",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    // Limpiar campos
                     TBnombre.Clear();
                     TBapellido.Clear();
                     TBmail.Clear();
                     TBpass.Clear();
                     TBusername.Clear();
+                    TBDni.Clear();       // <--- Limpiar
+                    TBtelefono.Clear();  // <--- Limpiar
+                    TBdireccion.Clear(); // <--- Limpiar
 
                     RBadmin.Checked = false;
                     RBvendedor.Checked = false;
@@ -109,6 +132,16 @@ namespace Gestion_Libreria.Presentacion.administrador
             {
                 MessageBox.Show("Error al guardar: " + ex.Message, "Error Crítico",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void TBDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo dígitos (0-9) y la tecla Backspace (para borrar)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+                MessageBox.Show("Solo se permiten números en el DNI.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -133,7 +166,16 @@ namespace Gestion_Libreria.Presentacion.administrador
 
             return true;
         }
-       
+
+        private void addUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lTelefono_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
