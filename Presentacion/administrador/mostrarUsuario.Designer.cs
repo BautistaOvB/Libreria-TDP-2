@@ -46,8 +46,8 @@
             this.rolesTableAdapter = new Gestion_Libreria.Punto_Barra_tdpDataSet2TableAdapters.rolesTableAdapter();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.txtDNI = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lDNI = new System.Windows.Forms.Label();
+            this.txtDNI = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.lDireccion = new System.Windows.Forms.Label();
@@ -193,24 +193,24 @@
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // lDNI
+            // 
+            this.lDNI.AutoSize = true;
+            this.lDNI.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lDNI.Location = new System.Drawing.Point(27, 283);
+            this.lDNI.Name = "lDNI";
+            this.lDNI.Size = new System.Drawing.Size(26, 13);
+            this.lDNI.TabIndex = 10;
+            this.lDNI.Text = "DNI";
+            // 
             // txtDNI
             // 
-            this.txtDNI.AutoSize = true;
-            this.txtDNI.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.txtDNI.Location = new System.Drawing.Point(27, 283);
+            this.txtDNI.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.txtDNI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDNI.Location = new System.Drawing.Point(27, 300);
             this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(26, 13);
-            this.txtDNI.TabIndex = 10;
-            this.txtDNI.Text = "DNI";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(27, 300);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 11;
+            this.txtDNI.Size = new System.Drawing.Size(121, 20);
+            this.txtDNI.TabIndex = 11;
             // 
             // btnCancelar
             // 
@@ -273,8 +273,8 @@
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.lDireccion);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtDNI);
+            this.Controls.Add(this.lDNI);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.cmbRol);
@@ -316,8 +316,8 @@
         private Punto_Barra_tdpDataSet2TableAdapters.rolesTableAdapter rolesTableAdapter;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Label txtDNI;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lDNI;
+        private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label lDireccion;

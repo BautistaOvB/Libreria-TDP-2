@@ -12,6 +12,7 @@ namespace Gestion_Libreria.Presentacion.administrador
         private List<Usuario> listaUsuarios;
         private List<Usuario> usuariosMostrados; // Lista actual visible (con filtro aplicado)
         private Form formularioActivo = null;
+        
         public VerUsuarios()
         {
             InitializeComponent();
@@ -43,6 +44,8 @@ namespace Gestion_Libreria.Presentacion.administrador
 
         private void PersonalizarColumnas()
         {
+            // Ajusta el ancho de todas las columnas para que entren en el espacio disponible
+            dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // Ocultar columnas que no queremos mostrar
             if (dgvUsuarios.Columns["id_usuario"] != null)
                 dgvUsuarios.Columns["id_usuario"].Visible = false;
@@ -69,6 +72,19 @@ namespace Gestion_Libreria.Presentacion.administrador
             // ⚠️ El nombre de la columna auto-generada es "nombre_rol", NO "colRol"
             if (dgvUsuarios.Columns["nombre_rol"] != null)
                 dgvUsuarios.Columns["nombre_rol"].HeaderText = "Rol";
+
+            if (dgvUsuarios.Columns["dni"] != null)
+            {
+                dgvUsuarios.Columns["dni"].HeaderText = "DNI";
+                dgvUsuarios.Columns["dni"].Visible = true; // Aseguramos que se vea
+            }
+
+            if (dgvUsuarios.Columns["direccion"] != null)
+                dgvUsuarios.Columns["direccion"].HeaderText = "Dirección";
+
+            if (dgvUsuarios.Columns["numero_telefono"] != null)
+                dgvUsuarios.Columns["numero_telefono"].HeaderText = "Teléfono";
+
         }
 
         private void txtBuscar_TextChanged_1(object sender, EventArgs e)
@@ -118,6 +134,11 @@ namespace Gestion_Libreria.Presentacion.administrador
                 formularioActivo.Close();
 
             formularioActivo = formHijo;
+
+            if (formHijo is mostrarUsuario formMostrar)
+            {
+                formMostrar.UsuarioActualizado += (s, e) => CargarUsuarios();
+            }
 
             formHijo.TopLevel = false;
             formHijo.FormBorderStyle = FormBorderStyle.None;

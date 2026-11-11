@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProductos));
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.librosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -116,6 +117,7 @@
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.pCabecera);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormProductos";
             this.Text = "Punto y Barra | Buscar Productos";
             this.Load += new System.EventHandler(this.FormProductos_Load);

@@ -23,13 +23,15 @@ namespace Gestion_Libreria.Datos
                     conexion.Open();
 
                     string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
-                                            v.id_metodo, v.id_usuario,
-                                            m.nombre   AS nombre_metodo,
-                                            u.nombre + ' ' + u.apellido AS nombre_usuario
-                                     FROM ventas v
-                                     INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
-                                     INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
-                                     ORDER BY v.fecha_venta DESC";
+                        v.id_metodo, v.id_usuario,
+                        m.nombre   AS nombre_metodo,
+                        u.nombre + ' ' + u.apellido AS nombre_usuario,
+                        c.nombre + ' ' + c.apellido AS nombre_cliente 
+                 FROM ventas v
+                 INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                 INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                 LEFT JOIN clientes c      ON v.id_cliente = c.id_cliente 
+                 ORDER BY v.fecha_venta DESC";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -45,7 +47,9 @@ namespace Gestion_Libreria.Datos
                                     id_metodo = Convert.ToInt32(reader["id_metodo"]),
                                     id_usuario = Convert.ToInt32(reader["id_usuario"]),
                                     nombre_metodo = reader["nombre_metodo"].ToString(),
-                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                    nombre_usuario = reader["nombre_usuario"].ToString(),
+                                    nombre_cliente = reader["nombre_cliente"] == DBNull.Value ? "Consumidor Final" : reader["nombre_cliente"].ToString() // 👈 AGREGAMOS
+
                                 });
                             }
                         }
@@ -77,7 +81,6 @@ namespace Gestion_Libreria.Datos
                                             v.id_metodo, v.id_usuario,
                                             m.nombre   AS nombre_metodo,
                                             u.nombre + ' ' + u.apellido AS nombre_usuario
-                                     FROM ventas v
                                      INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
                                      INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
                                      WHERE v.id_venta = @id";
@@ -685,6 +688,110 @@ namespace Gestion_Libreria.Datos
             }
 
             return idVentaGenerado;
+        }
+
+        /* Aca arrancan los metodos para los graficos*/
+
+        public List<VentaPorVendedor> ObtenerVentasPorVendedor()
+        {
+            List<VentaPorVendedor> lista = new List<VentaPorVendedor>();
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+                string query = @"
+            SELECT u.username AS Vendedor, SUM(v.total_venta) AS Total
+            FROM ventas v
+            INNER JOIN usuarios u ON v.id_usuario = u.id_usuario
+            GROUP BY u.username
+            ORDER BY Total DESC";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new VentaPorVendedor
+                        {
+                            NombreVendedor = reader["Vendedor"].ToString(),
+                            TotalVendido = Convert.ToDecimal(reader["Total"])
+                        });
+                    }
+                }
+            }
+            return lista;
+        }
+
+        // 2. Total vendido por categoría
+        public List<VentaPorCategoria> ObtenerVentasPorCategoria()
+        {
+            List<VentaPorCategoria> lista = new List<VentaPorCategoria>();
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+                // Asumiendo que en venta_detalles tenés el id_libro y en libros el cod_genero
+                string query = @"
+            SELECT g.descripcion AS Categoria, SUM(vd.subtotal) AS Total
+            FROM venta_detalles vd
+            INNER JOIN libros l ON vd.id_libro = l.id_libro
+            INNER JOIN generos g ON l.cod_genero = g.cod_genero
+            GROUP BY g.descripcion
+            ORDER BY Total DESC";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new VentaPorCategoria
+                        {
+                            Categoria = reader["Categoria"].ToString(),
+                            TotalVendido = Convert.ToDecimal(reader["Total"])
+                        });
+                    }
+                }
+            }
+            return lista;
+        }
+
+        // 3. Producto más vendido por categoría
+        public List<ProductoMasVendido> ObtenerProductosMasVendidosPorCategoria()
+        {
+            List<ProductoMasVendido> lista = new List<ProductoMasVendido>();
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+                // Usamos ROW_NUMBER() para rankear los libros dentro de cada categoría y quedarnos con el N°1
+                string query = @"
+            WITH RankedBooks AS (
+                SELECT g.descripcion AS Categoria, 
+                       l.nombre AS Libro, 
+                       SUM(vd.cantidad) AS CantidadVendida,
+                       ROW_NUMBER() OVER (PARTITION BY g.cod_genero ORDER BY SUM(vd.cantidad) DESC) AS RowNum
+                FROM venta_detalles vd
+                INNER JOIN libros l ON vd.id_libro = l.id_libro
+                INNER JOIN generos g ON l.cod_genero = g.cod_genero
+                GROUP BY g.descripcion, g.cod_genero, l.nombre
+            )
+            SELECT Categoria, Libro, CantidadVendida
+            FROM RankedBooks
+            WHERE RowNum = 1
+            ORDER BY Categoria";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new ProductoMasVendido
+                        {
+                            Categoria = reader["Categoria"].ToString(),
+                            NombreLibro = reader["Libro"].ToString(),
+                            CantidadVendida = Convert.ToInt32(reader["CantidadVendida"])
+                        });
+                    }
+                }
+            }
+            return lista;
         }
     }
 }

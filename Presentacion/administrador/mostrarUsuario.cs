@@ -10,6 +10,7 @@ namespace Gestion_Libreria.Presentacion.administrador
     {
         private int idUsuario;
         private Usuario usuarioActual;
+        public event EventHandler UsuarioActualizado;
 
         // Constructor que recibe el ID desde VerUsuarios
         public mostrarUsuario(int id)
@@ -64,6 +65,9 @@ namespace Gestion_Libreria.Presentacion.administrador
                     txtEmail.Text = usuarioActual.mail;
                     txtUsername.Text = usuarioActual.username;
                     cmbRol.SelectedValue = usuarioActual.id_rol;
+                    txtDNI.Text = usuarioActual.dni.ToString();
+                    txtTelefono.Text = usuarioActual.numero_telefono ?? "";
+                    txtDireccion.Text = usuarioActual.direccion ?? "";
 
                     this.Text = "Usuario: " + usuarioActual.username;
                 }
@@ -89,6 +93,9 @@ namespace Gestion_Libreria.Presentacion.administrador
             txtEmail.ReadOnly = true;
             txtUsername.ReadOnly = true;
             cmbRol.Enabled = false;
+            txtDNI.ReadOnly = true;
+            txtTelefono.ReadOnly = true;
+            txtDireccion.ReadOnly = true;
 
             btnGuardar.Enabled = false;
             btnEditar.Enabled = true;
@@ -101,6 +108,9 @@ namespace Gestion_Libreria.Presentacion.administrador
             txtEmail.ReadOnly = false;
             txtUsername.ReadOnly = false;
             cmbRol.Enabled = true;
+            txtDNI.ReadOnly = false;
+            txtTelefono.ReadOnly = false;
+            txtDireccion.ReadOnly = false;
 
             btnGuardar.Enabled = true;
             btnEditar.Enabled = false;
@@ -124,6 +134,15 @@ namespace Gestion_Libreria.Presentacion.administrador
                 cmbRol.SelectedValue == null)
             {
                 MessageBox.Show("Complete todos los campos.", "Aviso",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // DNI: validar que sea numérico (solo validar, no asignar aún)
+            int dni;
+            if (!int.TryParse(txtDNI.Text.Trim(), out dni) || dni <= 0)
+            {
+                MessageBox.Show("El DNI debe ser un número válido.", "Aviso",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -156,6 +175,11 @@ namespace Gestion_Libreria.Presentacion.administrador
                 usuarioActual.username = txtUsername.Text.Trim();
                 usuarioActual.id_rol = Convert.ToInt32(cmbRol.SelectedValue);
 
+                // 👇 nuevos campos, asignados recién acá
+                usuarioActual.dni = dni;
+                usuarioActual.numero_telefono = txtTelefono.Text.Trim();
+                usuarioActual.direccion = txtDireccion.Text.Trim();
+
                 // Guardar en BD
                 UsuarioDatos datos = new UsuarioDatos();
                 bool exito = datos.Actualizar(usuarioActual);
@@ -165,6 +189,9 @@ namespace Gestion_Libreria.Presentacion.administrador
                     MessageBox.Show("Usuario actualizado correctamente.", "Éxito",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BloquearCampos();
+                    this.DialogResult = DialogResult.OK;
+                    UsuarioActualizado?.Invoke(this, EventArgs.Empty);
+                    this.Close(); // Opcional: cerrar el form de edición para volver a la grilla
                 }
                 else
                 {
@@ -185,9 +212,6 @@ namespace Gestion_Libreria.Presentacion.administrador
             this.Close();
         }
 
-        private void btnEditar_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -161,6 +161,7 @@
       <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -173,12 +174,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\clienteDatos.cs" />
+    <Compile Include="Datos\CompraDatos.cs" />
     <Compile Include="Datos\LibroDatos.cs" />
     <Compile Include="Datos\proveedorDatos.cs" />
     <Compile Include="Datos\UsuarioDatos.cs" />
     <Compile Include="Datos\vtaDatos.cs" />
     <Compile Include="Entidad\Autor.cs" />
     <Compile Include="Entidad\Cliente.cs" />
+    <Compile Include="Entidad\Compra.cs" />
+    <Compile Include="Entidad\CompraDetalle.cs" />
+    <Compile Include="Entidad\DatosGraficos.cs" />
     <Compile Include="Entidad\generos.cs" />
     <Compile Include="Entidad\itemCarrito.cs" />
     <Compile Include="Entidad\Libro.cs" />
@@ -212,6 +217,18 @@
     <Compile Include="Presentacion\administrador\DetalleVenta.Designer.cs">
       <DependentUpon>DetalleVenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\administrador\guardarCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\administrador\guardarCompra.Designer.cs">
+      <DependentUpon>guardarCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\administrador\rteEstadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\administrador\rteEstadisticas.Designer.cs">
+      <DependentUpon>rteEstadisticas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\administrador\rteInventario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,11 +259,11 @@
     <Compile Include="Presentacion\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\repositor\AddProd.cs">
+    <Compile Include="Presentacion\repositor\AddLibro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\repositor\AddProd.Designer.cs">
-      <DependentUpon>AddProd.cs</DependentUpon>
+    <Compile Include="Presentacion\repositor\AddLibro.Designer.cs">
+      <DependentUpon>AddLibro.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\repositor\AddProveedor.cs">
       <SubType>Form</SubType>
@@ -356,6 +373,12 @@
     <EmbeddedResource Include="Presentacion\administrador\DetalleVenta.resx">
       <DependentUpon>DetalleVenta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\administrador\guardarCompra.resx">
+      <DependentUpon>guardarCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\administrador\rteEstadisticas.resx">
+      <DependentUpon>rteEstadisticas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\administrador\rteInventario.resx">
       <DependentUpon>rteInventario.cs</DependentUpon>
     </EmbeddedResource>
@@ -371,8 +394,8 @@
     <EmbeddedResource Include="Presentacion\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\repositor\AddProd.resx">
-      <DependentUpon>AddProd.cs</DependentUpon>
+    <EmbeddedResource Include="Presentacion\repositor\AddLibro.resx">
+      <DependentUpon>AddLibro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\repositor\AddProveedor.resx">
       <DependentUpon>AddProveedor.cs</DependentUpon>

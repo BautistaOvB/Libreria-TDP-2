@@ -46,7 +46,7 @@ namespace Gestion_Libreria.Presentacion.repositor
         // ============================================================
         private void BtnAddProd_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new AddProd());
+            AbrirFormularioEnPanel(new AddLibro());
         }
 
         // Si tenés un botón para ver las ventas, descomentá esto:
@@ -80,6 +80,11 @@ namespace Gestion_Libreria.Presentacion.repositor
         private void BtnEgresos_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new reporteEgresos());
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

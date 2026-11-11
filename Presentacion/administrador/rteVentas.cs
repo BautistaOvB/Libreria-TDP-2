@@ -123,7 +123,17 @@ namespace Gestion_Libreria.Presentacion.administrador
             if (dgvVentas.Columns["id_metodo"] != null)
                 dgvVentas.Columns["id_metodo"].Visible = false;
 
-            
+            if (dgvVentas.Columns["id_metodo"] != null)
+                dgvVentas.Columns["id_metodo"].Visible = false;
+            if (dgvVentas.Columns["id_usuario"] != null)
+                dgvVentas.Columns["id_usuario"].Visible = false;
+            if (dgvVentas.Columns["id_venta"] != null)
+                dgvVentas.Columns["id_venta"].Visible = false; // Opcional, si no querés mostrar el N° de venta
+
+            // 👇 MOSTRAMOS EL CLIENTE
+            if (dgvVentas.Columns["nombre_cliente"] != null)
+                dgvVentas.Columns["nombre_cliente"].HeaderText = "Cliente";
+
         }
 
         // ============================================================

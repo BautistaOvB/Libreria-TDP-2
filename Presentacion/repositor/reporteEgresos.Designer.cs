@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reporteEgresos));
             this.pCabecera = new System.Windows.Forms.Panel();
-            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
-            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.btnBuscarFecha = new System.Windows.Forms.Button();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             this.pDatagrid = new System.Windows.Forms.Panel();
+            this.dgvEgresos = new System.Windows.Forms.DataGridView();
             this.pDetalle = new System.Windows.Forms.Panel();
             this.dgvDetalleEgreso = new System.Windows.Forms.DataGridView();
-            this.dgvEgresos = new System.Windows.Forms.DataGridView();
             this.pCabecera.SuspendLayout();
             this.pDatagrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEgresos)).BeginInit();
             this.pDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleEgreso)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEgresos)).BeginInit();
             this.SuspendLayout();
             // 
             // pCabecera
@@ -52,15 +53,20 @@
             this.pCabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.pCabecera.Location = new System.Drawing.Point(0, 0);
             this.pCabecera.Name = "pCabecera";
-            this.pCabecera.Size = new System.Drawing.Size(800, 100);
+            this.pCabecera.Size = new System.Drawing.Size(1034, 100);
             this.pCabecera.TabIndex = 0;
             // 
-            // dtpDesde
+            // btnBuscarFecha
             // 
-            this.dtpDesde.Location = new System.Drawing.Point(12, 12);
-            this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(183, 20);
-            this.dtpDesde.TabIndex = 0;
+            this.btnBuscarFecha.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBuscarFecha.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBuscarFecha.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBuscarFecha.Location = new System.Drawing.Point(408, 10);
+            this.btnBuscarFecha.Name = "btnBuscarFecha";
+            this.btnBuscarFecha.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarFecha.TabIndex = 2;
+            this.btnBuscarFecha.Text = "Fecha";
+            this.btnBuscarFecha.UseVisualStyleBackColor = false;
             // 
             // dtpHasta
             // 
@@ -69,14 +75,12 @@
             this.dtpHasta.Size = new System.Drawing.Size(200, 20);
             this.dtpHasta.TabIndex = 1;
             // 
-            // btnBuscarFecha
+            // dtpDesde
             // 
-            this.btnBuscarFecha.Location = new System.Drawing.Point(408, 10);
-            this.btnBuscarFecha.Name = "btnBuscarFecha";
-            this.btnBuscarFecha.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarFecha.TabIndex = 2;
-            this.btnBuscarFecha.Text = "Fecha";
-            this.btnBuscarFecha.UseVisualStyleBackColor = true;
+            this.dtpDesde.Location = new System.Drawing.Point(12, 12);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(183, 20);
+            this.dtpDesde.TabIndex = 0;
             // 
             // pDatagrid
             // 
@@ -85,17 +89,28 @@
             this.pDatagrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.pDatagrid.Location = new System.Drawing.Point(0, 100);
             this.pDatagrid.Name = "pDatagrid";
-            this.pDatagrid.Size = new System.Drawing.Size(416, 350);
+            this.pDatagrid.Size = new System.Drawing.Size(540, 439);
             this.pDatagrid.TabIndex = 1;
+            // 
+            // dgvEgresos
+            // 
+            this.dgvEgresos.AllowUserToOrderColumns = true;
+            this.dgvEgresos.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvEgresos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEgresos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEgresos.Location = new System.Drawing.Point(0, 0);
+            this.dgvEgresos.Name = "dgvEgresos";
+            this.dgvEgresos.Size = new System.Drawing.Size(540, 439);
+            this.dgvEgresos.TabIndex = 0;
             // 
             // pDetalle
             // 
             this.pDetalle.BackColor = System.Drawing.Color.SteelBlue;
             this.pDetalle.Controls.Add(this.dgvDetalleEgreso);
             this.pDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pDetalle.Location = new System.Drawing.Point(416, 100);
+            this.pDetalle.Location = new System.Drawing.Point(540, 100);
             this.pDetalle.Name = "pDetalle";
-            this.pDetalle.Size = new System.Drawing.Size(384, 350);
+            this.pDetalle.Size = new System.Drawing.Size(494, 439);
             this.pDetalle.TabIndex = 2;
             // 
             // dgvDetalleEgreso
@@ -106,35 +121,25 @@
             this.dgvDetalleEgreso.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetalleEgreso.Location = new System.Drawing.Point(0, 0);
             this.dgvDetalleEgreso.Name = "dgvDetalleEgreso";
-            this.dgvDetalleEgreso.Size = new System.Drawing.Size(384, 350);
+            this.dgvDetalleEgreso.Size = new System.Drawing.Size(494, 439);
             this.dgvDetalleEgreso.TabIndex = 0;
-            // 
-            // dgvEgresos
-            // 
-            this.dgvEgresos.AllowUserToOrderColumns = true;
-            this.dgvEgresos.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvEgresos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEgresos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEgresos.Location = new System.Drawing.Point(0, 0);
-            this.dgvEgresos.Name = "dgvEgresos";
-            this.dgvEgresos.Size = new System.Drawing.Size(416, 350);
-            this.dgvEgresos.TabIndex = 0;
             // 
             // reporteEgresos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1034, 539);
             this.Controls.Add(this.pDetalle);
             this.Controls.Add(this.pDatagrid);
             this.Controls.Add(this.pCabecera);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "reporteEgresos";
             this.Text = "Punto y Barra | Egresos";
             this.pCabecera.ResumeLayout(false);
             this.pDatagrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEgresos)).EndInit();
             this.pDetalle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleEgreso)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEgresos)).EndInit();
             this.ResumeLayout(false);
 
         }

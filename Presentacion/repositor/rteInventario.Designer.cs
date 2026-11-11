@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rteInventario));
             this.Cabecera = new System.Windows.Forms.Panel();
+            this.pArticulos = new System.Windows.Forms.Panel();
+            this.lTotalLibros = new System.Windows.Forms.Label();
+            this.lCantidad = new System.Windows.Forms.Label();
+            this.btnMasCantidad = new System.Windows.Forms.Button();
+            this.btnMasVendidos = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.punto_Barra_tdpDataSet1 = new Gestion_Libreria.Punto_Barra_tdpDataSet1();
-            this.librosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.librosTableAdapter = new Gestion_Libreria.Punto_Barra_tdpDataSet1TableAdapters.librosTableAdapter();
             this.pLibros = new System.Windows.Forms.Panel();
             this.dgvStock = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,11 +50,12 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtISBN = new System.Windows.Forms.TextBox();
             this.lISBN = new System.Windows.Forms.Label();
-            this.btnMasVendidos = new System.Windows.Forms.Button();
-            this.btnMasCantidad = new System.Windows.Forms.Button();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.lAutor = new System.Windows.Forms.Label();
+            this.txtAutor = new System.Windows.Forms.TextBox();
             this.Cabecera.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).BeginInit();
+            this.pArticulos.SuspendLayout();
             this.pLibros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             this.panel1.SuspendLayout();
@@ -61,6 +64,7 @@
             // Cabecera
             // 
             this.Cabecera.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Cabecera.Controls.Add(this.pArticulos);
             this.Cabecera.Controls.Add(this.btnMasCantidad);
             this.Cabecera.Controls.Add(this.btnMasVendidos);
             this.Cabecera.Controls.Add(this.txtBuscar);
@@ -68,12 +72,70 @@
             this.Cabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.Cabecera.Location = new System.Drawing.Point(0, 0);
             this.Cabecera.Name = "Cabecera";
-            this.Cabecera.Size = new System.Drawing.Size(937, 100);
+            this.Cabecera.Size = new System.Drawing.Size(1035, 124);
             this.Cabecera.TabIndex = 0;
+            // 
+            // pArticulos
+            // 
+            this.pArticulos.BackColor = System.Drawing.Color.SteelBlue;
+            this.pArticulos.Controls.Add(this.lTotalLibros);
+            this.pArticulos.Controls.Add(this.lCantidad);
+            this.pArticulos.Location = new System.Drawing.Point(176, 12);
+            this.pArticulos.Name = "pArticulos";
+            this.pArticulos.Size = new System.Drawing.Size(160, 94);
+            this.pArticulos.TabIndex = 4;
+            // 
+            // lTotalLibros
+            // 
+            this.lTotalLibros.AutoSize = true;
+            this.lTotalLibros.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lTotalLibros.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lTotalLibros.Location = new System.Drawing.Point(39, 52);
+            this.lTotalLibros.Name = "lTotalLibros";
+            this.lTotalLibros.Size = new System.Drawing.Size(28, 16);
+            this.lTotalLibros.TabIndex = 1;
+            this.lTotalLibros.Text = "###";
+            // 
+            // lCantidad
+            // 
+            this.lCantidad.AutoSize = true;
+            this.lCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lCantidad.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lCantidad.Location = new System.Drawing.Point(12, 19);
+            this.lCantidad.Name = "lCantidad";
+            this.lCantidad.Size = new System.Drawing.Size(138, 16);
+            this.lCantidad.TabIndex = 0;
+            this.lCantidad.Text = "Cantidad de libros:";
+            // 
+            // btnMasCantidad
+            // 
+            this.btnMasCantidad.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnMasCantidad.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasCantidad.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnMasCantidad.Location = new System.Drawing.Point(12, 61);
+            this.btnMasCantidad.Name = "btnMasCantidad";
+            this.btnMasCantidad.Size = new System.Drawing.Size(96, 40);
+            this.btnMasCantidad.TabIndex = 3;
+            this.btnMasCantidad.Text = "Mas Stockeados";
+            this.btnMasCantidad.UseVisualStyleBackColor = false;
+            this.btnMasCantidad.Click += new System.EventHandler(this.btnMasCantidad_Click);
+            // 
+            // btnMasVendidos
+            // 
+            this.btnMasVendidos.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnMasVendidos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasVendidos.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnMasVendidos.Location = new System.Drawing.Point(12, 12);
+            this.btnMasVendidos.Name = "btnMasVendidos";
+            this.btnMasVendidos.Size = new System.Drawing.Size(97, 43);
+            this.btnMasVendidos.TabIndex = 2;
+            this.btnMasVendidos.Text = "Mas Vendidos";
+            this.btnMasVendidos.UseVisualStyleBackColor = false;
+            this.btnMasVendidos.Click += new System.EventHandler(this.btnMasVendidos_Click);
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(504, 40);
+            this.txtBuscar.Location = new System.Drawing.Point(653, 25);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(180, 20);
             this.txtBuscar.TabIndex = 1;
@@ -83,51 +145,42 @@
             this.btnBuscar.BackColor = System.Drawing.Color.SteelBlue;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBuscar.Location = new System.Drawing.Point(690, 37);
+            this.btnBuscar.Location = new System.Drawing.Point(850, 23);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 0;
             this.btnBuscar.Text = "Buscar producto";
             this.btnBuscar.UseVisualStyleBackColor = false;
-            // 
-            // punto_Barra_tdpDataSet1
-            // 
-            this.punto_Barra_tdpDataSet1.DataSetName = "Punto_Barra_tdpDataSet1";
-            this.punto_Barra_tdpDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // librosBindingSource
-            // 
-            this.librosBindingSource.DataMember = "libros";
-            this.librosBindingSource.DataSource = this.punto_Barra_tdpDataSet1;
-            // 
-            // librosTableAdapter
-            // 
-            this.librosTableAdapter.ClearBeforeFill = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // pLibros
             // 
             this.pLibros.BackColor = System.Drawing.Color.SteelBlue;
             this.pLibros.Controls.Add(this.dgvStock);
             this.pLibros.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pLibros.Location = new System.Drawing.Point(0, 100);
+            this.pLibros.Location = new System.Drawing.Point(0, 124);
             this.pLibros.Name = "pLibros";
-            this.pLibros.Size = new System.Drawing.Size(695, 350);
+            this.pLibros.Size = new System.Drawing.Size(695, 460);
             this.pLibros.TabIndex = 1;
             // 
             // dgvStock
             // 
             this.dgvStock.AllowUserToOrderColumns = true;
-            this.dgvStock.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.dgvStock.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStock.Location = new System.Drawing.Point(0, 0);
             this.dgvStock.Name = "dgvStock";
-            this.dgvStock.Size = new System.Drawing.Size(695, 350);
+            this.dgvStock.Size = new System.Drawing.Size(695, 460);
             this.dgvStock.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.lAutor);
+            this.panel1.Controls.Add(this.txtAutor);
+            this.panel1.Controls.Add(this.btnSalir);
+            this.panel1.Controls.Add(this.btnActualizar);
             this.panel1.Controls.Add(this.lGenero);
             this.panel1.Controls.Add(this.txtGenero);
             this.panel1.Controls.Add(this.txtPrecio);
@@ -139,16 +192,16 @@
             this.panel1.Controls.Add(this.txtISBN);
             this.panel1.Controls.Add(this.lISBN);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(695, 100);
+            this.panel1.Location = new System.Drawing.Point(695, 124);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(242, 350);
+            this.panel1.Size = new System.Drawing.Size(340, 460);
             this.panel1.TabIndex = 2;
             // 
             // lGenero
             // 
             this.lGenero.AutoSize = true;
             this.lGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lGenero.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lGenero.ForeColor = System.Drawing.Color.AliceBlue;
             this.lGenero.Location = new System.Drawing.Point(27, 299);
             this.lGenero.Name = "lGenero";
             this.lGenero.Size = new System.Drawing.Size(62, 16);
@@ -159,7 +212,6 @@
             // 
             this.txtGenero.Location = new System.Drawing.Point(27, 318);
             this.txtGenero.Name = "txtGenero";
-            this.txtGenero.ReadOnly = true;
             this.txtGenero.Size = new System.Drawing.Size(194, 20);
             this.txtGenero.TabIndex = 8;
             // 
@@ -167,7 +219,6 @@
             // 
             this.txtPrecio.Location = new System.Drawing.Point(27, 257);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.ReadOnly = true;
             this.txtPrecio.Size = new System.Drawing.Size(194, 20);
             this.txtPrecio.TabIndex = 7;
             // 
@@ -175,7 +226,7 @@
             // 
             this.lPrecio.AutoSize = true;
             this.lPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lPrecio.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lPrecio.ForeColor = System.Drawing.Color.AliceBlue;
             this.lPrecio.Location = new System.Drawing.Point(30, 238);
             this.lPrecio.Name = "lPrecio";
             this.lPrecio.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -187,7 +238,6 @@
             // 
             this.txtStock.Location = new System.Drawing.Point(27, 192);
             this.txtStock.Name = "txtStock";
-            this.txtStock.ReadOnly = true;
             this.txtStock.Size = new System.Drawing.Size(194, 20);
             this.txtStock.TabIndex = 5;
             // 
@@ -195,7 +245,7 @@
             // 
             this.lStock.AutoSize = true;
             this.lStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lStock.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lStock.ForeColor = System.Drawing.Color.AliceBlue;
             this.lStock.Location = new System.Drawing.Point(24, 173);
             this.lStock.Name = "lStock";
             this.lStock.Size = new System.Drawing.Size(127, 16);
@@ -206,7 +256,7 @@
             // 
             this.lNombre.AutoSize = true;
             this.lNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lNombre.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lNombre.ForeColor = System.Drawing.Color.AliceBlue;
             this.lNombre.Location = new System.Drawing.Point(24, 105);
             this.lNombre.Name = "lNombre";
             this.lNombre.Size = new System.Drawing.Size(62, 16);
@@ -217,7 +267,6 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(27, 124);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(194, 20);
             this.txtNombre.TabIndex = 2;
             // 
@@ -225,7 +274,6 @@
             // 
             this.txtISBN.Location = new System.Drawing.Point(27, 61);
             this.txtISBN.Name = "txtISBN";
-            this.txtISBN.ReadOnly = true;
             this.txtISBN.Size = new System.Drawing.Size(194, 20);
             this.txtISBN.TabIndex = 1;
             // 
@@ -233,46 +281,72 @@
             // 
             this.lISBN.AutoSize = true;
             this.lISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lISBN.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lISBN.ForeColor = System.Drawing.Color.AliceBlue;
             this.lISBN.Location = new System.Drawing.Point(24, 41);
             this.lISBN.Name = "lISBN";
             this.lISBN.Size = new System.Drawing.Size(46, 16);
             this.lISBN.TabIndex = 0;
             this.lISBN.Text = "ISBN:";
             // 
-            // btnMasVendidos
+            // btnActualizar
             // 
-            this.btnMasVendidos.Location = new System.Drawing.Point(12, 12);
-            this.btnMasVendidos.Name = "btnMasVendidos";
-            this.btnMasVendidos.Size = new System.Drawing.Size(97, 34);
-            this.btnMasVendidos.TabIndex = 2;
-            this.btnMasVendidos.Text = "Mas Vendidos";
-            this.btnMasVendidos.UseVisualStyleBackColor = true;
+            this.btnActualizar.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnActualizar.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnActualizar.Location = new System.Drawing.Point(155, 425);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 10;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
-            // btnMasCantidad
+            // btnSalir
             // 
-            this.btnMasCantidad.Location = new System.Drawing.Point(13, 53);
-            this.btnMasCantidad.Name = "btnMasCantidad";
-            this.btnMasCantidad.Size = new System.Drawing.Size(96, 30);
-            this.btnMasCantidad.TabIndex = 3;
-            this.btnMasCantidad.Text = "Mas Pedidos";
-            this.btnMasCantidad.UseVisualStyleBackColor = true;
+            this.btnSalir.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSalir.Location = new System.Drawing.Point(30, 425);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 11;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            // 
+            // lAutor
+            // 
+            this.lAutor.AutoSize = true;
+            this.lAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lAutor.ForeColor = System.Drawing.Color.AliceBlue;
+            this.lAutor.Location = new System.Drawing.Point(27, 353);
+            this.lAutor.Name = "lAutor";
+            this.lAutor.Size = new System.Drawing.Size(43, 16);
+            this.lAutor.TabIndex = 13;
+            this.lAutor.Text = "Autor";
+            // 
+            // txtAutor
+            // 
+            this.txtAutor.Location = new System.Drawing.Point(27, 372);
+            this.txtAutor.Name = "txtAutor";
+            this.txtAutor.Size = new System.Drawing.Size(194, 20);
+            this.txtAutor.TabIndex = 12;
             // 
             // rteInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 450);
+            this.ClientSize = new System.Drawing.Size(1035, 584);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pLibros);
             this.Controls.Add(this.Cabecera);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "rteInventario";
             this.Text = "Punto y Barra | Inventario";
             this.Load += new System.EventHandler(this.rteInventario_Load);
             this.Cabecera.ResumeLayout(false);
             this.Cabecera.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_Barra_tdpDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.librosBindingSource)).EndInit();
+            this.pArticulos.ResumeLayout(false);
+            this.pArticulos.PerformLayout();
             this.pLibros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -284,9 +358,6 @@
         #endregion
 
         private System.Windows.Forms.Panel Cabecera;
-        private Punto_Barra_tdpDataSet1 punto_Barra_tdpDataSet1;
-        private System.Windows.Forms.BindingSource librosBindingSource;
-        private Punto_Barra_tdpDataSet1TableAdapters.librosTableAdapter librosTableAdapter;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Panel pLibros;
@@ -304,5 +375,12 @@
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Button btnMasCantidad;
         private System.Windows.Forms.Button btnMasVendidos;
+        private System.Windows.Forms.Panel pArticulos;
+        private System.Windows.Forms.Label lTotalLibros;
+        private System.Windows.Forms.Label lCantidad;
+        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Label lAutor;
+        private System.Windows.Forms.TextBox txtAutor;
     }
 }

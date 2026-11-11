@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProdDetalles));
             this.LISBN = new System.Windows.Forms.Label();
             this.txtISBN = new System.Windows.Forms.TextBox();
             this.lTitulo = new System.Windows.Forms.Label();
@@ -138,22 +139,26 @@
             // 
             // BtnAgregarCarrito
             // 
+            this.BtnAgregarCarrito.BackColor = System.Drawing.Color.Azure;
+            this.BtnAgregarCarrito.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnAgregarCarrito.Location = new System.Drawing.Point(198, 306);
             this.BtnAgregarCarrito.Name = "BtnAgregarCarrito";
             this.BtnAgregarCarrito.Size = new System.Drawing.Size(88, 45);
             this.BtnAgregarCarrito.TabIndex = 10;
             this.BtnAgregarCarrito.Text = "Agregar al carrito";
-            this.BtnAgregarCarrito.UseVisualStyleBackColor = true;
+            this.BtnAgregarCarrito.UseVisualStyleBackColor = false;
             this.BtnAgregarCarrito.Click += new System.EventHandler(this.btnAgregarCarrito_Click);
             // 
             // BtnSalir
             // 
+            this.BtnSalir.BackColor = System.Drawing.Color.Azure;
+            this.BtnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnSalir.Location = new System.Drawing.Point(65, 317);
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(75, 23);
             this.BtnSalir.TabIndex = 11;
             this.BtnSalir.Text = "Salir";
-            this.BtnSalir.UseVisualStyleBackColor = true;
+            this.BtnSalir.UseVisualStyleBackColor = false;
             this.BtnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // ProdDetalles
@@ -174,6 +179,7 @@
             this.Controls.Add(this.lTitulo);
             this.Controls.Add(this.txtISBN);
             this.Controls.Add(this.LISBN);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ProdDetalles";
             this.Text = "Detalle de Producto";
             this.ResumeLayout(false);

@@ -189,6 +189,7 @@
             this.btnConfirmar.TabIndex = 7;
             this.btnConfirmar.Text = "Confirmar pago";
             this.btnConfirmar.UseVisualStyleBackColor = false;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // txtCvv
             // 

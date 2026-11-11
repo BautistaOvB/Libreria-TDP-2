@@ -185,6 +185,8 @@ El modelo de datos del sistema se compone de 9 tablas organizadas en tres domini
 | | `username` | VARCHAR(50) | NOT NULL, UNIQUE |
 | | `id_rol` | INT | FK $\rightarrow$ roles(id_rol) |
 
+---
+
 ###### 📚 Dominio: Catálogo e Inventario
 | Tabla | Campo | Tipo | Restricción |
 | :--- | :--- | :--- | :--- |
@@ -202,6 +204,8 @@ El modelo de datos del sistema se compone de 9 tablas organizadas en tres domini
 | | `direccion` | VARCHAR(200) | NULL |
 | | `telefono` | VARCHAR(30) | NULL |
 
+---
+
 ###### 💰 Dominio: Compras
 | Tabla | Campo | Tipo | Restricción |
 | :--- | :--- | :--- | :--- |
@@ -215,6 +219,8 @@ El modelo de datos del sistema se compone de 9 tablas organizadas en tres domini
 | | `cantidad` | INT | NOT NULL, CHECK $> 0$ |
 | | `precio_unitario` | DECIMAL(10,2) | NOT NULL |
 | | `subtotal` | DECIMAL(12,2) | NOT NULL |
+
+---
 
 ###### 🛒 Dominio: Ventas y Pagos
 | Tabla | Campo | Tipo | Restricción |
@@ -232,6 +238,8 @@ El modelo de datos del sistema se compone de 9 tablas organizadas en tres domini
 | | `subtotal` | DECIMAL(12,2) | NOT NULL |
 | **metodos_pago** | `id_metodo` | INT | PK, IDENTITY |
 | | `nombre` | VARCHAR(50) | NOT NULL, UNIQUE |
+
+---
 
 ##### 4.3.3 Relaciones y Cardinalidad
 | Relación | Cardinalidad | Descripción |
@@ -253,6 +261,8 @@ El modelo de datos del sistema se compone de 9 tablas organizadas en tres domini
 | **VENTA $\rightarrow$ PAGO** | $1:N$ | Una venta puede tener pagos mixtos. |
 | **VENTA $\rightarrow$ COMPROBANTE** | $1:1$ | Cada venta emite un comprobante. |
 | **VENTA $\rightarrow$ ANULACION_VENTA** | $1:N$ | Una venta puede tener una o más anulaciones (histórico). |
+
+---
 
 ##### 4.3.4 Reglas de Negocio en el DER
 1. **RF2.3 / RNF2.2:** Las tablas `ALERTA_STOCK` y `MOVIMIENTO_STOCK` registran automáticamente cada variación de stock con trazabilidad completa (usuario, fecha, motivo).
