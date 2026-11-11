@@ -10,6 +10,9 @@ namespace Gestion_Libreria.Entidad
     {
         public Libro Libro { get; set; }
         public int Cantidad { get; set; }
-        public decimal Subtotal => Libro.Precio * Cantidad;
+        public decimal Subtotal { set; get; }
+        public decimal PrecioUnitario { set; get; }
+        
+        
     }
 }

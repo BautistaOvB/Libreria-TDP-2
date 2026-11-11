@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Gestion_Libreria.Datos;
 using Gestion_Libreria.Entidad;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 
@@ -231,6 +233,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
         // ============================================================
         // CONFIRMAR PAGO
         // ============================================================
+        
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             if (cmbMetodo.SelectedIndex < 0)
@@ -244,11 +247,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
             MetodoPago metodo = (MetodoPago)cmbMetodo.SelectedItem;
             string nombre = metodo.nombre.ToLower();
 
-            bool esTarjeta = nombre.Contains("tarjeta") ||
-                             nombre.Contains("credito") ||
-                             nombre.Contains("crédito") ||
-                             nombre.Contains("debito") ||
-                             nombre.Contains("débito");
+            bool esTarjeta = nombre.Contains("tarjeta") || nombre.Contains("credito") ||
+                             nombre.Contains("crédito") || nombre.Contains("debito") || nombre.Contains("débito");
 
             if (esTarjeta)
             {
@@ -264,26 +264,131 @@ namespace Gestion_Libreria.Presentacion.vendedor
 
             try
             {
-                // 🔑 USAMOS EL ID DEL USUARIO LOGUEADO
-                // (Asumo que tenés una clase estática "Sesion" que guarda esto)
                 int idUsuario = Sesion.IdUsuario;
                 int idMetodo = (int)cmbMetodo.SelectedValue;
 
                 VentaDatos datos = new VentaDatos();
 
-                // 🔑 Llamamos al método pasando el ID del cliente
+                // 1. Guardamos en la base de datos
                 IdVentaGenerado = datos.RegistrarVentaConCantidades(idUsuario, idMetodo, idCliente, carrito);
 
+                // 2. Le avisamos al usuario que la venta se registró (ANTES de imprimir)
                 MessageBox.Show($"¡Venta #{IdVentaGenerado} registrada con éxito!\nTotal: {total:C2}",
                                 "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                // 3. Preparamos la impresión
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += new PrintPageEventHandler(ImprimirFacturaCarrito_PrintPage);
+                pd.DocumentName = $"Factura_{IdVentaGenerado}";
+
+                // 4. Mostramos la vista previa
+                PrintPreviewDialog preview = new PrintPreviewDialog();
+                preview.Document = pd;
+                preview.Width = 800;
+                preview.Height = 600;
+                preview.ShowDialog();
+
+                // 5. 🔑 CLAVE PARA CORTAR EL BUCLE: 
+                // Forzamos el DialogResult ANTES de cerrar
                 this.DialogResult = DialogResult.OK;
-                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al registrar venta: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        
+
+        private void ImprimirFacturaCarrito_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Font fontTitulo = new Font("Arial", 16, FontStyle.Bold);
+            Font fontSubtitulo = new Font("Arial", 11, FontStyle.Bold);
+            Font fontNormal = new Font("Arial", 10, FontStyle.Regular);
+            Font fontPequena = new Font("Arial", 8, FontStyle.Italic);
+            Brush brush = Brushes.Black;
+
+            float yPos = 20;
+            float leftMargin = e.MarginBounds.Left;
+            float rightMargin = e.MarginBounds.Right;
+
+            // 1. Encabezado
+            g.DrawString("PUNTO Y BARRA - LIBRERÍA", fontTitulo, brush, leftMargin, yPos);
+            yPos += 25;
+            g.DrawString("FACTURA DE VENTA", fontSubtitulo, brush, leftMargin, yPos);
+            yPos += 30;
+
+            // 2. Datos de la Venta
+            g.DrawString($"N° Factura: {IdVentaGenerado}", fontNormal, brush, leftMargin, yPos);
+            g.DrawString($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal, brush, leftMargin + 250, yPos);
+            yPos += 20;
+            g.DrawString($"Cliente: {nombreCliente}", fontNormal, brush, leftMargin, yPos);
+
+            // Acá usamos el objeto 'metodo' que ya está seleccionado en el ComboBox
+            MetodoPago metodoSeleccionado = (MetodoPago)cmbMetodo.SelectedItem;
+            g.DrawString($"Método de Pago: {metodoSeleccionado.nombre}", fontNormal, brush, leftMargin + 250, yPos);
+            yPos += 30;
+
+            // 3. Línea separadora
+            g.DrawLine(Pens.Black, leftMargin, yPos, rightMargin, yPos);
+            yPos += 10;
+
+            // 4. Cabecera de la tabla
+            g.DrawString("Cant.", fontSubtitulo, brush, leftMargin, yPos);
+            g.DrawString("Descripción", fontSubtitulo, brush, leftMargin + 50, yPos);
+
+            SizeF sizeUnit = g.MeasureString("P. Unit.", fontSubtitulo);
+            g.DrawString("P. Unit.", fontSubtitulo, brush, leftMargin + 380 - sizeUnit.Width, yPos);
+
+            SizeF sizeSubtotal = g.MeasureString("Subtotal", fontSubtitulo);
+            g.DrawString("Subtotal", fontSubtitulo, brush, rightMargin - sizeSubtotal.Width, yPos);
+
+            yPos += 20;
+            g.DrawLine(Pens.Black, leftMargin, yPos, rightMargin, yPos);
+            yPos += 10;
+
+            // 5. Filas de detalles (Acá iteramos sobre 'carrito' en vez de la BD)
+            foreach (ItemCarrito item in carrito)
+            {
+                if (yPos > e.MarginBounds.Bottom - 50) break; // Control de página simple
+
+                g.DrawString(item.Cantidad.ToString(), fontNormal, brush, leftMargin, yPos);
+
+                // Recortar nombre si es muy largo
+                string nombreLibro = item.Libro.Nombre;
+                string nombreCorto = nombreLibro.Length > 50 ? nombreLibro.Substring(0, 47) + "..." : nombreLibro;
+
+                g.DrawString(nombreCorto, fontNormal, brush, leftMargin + 50, yPos);
+
+                // Precio Unitario
+                string precioUnitStr = item.Libro.Precio.ToString("C2");
+                SizeF sizePU = g.MeasureString(precioUnitStr, fontNormal);
+                g.DrawString(precioUnitStr, fontNormal, brush, leftMargin + 380 - sizePU.Width, yPos);
+
+                // Subtotal
+                string subtotalStr = item.Subtotal.ToString("C2");
+                SizeF sizeSub = g.MeasureString(subtotalStr, fontNormal);
+                g.DrawString(subtotalStr, fontNormal, brush, rightMargin - sizeSub.Width, yPos);
+
+                yPos += 20;
+            }
+
+            // 6. Total
+            yPos += 10;
+            g.DrawLine(Pens.Black, leftMargin, yPos, rightMargin, yPos);
+            yPos += 20;
+
+            Font fontTotal = new Font("Arial", 14, FontStyle.Bold);
+            string totalStr = $"TOTAL: {total:C2}";
+            SizeF sizeTotal = g.MeasureString(totalStr, fontTotal);
+            g.DrawString(totalStr, fontTotal, brush, rightMargin - sizeTotal.Width, yPos);
+
+            yPos += 50;
+
+            // 7. Pie de página
+            g.DrawString("¡Gracias por su compra!", fontPequena, brush, leftMargin, yPos);
+            yPos += 15;
+            g.DrawString("Punto y Barra | Librería", fontPequena, brush, leftMargin, yPos);
         }
 
         // ============================================================

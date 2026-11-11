@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Admin_Base));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnStock = new System.Windows.Forms.Button();
             this.BtnRptVentas = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PanelContenedor = new System.Windows.Forms.Panel();
+            this.btnRteEstadistico = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -51,6 +53,8 @@
             this.panel1.AllowDrop = true;
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.btnRteEstadistico);
+            this.panel1.Controls.Add(this.btnSalir);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.btnStock);
             this.panel1.Controls.Add(this.BtnRptVentas);
@@ -59,16 +63,30 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(163, 529);
+            this.panel1.Size = new System.Drawing.Size(189, 556);
             this.panel1.TabIndex = 0;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSalir.Location = new System.Drawing.Point(61, 12);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(70, 23);
+            this.btnSalir.TabIndex = 6;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::Gestion_Libreria.Properties.Resources.punto_y_barra_azul_blanco;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(36, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(45, 53);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(88, 88);
+            this.pictureBox2.Size = new System.Drawing.Size(102, 103);
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
@@ -78,10 +96,10 @@
             this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnStock.Location = new System.Drawing.Point(12, 434);
+            this.btnStock.Location = new System.Drawing.Point(12, 396);
             this.btnStock.Margin = new System.Windows.Forms.Padding(0);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(140, 50);
+            this.btnStock.Size = new System.Drawing.Size(171, 60);
             this.btnStock.TabIndex = 3;
             this.btnStock.Text = "Ver Inventario";
             this.btnStock.UseVisualStyleBackColor = false;
@@ -93,9 +111,9 @@
             this.BtnRptVentas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnRptVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRptVentas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnRptVentas.Location = new System.Drawing.Point(12, 337);
+            this.BtnRptVentas.Location = new System.Drawing.Point(12, 328);
             this.BtnRptVentas.Name = "BtnRptVentas";
-            this.BtnRptVentas.Size = new System.Drawing.Size(140, 50);
+            this.BtnRptVentas.Size = new System.Drawing.Size(171, 63);
             this.BtnRptVentas.TabIndex = 2;
             this.BtnRptVentas.Text = "Reporte de Ventas";
             this.BtnRptVentas.UseVisualStyleBackColor = false;
@@ -107,10 +125,10 @@
             this.VerUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.VerUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.VerUsuario.Location = new System.Drawing.Point(12, 238);
+            this.VerUsuario.Location = new System.Drawing.Point(12, 256);
             this.VerUsuario.Name = "VerUsuario";
             this.VerUsuario.Padding = new System.Windows.Forms.Padding(10);
-            this.VerUsuario.Size = new System.Drawing.Size(140, 50);
+            this.VerUsuario.Size = new System.Drawing.Size(171, 66);
             this.VerUsuario.TabIndex = 1;
             this.VerUsuario.Text = "Ver Usuarios";
             this.VerUsuario.UseVisualStyleBackColor = false;
@@ -122,9 +140,9 @@
             this.BtnAddUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnAddUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAddUsuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnAddUsuario.Location = new System.Drawing.Point(12, 149);
+            this.BtnAddUsuario.Location = new System.Drawing.Point(12, 181);
             this.BtnAddUsuario.Name = "BtnAddUsuario";
-            this.BtnAddUsuario.Size = new System.Drawing.Size(140, 50);
+            this.BtnAddUsuario.Size = new System.Drawing.Size(171, 69);
             this.BtnAddUsuario.TabIndex = 0;
             this.BtnAddUsuario.Text = "Registrar Usuario";
             this.BtnAddUsuario.UseVisualStyleBackColor = false;
@@ -136,9 +154,9 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(163, 0);
+            this.panel2.Location = new System.Drawing.Point(189, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(884, 100);
+            this.panel2.Size = new System.Drawing.Size(1052, 100);
             this.panel2.TabIndex = 1;
             // 
             // pictureBox1
@@ -148,7 +166,7 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox1.Image = global::Gestion_Libreria.Properties.Resources.punto_y_barra_usuarios_registrados;
-            this.pictureBox1.Location = new System.Drawing.Point(794, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(962, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(90, 100);
             this.pictureBox1.TabIndex = 1;
@@ -170,17 +188,32 @@
             // 
             this.PanelContenedor.BackColor = System.Drawing.Color.LightSteelBlue;
             this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelContenedor.Location = new System.Drawing.Point(163, 100);
+            this.PanelContenedor.Location = new System.Drawing.Point(189, 100);
             this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(884, 429);
+            this.PanelContenedor.Size = new System.Drawing.Size(1052, 456);
             this.PanelContenedor.TabIndex = 2;
+            // 
+            // btnRteEstadistico
+            // 
+            this.btnRteEstadistico.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnRteEstadistico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRteEstadistico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRteEstadistico.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnRteEstadistico.Location = new System.Drawing.Point(13, 463);
+            this.btnRteEstadistico.Margin = new System.Windows.Forms.Padding(0);
+            this.btnRteEstadistico.Name = "btnRteEstadistico";
+            this.btnRteEstadistico.Size = new System.Drawing.Size(171, 60);
+            this.btnRteEstadistico.TabIndex = 7;
+            this.btnRteEstadistico.Text = "Reportes estadisticos";
+            this.btnRteEstadistico.UseVisualStyleBackColor = false;
+            this.btnRteEstadistico.Click += new System.EventHandler(this.btnRteEstadistico_Click);
             // 
             // Admin_Base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1047, 529);
+            this.ClientSize = new System.Drawing.Size(1241, 556);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -208,5 +241,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel PanelContenedor;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnRteEstadistico;
     }
 }

@@ -64,5 +64,15 @@ namespace Gestion_Libreria.Presentacion.administrador
         {
             AbrirFormularioEnPanel(new rteInventario());
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnRteEstadistico_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new rteEstadisticas());
+        }
     }
 }

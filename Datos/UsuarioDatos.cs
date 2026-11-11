@@ -63,7 +63,11 @@ namespace Gestion_Libreria.Datos
                 using (SqlConnection conexion = new SqlConnection(cadenaConexion))
                 {
                     conexion.Open();
-                    string query = "INSERT INTO usuarios (nombre, apellido, mail, password_hash, username, id_rol) VALUES (@nom, @ape, @mail, @pass, @user, @rol)";
+
+                    // Incluimos dni, direccion y numero_telefono en el INSERT
+                    string query = @"INSERT INTO usuarios 
+                             (nombre, apellido, mail, password_hash, username, id_rol, dni, direccion, numero_telefono) 
+                             VALUES (@nom, @ape, @mail, @pass, @user, @rol, @dni, @dir, @tel)";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -73,6 +77,11 @@ namespace Gestion_Libreria.Datos
                         comando.Parameters.AddWithValue("@pass", user.password_hash);
                         comando.Parameters.AddWithValue("@user", user.username);
                         comando.Parameters.AddWithValue("@rol", user.id_rol);
+
+                        // Manejo de nulos para el INSERT
+                        comando.Parameters.AddWithValue("@dni", user.dni > 0 ? (object)user.dni : DBNull.Value);
+                        comando.Parameters.AddWithValue("@dir", string.IsNullOrEmpty(user.direccion) ? (object)DBNull.Value : user.direccion);
+                        comando.Parameters.AddWithValue("@tel", string.IsNullOrEmpty(user.numero_telefono) ? (object)DBNull.Value : user.numero_telefono);
 
                         int filas = comando.ExecuteNonQuery();
                         return filas > 0;
@@ -96,11 +105,13 @@ namespace Gestion_Libreria.Datos
                 {
                     conexion.Open();
 
+                    // 1. Agregamos las columnas al SELECT
                     string query = @"SELECT u.id_usuario, u.nombre, u.apellido, u.mail, 
-                                            u.username, u.id_rol, r.nombre_rol 
-                                     FROM usuarios u 
-                                     INNER JOIN roles r ON u.id_rol = r.id_rol
-                                     ORDER BY u.id_usuario";
+                                    u.username, u.id_rol, r.nombre_rol,
+                                    u.dni, u.direccion, u.numero_telefono 
+                             FROM usuarios u 
+                             INNER JOIN roles r ON u.id_rol = r.id_rol
+                             ORDER BY u.id_usuario";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -116,7 +127,12 @@ namespace Gestion_Libreria.Datos
                                     mail = reader["mail"].ToString(),
                                     username = reader["username"].ToString(),
                                     id_rol = Convert.ToInt32(reader["id_rol"]),
-                                    nombre_rol = reader["nombre_rol"].ToString()
+                                    nombre_rol = reader["nombre_rol"].ToString(),
+
+                                    // 2. Mapeamos las columnas nuevas manejando los nulos
+                                    dni = reader["dni"] == DBNull.Value ? 0 : Convert.ToInt32(reader["dni"]),
+                                    direccion = reader["direccion"] == DBNull.Value ? "" : reader["direccion"].ToString(),
+                                    numero_telefono = reader["numero_telefono"] == DBNull.Value ? "" : reader["numero_telefono"].ToString()
                                 });
                             }
                         }
@@ -143,10 +159,11 @@ namespace Gestion_Libreria.Datos
                     conexion.Open();
 
                     string query = @"SELECT u.id_usuario, u.nombre, u.apellido, u.mail, 
-                                            u.username, u.id_rol, r.nombre_rol 
-                                     FROM usuarios u 
-                                     INNER JOIN roles r ON u.id_rol = r.id_rol
-                                     WHERE u.id_usuario = @id";
+                        u.username, u.id_rol, r.nombre_rol,
+                        u.direccion, u.numero_telefono, u.dni 
+                 FROM usuarios u 
+                 INNER JOIN roles r ON u.id_rol = r.id_rol
+                 WHERE u.id_usuario = @id";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -164,7 +181,12 @@ namespace Gestion_Libreria.Datos
                                     mail = reader["mail"].ToString(),
                                     username = reader["username"].ToString(),
                                     id_rol = Convert.ToInt32(reader["id_rol"]),
-                                    nombre_rol = reader["nombre_rol"].ToString()
+                                    nombre_rol = reader["nombre_rol"].ToString(),
+
+                                    // AQUÍ ESTÁ LA MAGIA PARA QUE NO EXPLOTE CON NULOS:
+                                    dni = reader["dni"] == DBNull.Value ? 0 : Convert.ToInt32(reader["dni"]),
+                                    direccion = reader["direccion"] == DBNull.Value ? "" : reader["direccion"].ToString(),
+                                    numero_telefono = reader["numero_telefono"] == DBNull.Value ? "" : reader["numero_telefono"].ToString()
                                 };
                             }
                         }
@@ -189,12 +211,15 @@ namespace Gestion_Libreria.Datos
                     conexion.Open();
 
                     string query = @"UPDATE usuarios 
-                                     SET nombre = @nom, 
-                                         apellido = @ape, 
-                                         mail = @mail, 
-                                         username = @user, 
-                                         id_rol = @rol 
-                                     WHERE id_usuario = @id";
+                             SET nombre = @nom, 
+                                 apellido = @ape, 
+                                 mail = @mail, 
+                                 username = @user, 
+                                 id_rol = @rol,
+                                 dni = @dni,
+                                 numero_telefono = @tel,
+                                 direccion = @dir
+                             WHERE id_usuario = @id";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -204,6 +229,13 @@ namespace Gestion_Libreria.Datos
                         comando.Parameters.AddWithValue("@mail", user.mail);
                         comando.Parameters.AddWithValue("@user", user.username);
                         comando.Parameters.AddWithValue("@rol", user.id_rol);
+
+                        // Si el DNI es 0, mandamos NULL a la base de datos
+                        comando.Parameters.AddWithValue("@dni", user.dni > 0 ? (object)user.dni : DBNull.Value);
+
+                        // Lo mismo para los textos vacíos
+                        comando.Parameters.AddWithValue("@tel", string.IsNullOrEmpty(user.numero_telefono) ? (object)DBNull.Value : user.numero_telefono);
+                        comando.Parameters.AddWithValue("@dir", string.IsNullOrEmpty(user.direccion) ? (object)DBNull.Value : user.direccion);
 
                         int filas = comando.ExecuteNonQuery();
                         return filas > 0;

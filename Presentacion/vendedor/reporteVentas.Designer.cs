@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reporteVentas));
             this.pCabecera = new System.Windows.Forms.Panel();
+            this.btnImprimirFactura = new System.Windows.Forms.Button();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblDNI = new System.Windows.Forms.Label();
             this.btnBuscarFecha = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
-            this.btnImprimirFactura = new System.Windows.Forms.Button();
             this.pCabecera.SuspendLayout();
             this.pLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
@@ -51,7 +51,7 @@
             // 
             // pCabecera
             // 
-            this.pCabecera.BackColor = System.Drawing.Color.DarkBlue;
+            this.pCabecera.BackColor = System.Drawing.Color.MidnightBlue;
             this.pCabecera.Controls.Add(this.btnImprimirFactura);
             this.pCabecera.Controls.Add(this.lblFecha);
             this.pCabecera.Controls.Add(this.lblDNI);
@@ -65,6 +65,19 @@
             this.pCabecera.Name = "pCabecera";
             this.pCabecera.Size = new System.Drawing.Size(1150, 129);
             this.pCabecera.TabIndex = 0;
+            // 
+            // btnImprimirFactura
+            // 
+            this.btnImprimirFactura.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnImprimirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnImprimirFactura.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnImprimirFactura.Location = new System.Drawing.Point(963, 76);
+            this.btnImprimirFactura.Name = "btnImprimirFactura";
+            this.btnImprimirFactura.Size = new System.Drawing.Size(75, 41);
+            this.btnImprimirFactura.TabIndex = 7;
+            this.btnImprimirFactura.Text = "Imprimir Factura";
+            this.btnImprimirFactura.UseVisualStyleBackColor = false;
+            this.btnImprimirFactura.Click += new System.EventHandler(this.btnImprimirFactura_Click);
             // 
             // lblFecha
             // 
@@ -172,19 +185,6 @@
             this.dgvDetalle.Size = new System.Drawing.Size(600, 342);
             this.dgvDetalle.TabIndex = 0;
             this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellClick);
-            // 
-            // btnImprimirFactura
-            // 
-            this.btnImprimirFactura.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnImprimirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnImprimirFactura.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnImprimirFactura.Location = new System.Drawing.Point(963, 76);
-            this.btnImprimirFactura.Name = "btnImprimirFactura";
-            this.btnImprimirFactura.Size = new System.Drawing.Size(75, 41);
-            this.btnImprimirFactura.TabIndex = 7;
-            this.btnImprimirFactura.Text = "Imprimir Factura";
-            this.btnImprimirFactura.UseVisualStyleBackColor = false;
-            this.btnImprimirFactura.Click += new System.EventHandler(this.btnImprimirFactura_Click);
             // 
             // reporteVentas
             // 

@@ -64,7 +64,7 @@
             this.Cabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.Cabecera.Location = new System.Drawing.Point(0, 0);
             this.Cabecera.Name = "Cabecera";
-            this.Cabecera.Size = new System.Drawing.Size(937, 100);
+            this.Cabecera.Size = new System.Drawing.Size(996, 100);
             this.Cabecera.TabIndex = 0;
             // 
             // txtBuscar
@@ -107,7 +107,7 @@
             this.pLibros.Dock = System.Windows.Forms.DockStyle.Left;
             this.pLibros.Location = new System.Drawing.Point(0, 100);
             this.pLibros.Name = "pLibros";
-            this.pLibros.Size = new System.Drawing.Size(695, 350);
+            this.pLibros.Size = new System.Drawing.Size(695, 422);
             this.pLibros.TabIndex = 1;
             // 
             // dgvStock
@@ -118,7 +118,7 @@
             this.dgvStock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStock.Location = new System.Drawing.Point(0, 0);
             this.dgvStock.Name = "dgvStock";
-            this.dgvStock.Size = new System.Drawing.Size(695, 350);
+            this.dgvStock.Size = new System.Drawing.Size(695, 422);
             this.dgvStock.TabIndex = 0;
             // 
             // panel1
@@ -137,7 +137,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(695, 100);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(242, 350);
+            this.panel1.Size = new System.Drawing.Size(301, 422);
             this.panel1.TabIndex = 2;
             // 
             // lGenero
@@ -240,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 450);
+            this.ClientSize = new System.Drawing.Size(996, 522);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pLibros);
             this.Controls.Add(this.Cabecera);

@@ -30,13 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Repositor_base));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.BtnEgresos = new System.Windows.Forms.Button();
             this.BtnVerStock = new System.Windows.Forms.Button();
             this.BtnProveedor = new System.Windows.Forms.Button();
             this.BtnReportes = new System.Windows.Forms.Button();
             this.BtnAddProd = new System.Windows.Forms.Button();
-            this.PanelContenedor = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PanelContenedor = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -44,6 +45,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel2.Controls.Add(this.btnSalir);
             this.panel2.Controls.Add(this.BtnEgresos);
             this.panel2.Controls.Add(this.BtnVerStock);
             this.panel2.Controls.Add(this.BtnProveedor);
@@ -54,17 +56,31 @@
             this.panel2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(179, 461);
+            this.panel2.Size = new System.Drawing.Size(190, 566);
             this.panel2.TabIndex = 1;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSalir.Location = new System.Drawing.Point(55, 6);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 7;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // BtnEgresos
             // 
             this.BtnEgresos.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnEgresos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnEgresos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnEgresos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnEgresos.Location = new System.Drawing.Point(15, 399);
+            this.BtnEgresos.Location = new System.Drawing.Point(14, 490);
             this.BtnEgresos.Name = "BtnEgresos";
-            this.BtnEgresos.Size = new System.Drawing.Size(140, 50);
+            this.BtnEgresos.Size = new System.Drawing.Size(170, 64);
             this.BtnEgresos.TabIndex = 6;
             this.BtnEgresos.Text = "Reporte de egresos";
             this.BtnEgresos.UseVisualStyleBackColor = false;
@@ -74,12 +90,13 @@
             // 
             this.BtnVerStock.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnVerStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnVerStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnVerStock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnVerStock.Location = new System.Drawing.Point(15, 197);
+            this.BtnVerStock.Location = new System.Drawing.Point(14, 241);
             this.BtnVerStock.Name = "BtnVerStock";
-            this.BtnVerStock.Size = new System.Drawing.Size(140, 50);
+            this.BtnVerStock.Size = new System.Drawing.Size(170, 62);
             this.BtnVerStock.TabIndex = 5;
-            this.BtnVerStock.Text = "Ver Productos";
+            this.BtnVerStock.Text = "Ver Libros";
             this.BtnVerStock.UseVisualStyleBackColor = false;
             this.BtnVerStock.Click += new System.EventHandler(this.BtnVerStock_Click);
             // 
@@ -87,10 +104,11 @@
             // 
             this.BtnProveedor.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnProveedor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnProveedor.Location = new System.Drawing.Point(15, 263);
+            this.BtnProveedor.Location = new System.Drawing.Point(12, 322);
             this.BtnProveedor.Name = "BtnProveedor";
-            this.BtnProveedor.Size = new System.Drawing.Size(140, 50);
+            this.BtnProveedor.Size = new System.Drawing.Size(172, 66);
             this.BtnProveedor.TabIndex = 4;
             this.BtnProveedor.Text = "Registrar Proveedor";
             this.BtnProveedor.UseVisualStyleBackColor = false;
@@ -100,11 +118,11 @@
             // 
             this.BtnReportes.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnReportes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnReportes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnReportes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnReportes.Location = new System.Drawing.Point(15, 328);
+            this.BtnReportes.Location = new System.Drawing.Point(14, 405);
             this.BtnReportes.Name = "BtnReportes";
-            this.BtnReportes.Size = new System.Drawing.Size(140, 50);
+            this.BtnReportes.Size = new System.Drawing.Size(170, 70);
             this.BtnReportes.TabIndex = 3;
             this.BtnReportes.Text = "Reporte de ingresos";
             this.BtnReportes.UseVisualStyleBackColor = false;
@@ -114,42 +132,42 @@
             // 
             this.BtnAddProd.BackColor = System.Drawing.Color.LightSteelBlue;
             this.BtnAddProd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnAddProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAddProd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BtnAddProd.Location = new System.Drawing.Point(15, 130);
+            this.BtnAddProd.Location = new System.Drawing.Point(14, 162);
             this.BtnAddProd.Name = "BtnAddProd";
             this.BtnAddProd.Padding = new System.Windows.Forms.Padding(5);
-            this.BtnAddProd.Size = new System.Drawing.Size(140, 50);
+            this.BtnAddProd.Size = new System.Drawing.Size(167, 63);
             this.BtnAddProd.TabIndex = 2;
-            this.BtnAddProd.Text = "Agregar producto";
+            this.BtnAddProd.Text = "Registrar Ingreso";
             this.BtnAddProd.UseVisualStyleBackColor = false;
             this.BtnAddProd.Click += new System.EventHandler(this.BtnAddProd_Click);
-            // 
-            // PanelContenedor
-            // 
-            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelContenedor.Location = new System.Drawing.Point(179, 0);
-            this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(605, 461);
-            this.PanelContenedor.TabIndex = 2;
-            this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint_1);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Gestion_Libreria.Properties.Resources.punto_y_barra_azul_blanco;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(40, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(43, 43);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(88, 88);
+            this.pictureBox1.Size = new System.Drawing.Size(105, 105);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // PanelContenedor
+            // 
+            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelContenedor.Location = new System.Drawing.Point(190, 0);
+            this.PanelContenedor.Name = "PanelContenedor";
+            this.PanelContenedor.Size = new System.Drawing.Size(1044, 566);
+            this.PanelContenedor.TabIndex = 2;
+            this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint_1);
             // 
             // Repositor_base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(1234, 566);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -171,5 +189,6 @@
         private System.Windows.Forms.Button BtnVerStock;
         private System.Windows.Forms.Button BtnEgresos;
         private System.Windows.Forms.Panel PanelContenedor;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

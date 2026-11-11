@@ -16,5 +16,7 @@ namespace Gestion_Libreria.Entidad
         public decimal Precio { get; set; }
         public int cod_genero { get; set; }
         public string nombre_genero { get; set; }
+        public string autor { get; set; }
+        public int cantidad_vendida { get; set; }
     }
 }
