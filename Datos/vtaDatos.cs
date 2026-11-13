@@ -294,18 +294,19 @@ namespace Gestion_Libreria.Datos
                 {
                     conexion.Open();
 
-                    // Importante: sumamos 1 día al "hasta" para incluir todo ese día completo
                     DateTime hastaFinDia = hasta.Date.AddDays(1);
 
                     string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
-                                    v.id_metodo, v.id_usuario,
-                                    m.nombre   AS nombre_metodo,
-                                    u.nombre + ' ' + u.apellido AS nombre_usuario
-                             FROM ventas v
-                             INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
-                             INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
-                             WHERE v.fecha_venta >= @desde AND v.fecha_venta < @hasta
-                             ORDER BY v.fecha_venta DESC";
+                            v.id_metodo, v.id_usuario,
+                            m.nombre   AS nombre_metodo,
+                            u.nombre + ' ' + u.apellido AS nombre_usuario,
+                            c.apellido + ', ' + c.nombre AS nombre_cliente
+                     FROM ventas v
+                     INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                     INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                     LEFT JOIN clientes c      ON v.id_cliente = c.id_cliente
+                     WHERE v.fecha_venta >= @desde AND v.fecha_venta < @hasta
+                     ORDER BY v.fecha_venta DESC";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -324,7 +325,8 @@ namespace Gestion_Libreria.Datos
                                     id_metodo = Convert.ToInt32(reader["id_metodo"]),
                                     id_usuario = Convert.ToInt32(reader["id_usuario"]),
                                     nombre_metodo = reader["nombre_metodo"].ToString(),
-                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                    nombre_usuario = reader["nombre_usuario"].ToString(),
+                                    nombre_cliente = reader["nombre_cliente"] == DBNull.Value ? "Consumidor Final" : reader["nombre_cliente"].ToString()
                                 });
                             }
                         }
@@ -356,9 +358,11 @@ namespace Gestion_Libreria.Datos
                                     v.id_metodo, v.id_usuario,
                                     m.nombre   AS nombre_metodo,
                                     u.nombre + ' ' + u.apellido AS nombre_usuario
+                                    c.apellido + ', ' + c.nombre AS nombre_cliente 
                              FROM ventas v
                              INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
                              INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                             LEFT JOIN clientes c      ON v.id_cliente = c.id_cliente 
                              WHERE u.nombre LIKE @filtro 
                                 OR u.apellido LIKE @filtro 
                                 OR u.username LIKE @filtro
@@ -380,7 +384,8 @@ namespace Gestion_Libreria.Datos
                                     id_metodo = Convert.ToInt32(reader["id_metodo"]),
                                     id_usuario = Convert.ToInt32(reader["id_usuario"]),
                                     nombre_metodo = reader["nombre_metodo"].ToString(),
-                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                    nombre_usuario = reader["nombre_usuario"].ToString(),
+                                    nombre_cliente = reader["nombre_cliente"] == DBNull.Value ? "Consumidor Final" : reader["nombre_cliente"].ToString()
                                 });
                             }
                         }
@@ -408,14 +413,16 @@ namespace Gestion_Libreria.Datos
                     conexion.Open();
 
                     string query = @"SELECT v.id_venta, v.fecha_venta, v.total_venta, 
-                                    v.id_metodo, v.id_usuario,
-                                    m.nombre   AS nombre_metodo,
-                                    u.nombre + ' ' + u.apellido AS nombre_usuario
-                             FROM ventas v
-                             INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
-                             INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
-                             WHERE v.id_usuario = @idUsuario
-                             ORDER BY v.fecha_venta DESC";
+                            v.id_metodo, v.id_usuario,
+                            m.nombre   AS nombre_metodo,
+                            u.nombre + ' ' + u.apellido AS nombre_usuario,
+                            c.apellido + ', ' + c.nombre AS nombre_cliente 
+                     FROM ventas v
+                     INNER JOIN metodos_pago m ON v.id_metodo  = m.id_metodo
+                     INNER JOIN usuarios u     ON v.id_usuario = u.id_usuario
+                     LEFT JOIN clientes c      ON v.id_cliente = c.id_cliente 
+                     WHERE v.id_usuario = @idUsuario
+                     ORDER BY v.fecha_venta DESC";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -433,7 +440,8 @@ namespace Gestion_Libreria.Datos
                                     id_metodo = Convert.ToInt32(reader["id_metodo"]),
                                     id_usuario = Convert.ToInt32(reader["id_usuario"]),
                                     nombre_metodo = reader["nombre_metodo"].ToString(),
-                                    nombre_usuario = reader["nombre_usuario"].ToString()
+                                    nombre_usuario = reader["nombre_usuario"].ToString(),
+                                    nombre_cliente = reader["nombre_cliente"] == DBNull.Value ? "Consumidor Final" : reader["nombre_cliente"].ToString()
                                 });
                             }
                         }
@@ -507,7 +515,10 @@ namespace Gestion_Libreria.Datos
 
             return lista;
         }
-        public int RegistrarVentaConCantidades(int idUsuario, int idMetodo, List<ItemCarrito> carrito)
+
+        // 🔑 Firma actualizada con el idCliente
+        // Reemplazá el método RegistrarVentaConCantidades (el que recibe idCliente) por este:
+        public int RegistrarVentaConCantidades(int idUsuario, int idMetodo, int idCliente, List<ItemCarrito> carrito)
         {
             int idVentaGenerado = 0;
 
@@ -521,7 +532,6 @@ namespace Gestion_Libreria.Datos
                     {
                         // 1) Validar stock y calcular total
                         decimal total = 0;
-
                         foreach (ItemCarrito item in carrito)
                         {
                             string queryCheck = "SELECT stock FROM libros WHERE id_libro = @idLibro";
@@ -542,16 +552,27 @@ namespace Gestion_Libreria.Datos
                             total += item.Subtotal;
                         }
 
-                        // 2) Insertar cabecera
-                        string queryVenta = @"INSERT INTO ventas (fecha_venta, total_venta, id_metodo, id_usuario)
-                                      VALUES (GETDATE(), @total, @idMetodo, @idUsuario);
-                                      SELECT SCOPE_IDENTITY();";
+                        // 2) Insertar cabecera (El id_cliente se inserta acá)
+                        string queryVenta = @"INSERT INTO ventas (fecha_venta, total_venta, id_metodo, id_usuario, id_cliente)
+                              VALUES (GETDATE(), @total, @idMetodo, @idUsuario, @idCliente);
+                              SELECT SCOPE_IDENTITY();";
 
                         using (SqlCommand cmd = new SqlCommand(queryVenta, conexion, transaccion))
                         {
                             cmd.Parameters.AddWithValue("@total", total);
                             cmd.Parameters.AddWithValue("@idMetodo", idMetodo);
                             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                            // 🔑 FORZAMOS EL TIPO DE DATO SQL PARA QUE NO LO CONFUNDA CON NULL
+                            var paramIdCliente = new SqlParameter("@idCliente", System.Data.SqlDbType.Int);
+
+                            if (idCliente > 0)
+                                paramIdCliente.Value = idCliente;
+                            else
+                                paramIdCliente.Value = DBNull.Value;
+
+                            cmd.Parameters.Add(paramIdCliente);
+
                             idVentaGenerado = Convert.ToInt32(cmd.ExecuteScalar());
                         }
 
@@ -559,8 +580,8 @@ namespace Gestion_Libreria.Datos
                         foreach (ItemCarrito item in carrito)
                         {
                             string queryDetalle = @"INSERT INTO venta_detalles
-                        (id_venta, id_libro, cantidad, precio_unitario, subtotal)
-                        VALUES (@idVenta, @idLibro, @cantidad, @precio, @subtotal)";
+                                    (id_venta, id_libro, cantidad, precio_unitario, subtotal)
+                                    VALUES (@idVenta, @idLibro, @cantidad, @precio, @subtotal)";
 
                             using (SqlCommand cmd = new SqlCommand(queryDetalle, conexion, transaccion))
                             {
@@ -573,8 +594,8 @@ namespace Gestion_Libreria.Datos
                             }
 
                             string queryStock = @"UPDATE libros
-                                          SET stock = stock - @cantidad
-                                          WHERE id_libro = @idLibro";
+                                  SET stock = stock - @cantidad
+                                  WHERE id_libro = @idLibro";
 
                             using (SqlCommand cmd = new SqlCommand(queryStock, conexion, transaccion))
                             {
@@ -596,171 +617,94 @@ namespace Gestion_Libreria.Datos
 
             return idVentaGenerado;
         }
-        // 🔑 Firma actualizada con el idCliente
-        public int RegistrarVentaConCantidades(int idUsuario, int idMetodo, int idCliente, List<ItemCarrito> carrito)
-        {
-            int idVentaGenerado = 0;
-
-            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
-            {
-                conexion.Open();
-
-                using (SqlTransaction transaccion = conexion.BeginTransaction())
-                {
-                    try
-                    {
-                        // 1) Validar stock y calcular total (Sin cambios)
-                        decimal total = 0;
-                        foreach (ItemCarrito item in carrito)
-                        {
-                            string queryCheck = "SELECT stock FROM libros WHERE id_libro = @idLibro";
-                            using (SqlCommand cmd = new SqlCommand(queryCheck, conexion, transaccion))
-                            {
-                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
-                                object result = cmd.ExecuteScalar();
-
-                                if (result == null)
-                                    throw new Exception($"El libro '{item.Libro.Nombre}' no existe.");
-
-                                int stockActual = Convert.ToInt32(result);
-
-                                if (stockActual < item.Cantidad)
-                                    throw new Exception($"Stock insuficiente de '{item.Libro.Nombre}'. Disponible: {stockActual}, solicitado: {item.Cantidad}.");
-                            }
-
-                            total += item.Subtotal;
-                        }
-
-                        // 2) Insertar cabecera (🔑 AGREGAMOS id_cliente)
-                        string queryVenta = @"INSERT INTO ventas (fecha_venta, total_venta, id_metodo, id_usuario, id_cliente)
-                                      VALUES (GETDATE(), @total, @idMetodo, @idUsuario, @idCliente);
-                                      SELECT SCOPE_IDENTITY();";
-
-                        using (SqlCommand cmd = new SqlCommand(queryVenta, conexion, transaccion))
-                        {
-                            cmd.Parameters.AddWithValue("@total", total);
-                            cmd.Parameters.AddWithValue("@idMetodo", idMetodo);
-                            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-                            cmd.Parameters.AddWithValue("@idCliente", idCliente); // 🔑 Se guarda en la BD
-
-                            idVentaGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-
-                        // 3) Insertar detalle + descontar stock (Sin cambios)
-                        foreach (ItemCarrito item in carrito)
-                        {
-                            // Insertamos el detalle
-                            string queryDetalle = @"INSERT INTO venta_detalles
-                                            (id_venta, id_libro, cantidad, precio_unitario, subtotal)
-                                            VALUES (@idVenta, @idLibro, @cantidad, @precio, @subtotal)";
-
-                            using (SqlCommand cmd = new SqlCommand(queryDetalle, conexion, transaccion))
-                            {
-                                cmd.Parameters.AddWithValue("@idVenta", idVentaGenerado);
-                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
-                                cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
-                                cmd.Parameters.AddWithValue("@precio", item.Libro.Precio);
-                                cmd.Parameters.AddWithValue("@subtotal", item.Subtotal);
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            // Descontamos el stock
-                            string queryStock = @"UPDATE libros
-                                          SET stock = stock - @cantidad
-                                          WHERE id_libro = @idLibro";
-
-                            using (SqlCommand cmd = new SqlCommand(queryStock, conexion, transaccion))
-                            {
-                                cmd.Parameters.AddWithValue("@idLibro", item.Libro.id_libro);
-                                cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-
-                        transaccion.Commit();
-                    }
-                    catch
-                    {
-                        transaccion.Rollback();
-                        throw; // Relanzamos para que el formulario Pago muestre el error real
-                    }
-                }
-            }
-
-            return idVentaGenerado;
-        }
 
         /* Aca arrancan los metodos para los graficos*/
 
-        public List<VentaPorVendedor> ObtenerVentasPorVendedor()
+        // ============================================================
+        // VERSIONES CON FILTRO DE FECHAS PARA LOS GRÁFICOS
+        // ============================================================
+
+        public List<VentaPorVendedor> ObtenerVentasPorVendedor(DateTime desde, DateTime hasta)
         {
             List<VentaPorVendedor> lista = new List<VentaPorVendedor>();
             using (SqlConnection conexion = new SqlConnection(cadenaConexion))
             {
                 conexion.Open();
+                DateTime hastaFinDia = hasta.Date.AddDays(1);
                 string query = @"
             SELECT u.username AS Vendedor, SUM(v.total_venta) AS Total
             FROM ventas v
             INNER JOIN usuarios u ON v.id_usuario = u.id_usuario
+            WHERE v.fecha_venta >= @desde AND v.fecha_venta < @hasta
             GROUP BY u.username
             ORDER BY Total DESC";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
-                using (SqlDataReader reader = comando.ExecuteReader())
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@desde", desde.Date);
+                    comando.Parameters.AddWithValue("@hasta", hastaFinDia);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
                     {
-                        lista.Add(new VentaPorVendedor
+                        while (reader.Read())
                         {
-                            NombreVendedor = reader["Vendedor"].ToString(),
-                            TotalVendido = Convert.ToDecimal(reader["Total"])
-                        });
+                            lista.Add(new VentaPorVendedor
+                            {
+                                NombreVendedor = reader["Vendedor"].ToString(),
+                                TotalVendido = Convert.ToDecimal(reader["Total"])
+                            });
+                        }
                     }
                 }
             }
             return lista;
         }
 
-        // 2. Total vendido por categoría
-        public List<VentaPorCategoria> ObtenerVentasPorCategoria()
+        public List<VentaPorCategoria> ObtenerVentasPorCategoria(DateTime desde, DateTime hasta)
         {
             List<VentaPorCategoria> lista = new List<VentaPorCategoria>();
             using (SqlConnection conexion = new SqlConnection(cadenaConexion))
             {
                 conexion.Open();
-                // Asumiendo que en venta_detalles tenés el id_libro y en libros el cod_genero
+                DateTime hastaFinDia = hasta.Date.AddDays(1);
                 string query = @"
             SELECT g.descripcion AS Categoria, SUM(vd.subtotal) AS Total
             FROM venta_detalles vd
+            INNER JOIN ventas v ON vd.id_venta = v.id_venta
             INNER JOIN libros l ON vd.id_libro = l.id_libro
             INNER JOIN generos g ON l.cod_genero = g.cod_genero
+            WHERE v.fecha_venta >= @desde AND v.fecha_venta < @hasta
             GROUP BY g.descripcion
             ORDER BY Total DESC";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
-                using (SqlDataReader reader = comando.ExecuteReader())
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@desde", desde.Date);
+                    comando.Parameters.AddWithValue("@hasta", hastaFinDia);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
                     {
-                        lista.Add(new VentaPorCategoria
+                        while (reader.Read())
                         {
-                            Categoria = reader["Categoria"].ToString(),
-                            TotalVendido = Convert.ToDecimal(reader["Total"])
-                        });
+                            lista.Add(new VentaPorCategoria
+                            {
+                                Categoria = reader["Categoria"].ToString(),
+                                TotalVendido = Convert.ToDecimal(reader["Total"])
+                            });
+                        }
                     }
                 }
             }
             return lista;
         }
 
-        // 3. Producto más vendido por categoría
-        public List<ProductoMasVendido> ObtenerProductosMasVendidosPorCategoria()
+        public List<ProductoMasVendido> ObtenerProductosMasVendidosPorCategoria(DateTime desde, DateTime hasta)
         {
             List<ProductoMasVendido> lista = new List<ProductoMasVendido>();
             using (SqlConnection conexion = new SqlConnection(cadenaConexion))
             {
                 conexion.Open();
-                // Usamos ROW_NUMBER() para rankear los libros dentro de cada categoría y quedarnos con el N°1
+                DateTime hastaFinDia = hasta.Date.AddDays(1);
                 string query = @"
             WITH RankedBooks AS (
                 SELECT g.descripcion AS Categoria, 
@@ -768,8 +712,10 @@ namespace Gestion_Libreria.Datos
                        SUM(vd.cantidad) AS CantidadVendida,
                        ROW_NUMBER() OVER (PARTITION BY g.cod_genero ORDER BY SUM(vd.cantidad) DESC) AS RowNum
                 FROM venta_detalles vd
+                INNER JOIN ventas v ON vd.id_venta = v.id_venta
                 INNER JOIN libros l ON vd.id_libro = l.id_libro
                 INNER JOIN generos g ON l.cod_genero = g.cod_genero
+                WHERE v.fecha_venta >= @desde AND v.fecha_venta < @hasta
                 GROUP BY g.descripcion, g.cod_genero, l.nombre
             )
             SELECT Categoria, Libro, CantidadVendida
@@ -778,20 +724,25 @@ namespace Gestion_Libreria.Datos
             ORDER BY Categoria";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
-                using (SqlDataReader reader = comando.ExecuteReader())
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@desde", desde.Date);
+                    comando.Parameters.AddWithValue("@hasta", hastaFinDia);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
                     {
-                        lista.Add(new ProductoMasVendido
+                        while (reader.Read())
                         {
-                            Categoria = reader["Categoria"].ToString(),
-                            NombreLibro = reader["Libro"].ToString(),
-                            CantidadVendida = Convert.ToInt32(reader["CantidadVendida"])
-                        });
+                            lista.Add(new ProductoMasVendido
+                            {
+                                Categoria = reader["Categoria"].ToString(),
+                                NombreLibro = reader["Libro"].ToString(),
+                                CantidadVendida = Convert.ToInt32(reader["CantidadVendida"])
+                            });
+                        }
                     }
                 }
             }
             return lista;
-        }
+        } 
     }
 }

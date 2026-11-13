@@ -39,8 +39,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
             // Suscribimos eventos
             this.Load += Pago_Load;
             this.cmbMetodo.SelectedIndexChanged += cmbMetodo_SelectedIndexChanged;
-            this.btnConfirmar.Click += btnConfirmar_Click;
-            this.btnCancelar.Click += btnCancelar_Click;
+            
 
             this.txtNtarjeta.KeyPress += txtNtarjeta_KeyPress;
             this.txtCvv.KeyPress += txtCvv_KeyPress;
@@ -54,7 +53,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
             ConfigurarGrillaCarrito();
             CargarCarrito();
             CargarMetodosPago();
-            CargarClientes();
+            
 
             HabilitarCamposTarjeta(false);
 
@@ -182,21 +181,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
             }
         }
 
-        // ============================================================
-        // CARGAMOS LOS CLIENTES
-        // ============================================================
-        private void CargarClientes()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar clientes: " + ex.Message);
-            }
-        }
-
+        
         // ============================================================
         // CAMBIO DE MÉTODO DE PAGO
         // ============================================================
@@ -289,8 +274,9 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 preview.ShowDialog();
 
                 // 5. 🔑 CLAVE PARA CORTAR EL BUCLE: 
-                // Forzamos el DialogResult ANTES de cerrar
+                
                 this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (Exception ex)
             {

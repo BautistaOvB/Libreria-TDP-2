@@ -180,7 +180,7 @@ namespace Gestion_Libreria.Presentacion.repositor
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        
         // ============================================================
         // AL HACER CLIC EN UN EGRESO, CARGAR CABECERA + DETALLE
         // ============================================================
@@ -243,6 +243,7 @@ namespace Gestion_Libreria.Presentacion.repositor
 
                 dgvEgresos.DataSource = null;
                 dgvEgresos.DataSource = listaVentas;
+                ConfigurarGrillaEgresos();
 
                 dgvDetalleEgreso.DataSource = null;
                 //LimpiarCabecera();

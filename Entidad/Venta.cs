@@ -19,6 +19,4 @@ namespace Gestion_Libreria.Entidad
         public string nombre_usuario { get; set; }
         public string nombre_cliente { get; set; }
     }
-
-
 }

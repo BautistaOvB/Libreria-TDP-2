@@ -15,7 +15,7 @@ namespace Gestion_Libreria.Presentacion.vendedor
         private VentaDatos vtaDatos = new VentaDatos();
         private Libro libroActual;
         private int idClienteSeleccionado = 0;
-
+        private string nombreClienteSeleccionado = "";
         public RegistroVta()
         {
             InitializeComponent();
@@ -169,7 +169,16 @@ namespace Gestion_Libreria.Presentacion.vendedor
             }
 
             RefrescarCarrito();
-            LimpiarCampos();
+            LimpiarCarrito();
+        }
+
+        private void LimpiarCarrito()
+        {
+            libroActual = null;
+            txtProducto.Text = "";
+            txtStock.Text = "";
+            txtPrecio.Text = "";
+            nudCantidad.Value = 1;
         }
 
         private void LimpiarCampos()
@@ -264,19 +273,22 @@ namespace Gestion_Libreria.Presentacion.vendedor
                 txtDNIcliente.Focus(); // Ponemos el foco en el DNI para que sea más rápido
                 return;
             }
-            string nombreCliente = txtApellidoNombre.Text; // "Apellido, Nombre"
+            string nombreCliente = string.IsNullOrWhiteSpace(nombreClienteSeleccionado)
+                           ? "Consumidor Final"
+                           : nombreClienteSeleccionado;
+            // "Apellido, Nombre"
 
             // Si pasa ambas validaciones, abre el formulario de Pago
             using (Pago frmPago = new Pago(carrito, idClienteSeleccionado, nombreCliente))
             {
                 if (frmPago.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show($"¡Venta #{frmPago.IdVentaGenerado} registrada con éxito!",
-                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     carrito.Clear();
                     RefrescarCarrito();
                     LimpiarCampos();
+                    idClienteSeleccionado = 0;
+                    nombreClienteSeleccionado = "";
 
                 }
 
@@ -329,9 +341,6 @@ namespace Gestion_Libreria.Presentacion.vendedor
                         // 🔑 Cargamos los datos en los TextBox de RegistroVta
                         txtDNIcliente.Text = cliente.dni;
                         txtApellidoNombre.Text = cliente.apellido + ", " + cliente.nombre;
-
-                        // Opcional: Guardar el ID del cliente en una variable privada para usarlo al pagar
-                        // idClienteSeleccionado = cliente.id_cliente;
                     }
                 }
             }

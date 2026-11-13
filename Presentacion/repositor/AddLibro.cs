@@ -20,7 +20,7 @@ namespace Gestion_Libreria.Presentacion.repositor
 
             this.Load += AddProd_Load;
             this.dgvLibros.CellClick += dgvLibros_CellClick;
-            this.btnSalir.Click += btnSalir_Click;
+            
 
             // Validaciones de teclado
             this.txtISBN.KeyPress += SoloNumerosYGuiones_KeyPress;
@@ -287,6 +287,7 @@ namespace Gestion_Libreria.Presentacion.repositor
         // ============================================================
         private void btnSalir_Click(object sender, EventArgs e)
         {
+           
             this.Close();
         }
 
@@ -354,8 +355,6 @@ namespace Gestion_Libreria.Presentacion.repositor
                 ItemCarrito nuevoItem = new ItemCarrito
                 {
                     Cantidad = cantidad,
-                    PrecioUnitario = precio,
-                    Subtotal = cantidad * precio,
                     Libro = new Libro
                     {
                         ISBN = isbn,
@@ -450,6 +449,11 @@ namespace Gestion_Libreria.Presentacion.repositor
         private void txtAutor_TextChanged(object sender, EventArgs e)
         {
              
+        }
+
+        private void btnLimpiarCampos_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
         }
     }
 }

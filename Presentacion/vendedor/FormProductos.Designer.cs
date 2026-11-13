@@ -81,20 +81,19 @@
             this.pFondo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pFondo.Location = new System.Drawing.Point(0, 78);
             this.pFondo.Name = "pFondo";
-            this.pFondo.Size = new System.Drawing.Size(1020, 431);
+            this.pFondo.Size = new System.Drawing.Size(725, 431);
             this.pFondo.TabIndex = 9;
             // 
             // dgvProductos
             // 
             this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductos.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvProductos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.Location = new System.Drawing.Point(0, 0);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.Size = new System.Drawing.Size(1020, 431);
+            this.dgvProductos.Size = new System.Drawing.Size(725, 431);
             this.dgvProductos.TabIndex = 0;
             // 
             // pDetalle
@@ -112,10 +111,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1020, 509);
-            this.Controls.Add(this.pDetalle);
             this.Controls.Add(this.pFondo);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.pDetalle);
             this.Controls.Add(this.pCabecera);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormProductos";

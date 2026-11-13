@@ -117,9 +117,9 @@
             this.pGraficoTxGenero.BackColor = System.Drawing.Color.MidnightBlue;
             this.pGraficoTxGenero.Controls.Add(this.chartProductos);
             this.pGraficoTxGenero.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pGraficoTxGenero.Location = new System.Drawing.Point(714, 0);
+            //this.pGraficoTxGenero.Location = new System.Drawing.Point(714, 0);
             this.pGraficoTxGenero.Name = "pGraficoTxGenero";
-            this.pGraficoTxGenero.Size = new System.Drawing.Size(365, 500);
+            //this.pGraficoTxGenero.Size = new System.Drawing.Size(365, 500);
             this.pGraficoTxGenero.TabIndex = 2;
             // 
             // chartProductos
