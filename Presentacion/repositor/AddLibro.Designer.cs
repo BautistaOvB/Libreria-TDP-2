@@ -36,7 +36,7 @@
             this.LStock = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.btnAddCarrito = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnLimpiarCampos = new System.Windows.Forms.Button();
             this.Leditorial = new System.Windows.Forms.Label();
             this.LPrecio = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
@@ -58,6 +58,7 @@
             this.pFooter = new System.Windows.Forms.Panel();
             this.btnConfirmarCompra = new System.Windows.Forms.Button();
             this.lTotal = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.pProducto.SuspendLayout();
             this.pDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLibros)).BeginInit();
@@ -138,17 +139,18 @@
             this.btnAddCarrito.UseVisualStyleBackColor = false;
             this.btnAddCarrito.Click += new System.EventHandler(this.btnAddCarrito_Click);
             // 
-            // btnSalir
+            // btnLimpiarCampos
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSalir.Location = new System.Drawing.Point(46, 390);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 7;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnLimpiarCampos.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnLimpiarCampos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLimpiarCampos.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(43, 390);
+            this.btnLimpiarCampos.Name = "btnLimpiarCampos";
+            this.btnLimpiarCampos.Size = new System.Drawing.Size(78, 44);
+            this.btnLimpiarCampos.TabIndex = 7;
+            this.btnLimpiarCampos.Text = "Limpiar Campos";
+            this.btnLimpiarCampos.UseVisualStyleBackColor = false;
+            this.btnLimpiarCampos.Click += new System.EventHandler(this.btnLimpiarCampos_Click);
             // 
             // Leditorial
             // 
@@ -184,13 +186,14 @@
             // pProducto
             // 
             this.pProducto.BackColor = System.Drawing.Color.MidnightBlue;
+            this.pProducto.Controls.Add(this.btnSalir);
             this.pProducto.Controls.Add(this.txtMostrarEditorial);
             this.pProducto.Controls.Add(this.txtAutor);
             this.pProducto.Controls.Add(this.lAutor);
             this.pProducto.Controls.Add(this.lGenero);
             this.pProducto.Controls.Add(this.cmbGenero);
             this.pProducto.Controls.Add(this.btnAddCarrito);
-            this.pProducto.Controls.Add(this.btnSalir);
+            this.pProducto.Controls.Add(this.btnLimpiarCampos);
             this.pProducto.Dock = System.Windows.Forms.DockStyle.Left;
             this.pProducto.Location = new System.Drawing.Point(0, 0);
             this.pProducto.Name = "pProducto";
@@ -259,9 +262,9 @@
             this.dgvLibros.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.dgvLibros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLibros.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLibros.Location = new System.Drawing.Point(346, 0);
+            this.dgvLibros.Location = new System.Drawing.Point(408, 0);
             this.dgvLibros.Name = "dgvLibros";
-            this.dgvLibros.Size = new System.Drawing.Size(592, 516);
+            this.dgvLibros.Size = new System.Drawing.Size(530, 516);
             this.dgvLibros.TabIndex = 0;
             // 
             // pCarrito
@@ -272,7 +275,7 @@
             this.pCarrito.Dock = System.Windows.Forms.DockStyle.Left;
             this.pCarrito.Location = new System.Drawing.Point(0, 0);
             this.pCarrito.Name = "pCarrito";
-            this.pCarrito.Size = new System.Drawing.Size(346, 516);
+            this.pCarrito.Size = new System.Drawing.Size(408, 516);
             this.pCarrito.TabIndex = 1;
             // 
             // dgvCarrito
@@ -282,7 +285,7 @@
             this.dgvCarrito.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCarrito.Location = new System.Drawing.Point(0, 111);
             this.dgvCarrito.Name = "dgvCarrito";
-            this.dgvCarrito.Size = new System.Drawing.Size(346, 279);
+            this.dgvCarrito.Size = new System.Drawing.Size(408, 279);
             this.dgvCarrito.TabIndex = 1;
             this.dgvCarrito.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCarrito_CellContentClick);
             // 
@@ -295,7 +298,7 @@
             this.pCabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.pCabecera.Location = new System.Drawing.Point(0, 0);
             this.pCabecera.Name = "pCabecera";
-            this.pCabecera.Size = new System.Drawing.Size(346, 111);
+            this.pCabecera.Size = new System.Drawing.Size(408, 111);
             this.pCabecera.TabIndex = 2;
             // 
             // btnBuscarProveedor
@@ -348,7 +351,7 @@
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pFooter.Location = new System.Drawing.Point(0, 390);
             this.pFooter.Name = "pFooter";
-            this.pFooter.Size = new System.Drawing.Size(346, 126);
+            this.pFooter.Size = new System.Drawing.Size(408, 126);
             this.pFooter.TabIndex = 0;
             // 
             // btnConfirmarCompra
@@ -357,7 +360,7 @@
             this.btnConfirmarCompra.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnConfirmarCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarCompra.ForeColor = System.Drawing.Color.AliceBlue;
-            this.btnConfirmarCompra.Location = new System.Drawing.Point(230, 61);
+            this.btnConfirmarCompra.Location = new System.Drawing.Point(313, 71);
             this.btnConfirmarCompra.Name = "btnConfirmarCompra";
             this.btnConfirmarCompra.Size = new System.Drawing.Size(75, 43);
             this.btnConfirmarCompra.TabIndex = 1;
@@ -375,6 +378,19 @@
             this.lTotal.Size = new System.Drawing.Size(142, 16);
             this.lTotal.TabIndex = 0;
             this.lTotal.Text = "Total de la compra:";
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSalir.Location = new System.Drawing.Point(98, 481);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(78, 23);
+            this.btnSalir.TabIndex = 15;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // AddLibro
             // 
@@ -423,7 +439,7 @@
         private System.Windows.Forms.Label LStock;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Button btnAddCarrito;
-        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnLimpiarCampos;
         private System.Windows.Forms.Label Leditorial;
         private System.Windows.Forms.Label LPrecio;
         private System.Windows.Forms.TextBox txtPrecio;
@@ -445,5 +461,6 @@
         private System.Windows.Forms.Label lFecha;
         private System.Windows.Forms.Button btnBuscarProveedor;
         private System.Windows.Forms.TextBox txtMostrarEditorial;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

@@ -61,23 +61,24 @@
             this.btnBuscarFecha.BackColor = System.Drawing.Color.SteelBlue;
             this.btnBuscarFecha.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBuscarFecha.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBuscarFecha.Location = new System.Drawing.Point(408, 10);
+            this.btnBuscarFecha.Location = new System.Drawing.Point(209, 20);
             this.btnBuscarFecha.Name = "btnBuscarFecha";
-            this.btnBuscarFecha.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarFecha.Size = new System.Drawing.Size(75, 42);
             this.btnBuscarFecha.TabIndex = 2;
-            this.btnBuscarFecha.Text = "Fecha";
+            this.btnBuscarFecha.Text = "Buscar fecha";
             this.btnBuscarFecha.UseVisualStyleBackColor = false;
+            this.btnBuscarFecha.Click += new System.EventHandler(this.btnBuscarFecha_Click);
             // 
             // dtpHasta
             // 
-            this.dtpHasta.Location = new System.Drawing.Point(201, 12);
+            this.dtpHasta.Location = new System.Drawing.Point(12, 46);
             this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.Size = new System.Drawing.Size(200, 20);
+            this.dtpHasta.Size = new System.Drawing.Size(183, 20);
             this.dtpHasta.TabIndex = 1;
             // 
             // dtpDesde
             // 
-            this.dtpDesde.Location = new System.Drawing.Point(12, 12);
+            this.dtpDesde.Location = new System.Drawing.Point(12, 16);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(183, 20);
             this.dtpDesde.TabIndex = 0;

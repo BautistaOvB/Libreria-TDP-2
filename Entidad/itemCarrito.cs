@@ -10,8 +10,16 @@ namespace Gestion_Libreria.Entidad
     {
         public Libro Libro { get; set; }
         public int Cantidad { get; set; }
-        public decimal Subtotal { set; get; }
-        public decimal PrecioUnitario { set; get; }
+        public decimal Subtotal
+        {
+            get { return Cantidad * Libro.Precio; }
+        }
+
+        // El PrecioUnitario se obtiene directo del Libro
+        public decimal PrecioUnitario
+        {
+            get { return Libro.Precio; }
+        }
         
         
     }

@@ -84,6 +84,12 @@ namespace Gestion_Libreria.Presentacion.repositor
                 HeaderText = "Género",
                 DataPropertyName = "nombre_genero"
             });
+            dgvStock.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colAutor",
+                HeaderText = "Autor",
+                DataPropertyName = "autor"
+            });
         }
 
         private void CargarLibros()

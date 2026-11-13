@@ -14,6 +14,8 @@ namespace Gestion_Libreria.Presentacion.administrador
 {
     public partial class addUsuario : Form
     {
+        private List<Usuario> listaUsuarios;
+        private List<Usuario> usuariosMostrados;
         public addUsuario()
         {
             InitializeComponent();
@@ -143,6 +145,70 @@ namespace Gestion_Libreria.Presentacion.administrador
                 e.Handled = true; // Bloquea la tecla
                 MessageBox.Show("Solo se permiten números en el DNI.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void CargarUsuarios()
+        {
+            try
+            {
+                UsuarioDatos datos = new UsuarioDatos();
+                listaUsuarios = datos.ObtenerTodos();
+                usuariosMostrados = listaUsuarios;
+
+                dgvUsuarios.DataSource = null;
+                dgvUsuarios.DataSource = usuariosMostrados;
+                PersonalizarColumnas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar usuarios: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PersonalizarColumnas()
+        {
+            // Ajusta el ancho de todas las columnas para que entren en el espacio disponible
+            dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Ocultar columnas que no queremos mostrar
+            if (dgvUsuarios.Columns["id_usuario"] != null)
+                dgvUsuarios.Columns["id_usuario"].Visible = false;
+
+            if (dgvUsuarios.Columns["password_hash"] != null)
+                dgvUsuarios.Columns["password_hash"].Visible = false;
+
+            if (dgvUsuarios.Columns["id_rol"] != null)
+                dgvUsuarios.Columns["id_rol"].Visible = false;
+
+            // Encabezados amigables
+            if (dgvUsuarios.Columns["nombre"] != null)
+                dgvUsuarios.Columns["nombre"].HeaderText = "Nombre";
+
+            if (dgvUsuarios.Columns["apellido"] != null)
+                dgvUsuarios.Columns["apellido"].HeaderText = "Apellido";
+
+            if (dgvUsuarios.Columns["mail"] != null)
+                dgvUsuarios.Columns["mail"].HeaderText = "Email";
+
+            if (dgvUsuarios.Columns["username"] != null)
+                dgvUsuarios.Columns["username"].HeaderText = "Usuario";
+
+            // ⚠️ El nombre de la columna auto-generada es "nombre_rol", NO "colRol"
+            if (dgvUsuarios.Columns["nombre_rol"] != null)
+                dgvUsuarios.Columns["nombre_rol"].HeaderText = "Rol";
+
+            if (dgvUsuarios.Columns["dni"] != null)
+            {
+                dgvUsuarios.Columns["dni"].HeaderText = "DNI";
+                dgvUsuarios.Columns["dni"].Visible = true; // Aseguramos que se vea
+            }
+
+            if (dgvUsuarios.Columns["direccion"] != null)
+                dgvUsuarios.Columns["direccion"].HeaderText = "Dirección";
+
+            if (dgvUsuarios.Columns["numero_telefono"] != null)
+                dgvUsuarios.Columns["numero_telefono"].HeaderText = "Teléfono";
+
         }
 
         private void Bsalir_Click(object sender, EventArgs e)

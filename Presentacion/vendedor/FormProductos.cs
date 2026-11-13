@@ -88,6 +88,8 @@ namespace Gestion_Libreria.Presentacion.vendedor
                     dgvProductos.Columns["Proveedores"].HeaderText = "Proveedores";
                 if(dgvProductos.Columns["Autor"] != null)
                     dgvProductos.Columns["Autor"].HeaderText = "Autor";
+                if (dgvProductos.Columns["cantidad_vendida"] != null)
+                    dgvProductos.Columns["cantidad_vendida"].Visible = false;
             }
             catch (Exception ex)
             {

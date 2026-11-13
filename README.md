@@ -6,7 +6,6 @@
 
 **Autores:**  
 - Ovalle Bravo Bautista  
-- Marcos Valentin Romero Cristanchi  
 
 ---
 
